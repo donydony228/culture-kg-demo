@@ -1,0 +1,69 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>文資知識圖譜 假資料示意</title>
+<style>
+  body{margin:0;font:14px system-ui,sans-serif;display:flex;height:100vh}
+  #g{flex:1}
+  #side{width:320px;padding:12px;border-left:1px solid #ccc;overflow:auto}
+  .lg span{display:inline-block;margin:2px 6px 2px 0;padding:1px 8px;border-radius:10px;color:#fff;font-size:12px}
+  pre{white-space:pre-wrap;background:#f5f5f5;padding:8px}
+  .warn{background:#fff3cd;padding:6px;font-size:12px}
+</style>
+<div id="g"></div>
+<div id="side">
+  <div class="warn">⚠ 全部為虛構資料，僅示意圖譜形狀。</div>
+  <h3>圖例</h3><div class="lg" id="lg"></div>
+  <h3>點選節點</h3><pre id="info">點任一節點看屬性與來源</pre>
+</div>
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script>
+const C={Heritage:'#c0392b',Event:'#e67e22',Craftsman:'#8e44ad',Component:'#16a085',Project:'#2980b9',Organization:'#7f8c8d',Document:'#27ae60',Page:'#95a5a6'};
+// [id,type,label,props]
+const N=[
+ ['h1','Heritage','虛構・靈應宮',{類別:'古蹟',等級:'縣定',縣市:'彰化縣',座標:'24.05,120.50'}],
+ ['h2','Heritage','虛構・福澤廟',{類別:'歷史建築',縣市:'臺南市',座標:'23.00,120.20'}],
+ ['h3','Heritage','虛構・慶安祠',{類別:'古蹟',等級:'市定',縣市:'新北市',座標:'25.00,121.40'}],
+ ['c1','Craftsman','陳某某（大木匠師）',{派別:'泉州派',活躍:'1900s–1930s'}],
+ ['c2','Craftsman','林某某（剪黏匠師）',{派別:'潮汕派',活躍:'1920s–1950s'}],
+ ['c3','Craftsman','黃某某（彩繪）',{活躍:'1960s–1990s'}],
+ ['m1','Component','靈應宮・正殿屋頂',{類型:'屋頂'}],
+ ['m2','Component','靈應宮・剪黏',{類型:'剪黏'}],
+ ['m3','Component','福澤廟・斗栱',{類型:'斗栱'}],
+ ['e1','Event','創建 1769',{類型:'創建',起訖:'1769',原始記載:'清乾隆三十四年'}],
+ ['e2','Event','重修 1923',{類型:'重修',起訖:'1923',原始記載:'大正十二年',經費:'—'}],
+ ['e3','Event','修復 2008–2010',{類型:'修復',起訖:'2008–2010',原始記載:'民國97–99年',經費:'1,800萬'}],
+ ['e4','Event','重建 1895',{類型:'重建',起訖:'1895',原始記載:'乙未年'}],
+ ['e5','Event','修復 2015',{類型:'修復',起訖:'2015',原始記載:'民國104年'}],
+ ['e6','Event','重修 1931',{類型:'重修',起訖:'1931',原始記載:'昭和六年'}],
+ ['p1','Project','靈應宮修復及再利用計畫',{案號:'FAKE-2008-01',年度:'2008',經費:'1,800萬'}],
+ ['p2','Project','福澤廟調查研究',{案號:'FAKE-2015-07',年度:'2015'}],
+ ['o1','Organization','某某文化資產研究所',{類型:'承攬廠商'}],
+ ['o2','Organization','彰化縣文化局',{類型:'主管機關'}],
+ ['d1','Document','靈應宮修復及再利用計畫書',{類型:'修復計畫',出版年:'2010',格式:'PDF（掃描）'}],
+ ['d2','Document','福澤廟調查研究報告',{類型:'調查研究',出版年:'2016',格式:'PDF'}],
+ ['d3','Document','慶安祠工作報告',{類型:'工作報告',出版年:'2016',格式:'Word'}],
+ ['g1','Page','d1 p.45',{OCR信心:0.93,片段:'…大正十二年由陳某某主持重修正殿，換修樑架…'}],
+ ['g2','Page','d1 p.78',{OCR信心:0.88,片段:'…剪黏部分由林某某師傅修補，歷時三月…'}],
+ ['g3','Page','d2 p.12',{OCR信心:0.96,片段:'…昭和六年重修，大木作為陳某某…'}],
+ ['g4','Page','d2 p.30',{OCR信心:0.90,片段:'…民國104年修復斗栱，彩繪由黃某某…'}],
+ ['g5','Page','d3 p.5',{OCR信心:0.99,片段:'…乙未年遭焚毀，次年重建…'}],
+];
+// [from,to,rel]
+const E=[
+ ['m1','h1','PART_OF'],['m2','h1','PART_OF'],['m3','h2','PART_OF'],
+ ['e1','h1','ABOUT'],['e2','m1','ABOUT'],['e3','h1','ABOUT'],['e4','h3','ABOUT'],['e5','m3','ABOUT'],['e6','h2','ABOUT'],
+ ['c1','e2','PARTICIPATED_IN'],['c1','e6','PARTICIPATED_IN'],['c2','e2','PARTICIPATED_IN'],['c3','e5','PARTICIPATED_IN'],
+ ['o1','p1','EXECUTED'],['o1','p2','EXECUTED'],['o2','p1','COMMISSIONED'],
+ ['p1','e3','INCLUDES'],['p2','e5','INCLUDES'],
+ ['p1','d1','PRODUCED'],['p2','d2','PRODUCED'],
+ ['d1','h1','DESCRIBES'],['d2','h2','DESCRIBES'],['d3','h3','DESCRIBES'],
+ ['g1','d1','IN'],['g2','d1','IN'],['g3','d2','IN'],['g4','d2','IN'],['g5','d3','IN'],
+ ['e2','g1','EVIDENCED_BY'],['e2','g2','EVIDENCED_BY'],['e6','g3','EVIDENCED_BY'],['e5','g4','EVIDENCED_BY'],['e4','g5','EVIDENCED_BY'],
+];
+const byId=Object.fromEntries(N.map(n=>[n[0],n]));
+const nodes=new vis.DataSet(N.map(([id,t,l])=>({id,label:l,color:C[t],font:{color:'#222',size:13},shape:t=='Heritage'?'dot':'box',size:t=='Heritage'?22:10,title:t})));
+const edges=new vis.DataSet(E.map(([f,t,r])=>({from:f,to:t,label:r,arrows:'to',font:{size:9,align:'middle'},color:r=='EVIDENCED_BY'?{color:'#bbb'}:undefined,dashes:r=='EVIDENCED_BY'})));
+const net=new vis.Network(g,{nodes,edges},{physics:{solver:'forceAtlas2Based',stabilization:200},interaction:{hover:true}});
+net.on('click',p=>{const n=byId[p.nodes[0]];if(n)info.textContent=n[1]+'\n'+n[2]+'\n\n'+Object.entries(n[3]).map(([k,v])=>k+'：'+v).join('\n')});
+lg.innerHTML=Object.entries(C).map(([k,v])=>`<span style="background:${v}">${k}</span>`).join('');
+</script>

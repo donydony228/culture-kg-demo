@@ -3,565 +3,295 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>文化資產知識庫 Demo</title>
+<title>文化資產知識庫</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600&display=swap" rel="stylesheet">
 <style>
-:root { --ink:#16202E; --paper:#F6F4EE; --card:#FFFDF8; --line:#DDD8CB; --soft:#E9E5DA; --accent:#2F5BEA; --accent2:#8FB0FF; --muted:#4A5568; --warn:#B7791F; --warnbg:#FDF3DC; }
-* { box-sizing:border-box; }
-body { margin:0; background:var(--paper); color:var(--ink); font-family:'Noto Sans TC', Arial, sans-serif; line-height:1.6; }
-a { color:var(--accent); text-decoration:none; }
-a:hover { text-decoration:underline; }
-header { background:var(--ink); color:var(--paper); display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; padding:14px 24px; position:sticky; top:0; z-index:1000; }
-.brand { color:var(--paper); font-weight:700; font-size:20px; }
-.brand span { color:var(--accent2); font-weight:500; font-size:14px; margin-left:6px; }
-nav { display:flex; gap:18px; flex:1; }
-nav a { color:#C9D1DC; }
-nav a.on { color:var(--paper); font-weight:700; }
-.toggle { display:flex; align-items:center; gap:8px; font-size:14px; color:#C9D1DC; cursor:pointer; }
-.notice { padding:10px 24px; font-size:14px; background:var(--soft); color:var(--muted); }
-body.back .notice { background:var(--warnbg); color:#744210; }
-main { max-width:1120px; margin:0 auto; padding:24px; }
-h1 { font-size:32px; margin:8px 0 4px; }
-h2 { font-size:22px; margin:32px 0 12px; }
-h3 { font-size:18px; margin:0; }
-.meta { color:var(--muted); margin:0; }
-.card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px; }
-.cols { display:grid; grid-template-columns:1.3fr 1fr; gap:24px; align-items:start; }
-.map { height:520px; border-radius:12px; border:1px solid var(--line); }
-.map.small { height:280px; }
-input[type=search] { width:100%; font:inherit; font-size:18px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
-.list { display:flex; flex-direction:column; gap:10px; }
-.list .card p { margin:4px 0 0; color:var(--muted); font-size:14px; }
-.tag { display:inline-block; font-size:12px; padding:1px 8px; border-radius:999px; background:var(--soft); color:var(--muted); margin-left:6px; vertical-align:middle; font-weight:500; }
-.tag.blue { background:#E3EAFD; color:#1E3FAE; }
-.tag.warn { background:var(--warnbg); color:#744210; }
-.hint { color:var(--muted); font-size:14px; }
-.timeline { list-style:none; padding:0; margin:0; border-left:3px solid var(--line); }
-.timeline > li { position:relative; padding:0 0 20px 24px; }
-.timeline > li::before { content:''; position:absolute; left:-8px; top:6px; width:13px; height:13px; border-radius:50%; background:var(--accent); }
-.timeline > li.hidden-front::before { background:var(--warn); }
-.year { font-weight:700; color:var(--accent); }
-.ev p { margin:4px 0; }
-details { margin-top:6px; }
-summary { cursor:pointer; color:var(--accent); font-size:14px; }
-.src { list-style:none; padding:0; margin:8px 0 0; display:flex; flex-direction:column; gap:8px; }
-.src li { background:var(--soft); border-radius:8px; padding:8px 12px; font-size:14px; }
-.src li.off { background:var(--warnbg); }
-.src q { display:block; margin-top:2px; }
-.backonly { display:none; }
-body.back .backonly { display:block; }
-.private { background:var(--warnbg); border-radius:8px; padding:8px 12px; font-size:14px; color:#744210; }
-table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
-th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); font-size:15px; vertical-align:top; }
-th { background:var(--soft); }
-.filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-.filters button, footer button { font:inherit; font-size:14px; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); cursor:pointer; color:var(--ink); }
-.filters button.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
-/* ---- 深色：起始畫面與網絡圖 ---- */
-body.dark { background:#0F1722; color:#E4E8EE; }
-body.dark main { max-width:none; padding:0; }
-body.dark a { color:#8FB0FF; }
-body.dark .meta, body.dark .hint { color:#9AA5B1; }
-body.dark .notice { background:#1C2838; color:#9AA5B1; }
-body.dark.back .notice { background:#4A3B12; color:#FFD166; }
-body.dark footer { color:#9AA5B1; }
-body.dark footer button { background:#1C2838; color:#E4E8EE; border-color:#2E3D52; }
-body.dark .tag { background:#26344A; color:#C9D1DC; }
-body.dark .tag.blue { background:#22305A; color:#8FB0FF; }
-body.dark .tag.warn { background:#4A3B12; color:#FFD166; }
-body.dark .src li { background:#1C2838; }
-body.dark .src li.off { background:#3A3320; }
-body.dark summary { color:#8FB0FF; }
-.landing { min-height:calc(100vh - 150px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:24px; text-align:center; }
-.landing h1 { font-size:44px; color:#F6F4EE; margin:0; }
-.landing p { margin:0; }
-.landing form { width:min(640px, 100%); }
-.dark input[type=search] { background:#1C2838; border-color:#2E3D52; color:#F6F4EE; }
-.dark input[type=search]::placeholder { color:#6B7A8F; }
-.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
-.chips a { padding:6px 14px; border-radius:999px; border:1px solid #2E3D52; background:#16202E; color:#C9D1DC; font-size:14px; }
-.chips a:hover { border-color:#8FB0FF; color:#F6F4EE; text-decoration:none; }
-.net { display:grid; grid-template-columns:1fr 380px; height:calc(100vh - 100px); min-height:520px; }
-.netmain { position:relative; }
-#cy { position:absolute; inset:0; }
-.netbar { position:absolute; top:16px; left:16px; right:16px; z-index:10; display:flex; flex-wrap:wrap; gap:12px; align-items:center; pointer-events:none; }
-.netbar > * { pointer-events:auto; }
-.netbar form { flex:0 1 360px; }
-.netbar input[type=search] { font-size:15px; padding:8px 14px; }
-.legend { display:flex; flex-wrap:wrap; gap:6px; }
-.legend label { display:flex; align-items:center; gap:6px; font-size:13px; padding:4px 10px; border-radius:999px; background:#16202Ecc; border:1px solid #2E3D52; cursor:pointer; color:#C9D1DC; }
-.legend input { display:none; }
-.legend label:has(input:not(:checked)) { opacity:.4; }
-.dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
-.panel { background:#16202E; border-left:1px solid #26344A; padding:20px 24px; overflow-y:auto; }
-.panel h2 { margin:0 0 4px; font-size:22px; color:#F6F4EE; }
-.panel h3 { font-size:15px; margin:18px 0 6px; color:#9AA5B1; font-weight:500; }
-.panel p { margin:4px 0; }
-.panel ul.plain { padding-left:18px; margin:4px 0; }
-footer { max-width:1120px; margin:0 auto; padding:24px; color:var(--muted); font-size:13px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
-@media (max-width:800px) {
-  .cols { grid-template-columns:1fr; }
-  .map { height:360px; }
-  .net { grid-template-columns:1fr; height:auto; }
-  .netmain { height:70vh; }
-  .panel { border-left:none; border-top:1px solid #26344A; }
-  .landing h1 { font-size:32px; }
-  main { padding:16px; }
-}
+  body { margin: 0; height: 100vh; display: flex; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: #f0f2f5; overflow: hidden; }
+  #sidebar { flex: 0 0 25%; min-width: 300px; max-width: 420px; display: flex; flex-direction: column; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,.12); z-index: 10; }
+  #query-container { display: flex; gap: 8px; padding: 12px; border-bottom: 1px solid #e3e6ea; }
+  #query-input { flex: 1; min-width: 0; padding: 8px 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+  #query-button { padding: 8px 14px; font-size: 16px; color: #fff; background: #4caf50; border: 0; border-radius: 4px; cursor: pointer; }
+  #query-button:hover { background: #45a049; }
+  #query-button:disabled { background: #9ccc9f; cursor: wait; }
+  #results-container { flex: 1; overflow-y: auto; padding: 12px; }
+  #results-content { white-space: pre-wrap; line-height: 1.6; margin-top: 6px; }
+  #hint { color: #888; font-size: 12px; line-height: 1.6; }
+  #brand { padding: 14px 12px 0; font: 600 22px "Noto Serif TC", serif; color: #2f3a4a; }
+  #brand small { display: block; margin-top: 2px; font: 400 12px "Noto Sans TC", sans-serif; color: #888; }
+  .cite { display: inline-block; min-width: 16px; padding: 0 4px; margin: 0 1px; font-size: 12px; line-height: 16px; text-align: center; color: #fff; background: #2b7ce9; border-radius: 8px; cursor: pointer; vertical-align: super; }
+  .cite:hover { background: #1a5fc0; }
+  #trust { margin-top: 12px; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #35603a; background: #eef7ee; border-radius: 6px; }
+  #trust.warn { color: #7a5a00; background: #fff6dc; }
+  #trust ol { margin: 6px 0 0; padding-left: 20px; } #trust li { cursor: pointer; } #trust li:hover { text-decoration: underline; }
+  .conflict { margin: 10px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #7a5a00; background: #fff6dc; border-radius: 6px; }
+  .src { margin: 8px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; background: #f6f7f9; border-radius: 6px; }
+  .src q { display: block; margin-top: 4px; color: #444; quotes: none; }
+  .tag { display: inline-block; margin-right: 4px; padding: 0 6px; font-size: 12px; color: #35603a; background: #dff0e0; border-radius: 8px; }
+  #answer { white-space: pre-wrap; line-height: 1.7; font-size: 16px; }
+  #entities h4, #detail h4 { margin: 16px 0 6px; font-size: 12px; color: #888; font-weight: normal; }
+  .chip { display: inline-block; margin: 0 6px 6px 0; padding: 3px 9px; font-size: 12px; background: #eef2f7; border-radius: 12px; cursor: pointer; }
+  .chip::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--c); }
+  .chip:hover { background: #dde6f1; }
+  #detail h3 { margin: 8px 0 4px; font-size: 22px; }
+  #back { color: #2b7ce9; cursor: pointer; font-size: 12px; }
+  #legend label { cursor: pointer; user-select: none; margin-right: 6px; }
+  #legend label.off { opacity: .4; }
+  pre { white-space: pre-wrap; font-size: 12px; color: #444; background: #f6f6f6; padding: 8px; border-radius: 4px; }
+  #graph { position: relative; flex: 1; min-width: 0; }
+  #mynetwork { width: 100%; height: 100%; }
+  #legend { position: absolute; left: 12px; bottom: 12px; z-index: 5; font-size: 12px; background: rgba(255,255,255,.9); padding: 8px 10px; border-radius: 6px; }
+  #legend span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 4px 0 8px; vertical-align: middle; }
+  #tools { position: absolute; top: 12px; right: 12px; z-index: 5; display: flex; gap: 6px; }
+  #tools select, #tools button { padding: 6px 8px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; }
+  #tools button:hover { background: #eef2f7; }
+  #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #3498db; }
 </style>
 </head>
 <body>
-<header>
-  <a class="brand" href="#/">文化資產知識庫<span>Demo</span></a>
-  <nav><a href="#/" data-nav="">搜尋</a><a href="#/map" data-nav="map">地圖</a><a href="#/timeline" data-nav="timeline">時間軸</a></nav>
-  <label class="toggle"><input type="checkbox" id="back"> 後台視角</label>
-</header>
-<div class="notice" id="notice"></div>
-<main id="app"><p class="hint">載入中…</p></main>
-<footer>
-  <span>本站所有個案、匠師與報告內容皆為虛構，僅示意知識圖譜的查詢方式。地圖 © OpenStreetMap 貢獻者。</span>
-  <button id="dl">下載公開資料（JSON）</button>
-</footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+<aside id="sidebar">
+  <div id="brand">文化資產知識庫<small>答案皆來自已校對、可公開的知識圖譜，並附出處</small></div>
+  <div id="query-container">
+    <input id="query-input" placeholder="問知識圖譜一個問題，例如：靈應宮的屋頂歷來怎麼修？" autofocus>
+    <button id="query-button">Search</button>
+  </div>
+  <div id="results-container">
+    <div id="hint">輸入問題後，答案會顯示在這裡，相關實體可點擊查看；右側圖譜中無關節點會變灰。也可直接點圖上的節點。</div>
+    <div id="answer" hidden></div>
+    <div id="trust" hidden></div>
+    <div id="entities" hidden></div>
+    <div id="detail" hidden></div>
+  </div>
+</aside>
+<main id="graph">
+  <div id="loading">Loading graph...</div>
+  <div id="mynetwork"></div>
+  <div id="tools">
+  <select id="layout" title="佈局">
+    <option value="fa2">ForceAtlas2（力導向）</option><option value="circular">環形</option>
+    <option value="cluster">依類別分群</option><option value="noverlap">防重疊（Noverlap）</option><option value="random">隨機</option>
+  </select>
+  <select id="focus-mode" title="聚焦排法">
+    <option value="concentric">聚焦：同心圓</option><option value="force">聚焦：力導向</option>
+    <option value="columns">聚焦：依類別分欄</option><option value="timeline">聚焦：時間軸</option>
+  </select>
+  <button id="restore" title="還原到搜尋前的佈局並取消變灰">還原佈局</button>
+  </div>
+  <div id="legend"></div>
+</main>
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script>
-const OK = ['已校', '已修正'];
-const ERAS = [['全部', -Infinity, Infinity], ['清代', -Infinity, 1895], ['日治', 1895, 1945], ['戰後', 1945, Infinity]];
-let D, back = false, map = null, cy = null;
-const by = {};
-const app = document.getElementById('app');
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const COLORS = { 個案: '#F6C85F', 修繕事件: '#5CC8B0', 匠師: '#6C8EF5', 構件: '#B58CE0', 年代: '#E8B466', 文件: '#9AA5B1', 單位: '#F28B82' };
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+let nodes, edges, G = {}, active = null, queryActive = null, only = new Set(), hasAnswer = false;
 
-// ---- 公開規則：出處已校對、且來源文件可公開，前台才看得到 ----
-const docOf = pageId => by[by[pageId].doc];
-const srcOk = s => OK.includes(s.status) && docOf(s.page).public;
-const evOk = e => e.sources.some(srcOk);
-const partOk = p => srcOk(p.source) && evOk(by[p.event]);
-const events = () => D.events.filter(e => back || evOk(e));
-const parts = () => D.participations.filter(p => back || partOk(p));
-const srcs = e => e.sources.filter(s => back || srcOk(s));
-const heritageOf = e => [...new Set(e.about.map(id => by[id].heritage || id))];
-const yr = e => e.yearFrom === e.yearTo ? `${e.yearFrom}` : `${e.yearFrom}–${e.yearTo}`;
-const claims = e => [...new Set(srcs(e).filter(s => s.claim).map(s => s.claim))];
-// 前台顯示校對後的文字；後台保留 OCR 原文
-const fixText = t => back ? t : D.participations.filter(p => p.correction).reduce((s, p) => s.replaceAll(p.correction.originalValue, p.correction.correctedValue), t);
-
-function hiddenCount() {
-  return D.events.flatMap(e => e.sources).filter(s => !srcOk(s)).length + D.participations.filter(p => !partOk(p)).length;
+// 套用目前狀態：有查詢時，無關節點與邊變灰；類別被關掉的節點隱藏
+function paint() {
+  nodes.update(nodes.get().map(n => {
+    const dim = active && !active.has(n.id), hit = active && active.has(n.id);
+    return { id: n.id, hidden: only.size > 0 && !only.has(n.kind), size: n.kind === '個案' ? 22 : 16, borderWidth: hit ? 4 : 2,
+      color: dim ? { background: '#E3E6EA', border: '#CDD2D8' } : { background: COLORS[n.kind], border: hit ? '#FFC300' : '#2B7CE9' },
+      font: { size: 14, color: dim ? '#B5BBC2' : '#333' } };
+  }));
+  edges.update(edges.get().map(e => ({ id: e.id, color: { color: active && !(active.has(e.from) && active.has(e.to)) ? '#E3E6EA' : '#848484', highlight: '#FFC300' } })));
 }
 
-// ---- 共用片段 ----
-function statusTag(s) {
-  if (!back) return '';
-  const doc = docOf(s.page);
-  const bits = [s.method + (s.confidence ? ` · 信心 ${s.confidence}` : ''), s.status];
-  let html = `<span class="tag ${OK.includes(s.status) ? '' : 'warn'}">${esc(bits.join(' · '))}</span>`;
-  if (!doc.public) html += `<span class="tag warn">文件不公開：${esc(doc.privateReason || '')}</span>`;
-  return html;
+// 佈局：fa2 交給 vis 物理引擎，其餘直接算座標後關掉物理
+function setLayout(name) {
+  net.setOptions({ physics: { enabled: name === 'fa2' } });
+  if (name === 'fa2') return net.stabilize(250);
+  const ids = nodes.getIds(), R = 60 * Math.sqrt(ids.length), P = {};
+  const kinds = Object.keys(COLORS), byKind = k => ids.filter(i => G[i].kind === k);
+  if (name === 'circular') [...ids].sort((a, b) => kinds.indexOf(G[a].kind) - kinds.indexOf(G[b].kind))
+    .forEach((id, i) => P[id] = [R * Math.cos(2 * Math.PI * i / ids.length), R * Math.sin(2 * Math.PI * i / ids.length)]);
+  if (name === 'random') ids.forEach(id => P[id] = [(Math.random() - .5) * 2 * R, (Math.random() - .5) * 2 * R]);
+  if (name === 'cluster') kinds.forEach((k, ki) => { const m = byKind(k), a = 2 * Math.PI * ki / kinds.length, cx = R * Math.cos(a), cy = R * Math.sin(a);
+    m.forEach((id, i) => P[id] = m.length === 1 ? [cx, cy] : [cx + 25 * Math.sqrt(m.length) * Math.cos(2 * Math.PI * i / m.length), cy + 25 * Math.sqrt(m.length) * Math.sin(2 * Math.PI * i / m.length)]); });
+  if (name === 'noverlap') { // 從目前位置出發，把太近的節點推開
+    const cur = net.getPositions(); ids.forEach(id => P[id] = [cur[id].x, cur[id].y]);
+    for (let it = 0; it < 200; it++) for (const a of ids) for (const b of ids) if (a < b) {
+      const dx = P[b][0] - P[a][0], dy = P[b][1] - P[a][1], d = Math.hypot(dx, dy) || .01, min = 90;
+      if (d < min) { const f = (min - d) / 2 / d; P[a][0] -= dx * f; P[a][1] -= dy * f; P[b][0] += dx * f; P[b][1] += dy * f; } } }
+  ids.forEach(id => net.moveNode(id, P[id][0], P[id][1]));
+  net.fit({ animation: true });
 }
+// 聚焦：命中／選取的節點依「聚焦排法」重排，其餘節點往外推開，補間動畫後鏡頭拉近
+let anim = 0, home = null, focusMode = 'concentric';
+const KIND_ORDER = Object.keys(COLORS);
 
-function sourceList(e) {
-  const list = srcs(e);
-  if (!list.length) return '';
-  return `<details><summary>出處（${list.length}）</summary><ul class="src">${list.map(s => {
-    const p = by[s.page], d = by[p.doc];
-    return `<li class="${srcOk(s) ? '' : 'off'}">《${esc(d.title)}》第 ${p.page} 頁${s.claim ? `，記載為 ${esc(s.claim)} 年` : ''}${statusTag(s)}<q>${esc(fixText(p.text))}</q></li>`;
-  }).join('')}</ul></details>`;
-}
-
-function craftsmenOf(e) {
-  const list = parts().filter(p => p.event === e.id);
-  if (!list.length) return '';
-  return `<p>參與匠師：${list.map(p => {
-    let s = `<a href="#/c/${p.craftsman}">${esc(by[p.craftsman].name)}</a>（${esc(p.role)}）`;
-    if (back && !partOk(p)) s += `<span class="tag warn">${esc(p.source.status)} · 前台不顯示</span>`;
-    if (back && p.correction) s += `<span class="tag warn">已修正：${esc(p.correction.originalValue)} → ${esc(p.correction.correctedValue)}（${esc(p.correction.reviewer)}，${esc(p.correction.reviewedAt)}）</span>`;
-    return s;
-  }).join('、')}</p>`;
-}
-
-function eventItem(e, showHeritage) {
-  const comp = e.about.filter(id => by[id].heritage).map(id => by[id].name);
-  const cl = claims(e);
-  const where = showHeritage ? heritageOf(e).map(h => `<a href="#/h/${h}">${esc(by[h].name)}</a>`).join('、') + ' · ' : '';
-  return `<li class="ev ${evOk(e) ? '' : 'hidden-front'}">
-    <span class="year">${cl.length > 1 ? cl.join(' / ') : yr(e)}</span>
-    <h3>${where}${esc(e.type)}${comp.length ? `：${esc(comp.join('、'))}` : ''}
-      ${e.status ? `<span class="tag blue">${esc(e.status)}</span>` : ''}
-      ${cl.length > 1 ? `<span class="tag warn">有 ${cl.length} 種記載</span>` : ''}
-      ${back && !evOk(e) ? '<span class="tag warn">前台不顯示</span>' : ''}</h3>
-    <p class="meta">原始記載：${esc(e.original)}${e.description ? `　${esc(e.description)}` : ''}</p>
-    ${e.methods ? `<p>工法：${esc(e.methods.join('、'))}${e.materials ? `　材料：${esc(e.materials.join('、'))}` : ''}</p>` : (e.materials ? `<p>材料：${esc(e.materials.join('、'))}</p>` : '')}
-    ${craftsmenOf(e)}
-    ${sourceList(e)}
-  </li>`;
-}
-
-function heritageCard(h, extra = '') {
-  return `<a class="card" href="#/h/${h.id}"><h3>${esc(h.name)}<span class="tag">${esc(h.category)}</span></h3><p>${esc(h.city)}${esc(h.district)}${extra}</p></a>`;
-}
-
-function newMap(el, points, onClick) {
-  map = L.map(el, { scrollWheelZoom: false });
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map);
-  for (const h of points) {
-    L.circleMarker([h.lat, h.lng], { radius: 9, color: '#16202E', weight: 2, fillColor: '#2F5BEA', fillOpacity: .9 })
-      .addTo(map).bindPopup(`<a href="#/h/${h.id}"><b>${esc(h.name)}</b></a><br>${esc(h.city)}${esc(h.district)}`);
+const arrangers = { // 各回傳 { id: [x, y] }，座標以 (cx, cy) 為中心
+  concentric(ids, es, center, cx, cy) { // 以中心節點為圓心、依連線距離排同心圓
+    const nb = id => es.flatMap(e => e.from === id ? [e.to] : e.to === id ? [e.from] : []);
+    const depth = { [center]: 0 };
+    for (let q = [center]; q.length;) { const f = q.shift(); nb(f).forEach(n => depth[n] === undefined && (depth[n] = depth[f] + 1, q.push(n))); }
+    const maxD = Math.max(...Object.values(depth)) + 1, rings = {}, T = { [center]: [cx, cy] };
+    ids.forEach(i => (rings[depth[i] ?? maxD] ||= []).push(i));
+    for (const [d, m] of Object.entries(rings)) if (+d > 0) {
+      const r = Math.max(150 * d, m.length * 85 / (2 * Math.PI));
+      m.forEach((id, k) => T[id] = [cx + r * Math.cos(2 * Math.PI * k / m.length + +d), cy + r * Math.sin(2 * Math.PI * k / m.length + +d)]);
+    }
+    return T;
+  },
+  force(ids, es, center, cx, cy) { // 從同心圓出發，只對命中子圖跑 Fruchterman-Reingold，看出自然群聚
+    const T = arrangers.concentric(ids, es, center, cx, cy), P = Object.fromEntries(ids.map(i => [i, [...T[i]]]));
+    for (let it = 0; it < 250; it++) {
+      const D = Object.fromEntries(ids.map(i => [i, [0, 0]]));
+      for (const a of ids) for (const b of ids) if (a < b) {
+        const dx = P[a][0] - P[b][0], dy = P[a][1] - P[b][1], d = Math.hypot(dx, dy) || .1, f = 14000 / (d * d);
+        D[a][0] += dx / d * f; D[a][1] += dy / d * f; D[b][0] -= dx / d * f; D[b][1] -= dy / d * f; }
+      for (const e of es) { const dx = P[e.to][0] - P[e.from][0], dy = P[e.to][1] - P[e.from][1], d = Math.hypot(dx, dy) || .1, f = (d - 130) * .05;
+        D[e.from][0] += dx / d * f; D[e.from][1] += dy / d * f; D[e.to][0] -= dx / d * f; D[e.to][1] -= dy / d * f; }
+      for (const i of ids) { P[i][0] += Math.max(-20, Math.min(20, D[i][0] - (P[i][0] - cx) * .01)); P[i][1] += Math.max(-20, Math.min(20, D[i][1] - (P[i][1] - cy) * .01)); }
+    }
+    return P;
+  },
+  columns(ids, es, center, cx, cy) { // 依類別分欄：個案 | 事件 | 匠師 ...，欄內依名稱排序
+    const ks = KIND_ORDER.filter(k => ids.some(i => G[i].kind === k)), T = {};
+    ks.forEach((k, ki) => { const m = ids.filter(i => G[i].kind === k).sort((a, b) => G[a].label.localeCompare(G[b].label, 'zh-Hant', { numeric: true }));
+      m.forEach((id, i) => T[id] = [cx + (ki - (ks.length - 1) / 2) * 240, cy + (i - (m.length - 1) / 2) * 62]); });
+    return T;
+  },
+  timeline(ids, es, center, cx, cy) { // 時間軸：事件依年代由左到右，其他實體靠到相關事件下方（各類別一列）
+    const evs = ids.filter(i => G[i].year), ys = evs.map(i => G[i].year[0]);
+    if (!evs.length) return arrangers.columns(ids, es, center, cx, cy);
+    const lo = Math.min(...ys), span = Math.max(Math.max(...ys) - lo, 1), W = Math.max(evs.length * 140, 800), T = {}, rows = {};
+    const xOf = id => G[id].year ? cx - W / 2 + (G[id].year[0] - lo) / span * W
+      : (xs => xs.length ? xs.reduce((a, b) => a + b) / xs.length : cx)(es.flatMap(e => e.from === id ? [e.to] : e.to === id ? [e.from] : []).filter(n => G[n].year).map(xOf));
+    ids.forEach(i => (rows[G[i].kind] ||= []).push([i, xOf(i)]));
+    const ks = KIND_ORDER.filter(k => rows[k]);
+    ks.forEach((k, ri) => { let last = -Infinity; rows[k].sort((a, b) => a[1] - b[1]).forEach(([id, x]) => { x = Math.max(x, last + 140); last = x; T[id] = [x, cy + (ri - (ks.length - 1) / 2) * 110]; }); });
+    const mid = Object.values(T).reduce((a, p) => a + p[0], 0) / ids.length; ids.forEach(i => T[i][0] += cx - mid);
+    return T;
   }
-  map.fitBounds(points.map(h => [h.lat, h.lng]), { padding: [40, 40], maxZoom: 12 });
-  if (onClick) map.on('click', onClick);
-}
-
-function km(a, b) {
-  const r = x => x * Math.PI / 180, dLat = r(b.lat - a.lat), dLng = r(b.lng - a.lng);
-  const t = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLng / 2) ** 2;
-  return 12742 * Math.asin(Math.sqrt(t));
-}
-
-// ---- 頁面 ----
-function mapPage() {
-  app.innerHTML = `
-    <h1>地圖探索</h1>
-    <p class="meta">輸入廟名、匠師或地區，或在地圖上點一下，看附近有哪些文資。</p>
-    <p><input type="search" id="q" placeholder="例如：靈應宮、陳某某、彰化、剪黏"></p>
-    <div class="cols"><div id="map" class="map"></div><div><h2 id="lt" style="margin-top:0">全部個案（${D.heritage.length}）</h2><div class="list" id="list"></div></div></div>`;
-  const list = document.getElementById('list'), lt = document.getElementById('lt');
-  const all = () => { lt.textContent = `全部個案（${D.heritage.length}）`; list.innerHTML = D.heritage.map(h => heritageCard(h)).join(''); };
-  all();
-  let circle = null;
-  newMap('map', D.heritage, ev => {
-    const c = { lat: ev.latlng.lat, lng: ev.latlng.lng };
-    if (circle) circle.remove();
-    circle = L.circle(ev.latlng, { radius: 10000, color: '#2F5BEA', weight: 1, fillOpacity: .08 }).addTo(map);
-    const near = D.heritage.map(h => [h, km(c, h)]).filter(([, d]) => d <= 10).sort((a, b) => a[1] - b[1]);
-    lt.textContent = `點選位置 10 公里內：${near.length} 處`;
-    list.innerHTML = near.length ? near.map(([h, d]) => heritageCard(h, ` · 約 ${d.toFixed(1)} 公里`)).join('') : '<p class="hint">附近沒有個案，試著點彰化市一帶。</p>';
-  });
-  document.getElementById('q').addEventListener('input', ev => {
-    const q = ev.target.value.trim();
-    if (!q) return all();
-    const hit = o => Object.values(o).some(v => typeof v === 'string' && v.includes(q));
-    const viaCraftsman = new Set(parts().filter(p => by[p.craftsman].name.includes(q)).flatMap(p => heritageOf(by[p.event])));
-    const hs = D.heritage.filter(h => hit({ name: h.name, city: h.city, district: h.district, address: h.address, summary: h.summary }) || viaCraftsman.has(h.id));
-    const cs = D.craftsmen.filter(c => hit({ name: c.name, role: c.role, school: c.school }));
-    lt.textContent = `搜尋「${q}」：${hs.length + cs.length} 筆`;
-    list.innerHTML = cs.map(c => `<a class="card" href="#/c/${c.id}"><h3>${esc(c.name)}<span class="tag blue">匠師</span></h3><p>${esc(c.role)}${c.school ? ' · ' + esc(c.school) : ''}</p></a>`).join('')
-      + hs.map(h => heritageCard(h)).join('') || '<p class="hint">找不到符合的結果。</p>';
-  });
-}
-
-function heritagePage(id) {
-  const h = by[id];
-  if (!h) return landing();
-  const evs = events().filter(e => heritageOf(e).includes(id)).sort((a, b) => a.yearFrom - b.yearFrom);
-  const docs = D.documents.filter(d => d.heritage.includes(id) && (back || d.public));
-  app.innerHTML = `
-    <p><a href="javascript:history.back()">← 返回</a></p>
-    <h1>${esc(h.name)}</h1>
-    <p class="meta">${esc([h.category, h.grade].filter(Boolean).join(' · '))}　${esc(h.address)}</p>
-    <div class="cols" style="margin-top:16px">
-      <div>
-        <p>${esc(h.summary)}</p>
-        <p class="private backonly">內部欄位（前台不顯示）：所有權人 ${esc(h.owner)}</p>
-        <h2>歷史與修繕時間軸</h2>
-        ${evs.length ? `<ol class="timeline">${evs.map(e => eventItem(e)).join('')}</ol>` : '<p class="hint">尚無已公開的紀錄。</p>'}
-      </div>
-      <div>
-        <div id="map" class="map small"></div>
-        <h2>相關文件</h2>
-        <div class="list">${docs.map(d => `<div class="card"><h3>${esc(d.title)}${d.public ? '' : '<span class="tag warn">不公開</span>'}</h3><p>${esc(d.type)} · ${d.year} · ${esc(d.format)}</p></div>`).join('')}</div>
-        <p style="margin-top:16px"><a href="#/n/${id}">在網絡圖中查看 →</a></p>
-      </div>
-    </div>`;
-  newMap('map', [h]);
-}
-
-function craftsmanPage(id) {
-  const c = by[id];
-  if (!c) return landing();
-  const ps = parts().filter(p => p.craftsman === id).map(p => [p, by[p.event]]).sort((a, b) => a[1].yearFrom - b[1].yearFrom);
-  const hs = [...new Set(ps.flatMap(([, e]) => heritageOf(e)))].map(h => by[h]);
-  app.innerHTML = `
-    <p><a href="javascript:history.back()">← 返回</a></p>
-    <h1>${esc(c.name)}</h1>
-    <p class="meta">${esc([c.role, c.school, `活躍於 ${c.active}`].filter(Boolean).join(' · '))}</p>
-    <p>${esc(c.summary)}</p>
-    <div class="cols" style="margin-top:16px">
-      <div>
-        <h2 style="margin-top:0">參與過的廟宇（${hs.length}）</h2>
-        <table><tr><th>年代</th><th>個案</th><th>參與內容</th><th>出處</th></tr>${ps.map(([p, e]) => {
-          const pg = by[p.source.page];
-          return `<tr><td>${yr(e)}</td><td>${heritageOf(e).map(h => `<a href="#/h/${h}">${esc(by[h].name)}</a>`).join('、')}</td>
-            <td>${esc(e.type)} · ${esc(p.role)}${back && !partOk(p) ? '<span class="tag warn">前台不顯示</span>' : ''}</td>
-            <td>《${esc(by[pg.doc].title)}》第 ${pg.page} 頁${statusTag(p.source)}<br><q>${esc(fixText(p.source.quote))}</q></td></tr>`;
-        }).join('')}</table>
-      </div>
-      <div>${hs.length ? '<div id="map" class="map small"></div>' : ''}<p style="margin-top:16px"><a href="#/n/${id}">在網絡圖中查看 →</a></p></div>
-    </div>`;
-  if (hs.length) newMap('map', hs);
-}
-
-function timelinePage(era = 0) {
-  const [, lo, hi] = ERAS[era];
-  const evs = events().filter(e => e.yearFrom >= lo && e.yearFrom < hi).sort((a, b) => a.yearFrom - b.yearFrom);
-  app.innerHTML = `
-    <h1>時間軸</h1>
-    <p class="meta">依年代瀏覽各個案的興建、重修與災損紀錄。</p>
-    <div class="filters">${ERAS.map(([n], i) => `<button class="${i === era ? 'on' : ''}" data-era="${i}">${n}</button>`).join('')}</div>
-    ${evs.length ? `<ol class="timeline">${evs.map(e => eventItem(e, true)).join('')}</ol>` : '<p class="hint">這個時期沒有紀錄。</p>'}`;
-  app.querySelectorAll('[data-era]').forEach(b => b.onclick = () => timelinePage(+b.dataset.era));
-}
-
-// ---- 起始畫面：只有搜尋欄 ----
-const EXAMPLES = ['靈應宮', '陳某某', '剪黏', '1920 年代', '彰化'];
-
-function bindSearch(form) {
-  document.getElementById(form).addEventListener('submit', ev => {
-    ev.preventDefault();
-    const q = ev.target.querySelector('input').value.trim();
-    if (q) location.hash = '#/q/' + encodeURIComponent(q);
-  });
-}
-
-function landing() {
-  app.innerHTML = `<section class="landing">
-    <h1>文化資產知識庫</h1>
-    <p class="meta">搜尋一座廟、一位匠師、一種構件或一個年代，看它和誰有關。</p>
-    <form id="lf"><input type="search" placeholder="例如：靈應宮、陳某某、剪黏、1920" autofocus></form>
-    <div class="chips">${EXAMPLES.map(t => `<a href="#/q/${encodeURIComponent(t)}">${t}</a>`).join('')}</div>
-    <p class="hint">也可以從<a href="#/map">地圖</a>或<a href="#/timeline">時間軸</a>開始瀏覽。所有資料皆為虛構。</p>
-  </section>`;
-  bindSearch('lf');
-}
-
-// ---- 知識網絡：全部實體與關係，依前台／後台規則過濾 ----
-const KINDS = { // 名稱、顏色、形狀、大小
-  h: ['個案', '#F6F4EE', 'round-rectangle', 44],
-  e: ['修繕事件', '#5CC8B0', 'diamond', 30],
-  c: ['匠師', '#8FB0FF', 'ellipse', 34],
-  m: ['構件', '#C792EA', 'hexagon', 28],
-  y: ['年代', '#E8B466', 'ellipse', 30],
-  d: ['文件', '#9AA5B1', 'rectangle', 24],
-  o: ['單位', '#F28B82', 'round-rectangle', 24]
 };
-const short = s => s.replace('虛構・', '');
-const offKinds = new Set();
-let net, shown, roots, selected;
 
-function buildNet() {
-  const N = new Map(), E = new Map();
-  const node = (id, kind, label, hid = false) => N.has(id) ? (hid || (N.get(id).hid = false)) : N.set(id, { id, kind, label, hid });
-  const link = (a, b, label, hid = false) => { const id = a + '~' + b; E.has(id) ? (hid || (E.get(id).hid = false)) : E.set(id, { id, source: a, target: b, label, hid }); };
-  D.heritage.forEach(h => node(h.id, 'h', short(h.name)));
-  for (const e of D.events) {
-    const ok = evOk(e);
-    if (!back && !ok) continue;
-    node(e.id, 'e', `${yr(e)} ${e.type}`, !ok);
-    heritageOf(e).forEach(h => link(e.id, h, '關於', !ok));
-    for (const a of e.about.filter(a => by[a].heritage)) {
-      node(a, 'm', `${short(by[by[a].heritage].name)}・${by[a].name}`, !ok);
-      link(a, by[a].heritage, '屬於', !ok);
-      link(e.id, a, '修繕', !ok);
-    }
-    const dec = Math.floor(e.yearFrom / 10) * 10;
-    node('y' + dec, 'y', `${dec} 年代`, !ok);
-    link(e.id, 'y' + dec, '年代', !ok);
-    for (const s of e.sources) {
-      const sok = srcOk(s);
-      if (!back && !sok) continue;
-      const d = docOf(s.page);
-      node(d.id, 'd', d.title, !d.public);
-      link(d.id, e.id, '記載', !sok);
-    }
-    const p = e.project && by[e.project];
-    if (p && p.executor) { node(p.executor, 'o', by[p.executor].name, !ok); link(p.executor, e.id, '承攬', !ok); }
-  }
-  for (const p of D.participations) {
-    const ok = partOk(p);
-    if (!back && !ok) continue;
-    node(p.craftsman, 'c', by[p.craftsman].name, !ok);
-    link(p.craftsman, p.event, p.role, !ok);
-  }
-  return { N, E };
-}
-
-// 依優先順序比對，取第一個有結果的層級：名稱 → 地區、類型、角色 → 文件標題
-function findNodes(q, n) {
-  const has = (...v) => v.some(x => typeof x === 'string' && x.includes(q));
-  const num = q.match(/\d{3,4}/);
-  const tiers = [
-    [...D.heritage.filter(h => has(h.name)), ...D.craftsmen.filter(c => has(c.name))].map(x => x.id).concat(num ? ['y' + Math.floor(+num[0] / 10) * 10] : []),
-    [...D.heritage.filter(h => has(h.city, h.district, h.address)), ...D.craftsmen.filter(c => has(c.role, c.school)),
-     ...D.components.filter(m => has(m.name, m.type)), ...D.organizations.filter(o => has(o.name)), ...D.events.filter(e => e.type === q)].map(x => x.id),
-    D.documents.filter(d => has(d.title)).map(d => d.id)
-  ];
-  for (const t of tiers) { const ids = [...new Set(t)].filter(id => n.N.has(id)); if (ids.length) return ids; }
-  return [];
-}
-
-const neighbors = id => [...net.E.values()].flatMap(e => e.source === id ? [e.target] : e.target === id ? [e.source] : []);
-
-function expand(id, depth) {
-  shown.add(id);
-  let frontier = [id];
-  for (let i = 0; i < depth; i++) {
-    frontier = frontier.flatMap(f => neighbors(f).filter(n => !shown.has(n) && shown.add(n)));
-  }
-}
-
-// 把 shown 裡還沒畫的節點和邊加進圖。有 anchor 時新節點圍在它旁邊，不重排整張圖
-function sync(anchor) {
-  const fresh = [];
-  for (const id of shown) if (!cy.getElementById(id).length) {
-    const n = net.N.get(id);
-    fresh.push(cy.add({ group: 'nodes', data: { id, kind: n.kind, label: n.label }, classes: n.hid ? 'hid' : '' }));
-  }
-  for (const e of net.E.values()) if (shown.has(e.source) && shown.has(e.target) && !cy.getElementById(e.id).length)
-    cy.add({ group: 'edges', data: e, classes: e.hid ? 'hid' : '' });
-  cy.nodes().forEach(n => n.toggleClass('off', offKinds.has(n.data('kind')) && !roots.includes(n.id())));
-  if (anchor) {
-    const p = cy.getElementById(anchor).position(), R = 110 + fresh.length * 6;
-    fresh.forEach((n, i) => n.position({ x: p.x + R * Math.cos(2 * Math.PI * i / fresh.length), y: p.y + R * Math.sin(2 * Math.PI * i / fresh.length) }));
-    return;
-  }
-  const depth = Object.fromEntries(roots.map(r => [r, 0]));
-  for (let fr = [...roots]; fr.length;) fr = fr.flatMap(f => neighbors(f).filter(n => shown.has(n) && depth[n] === undefined && (depth[n] = depth[f] + 1)));
-  const max = Math.max(...Object.values(depth));
-  cy.layout({ name: 'concentric', concentric: n => max - (depth[n.id()] ?? max), levelWidth: () => 1, minNodeSpacing: 40, padding: 60, animate: false }).run();
-}
-
-function nodePanel(id) {
-  const n = net.N.get(id), o = by[id], k = n.kind;
-  let body = '';
-  if (k === 'h') body = `<p class="meta">${esc([o.category, o.grade].filter(Boolean).join(' · '))}　${esc(o.address)}</p><p>${esc(o.summary)}</p>`;
-  if (k === 'c') body = `<p class="meta">${esc([o.role, o.school, '活躍於 ' + o.active].filter(Boolean).join(' · '))}</p><p>${esc(o.summary)}</p>`;
-  if (k === 'e') body = `<p class="meta">原始記載：${esc(o.original)}</p>${o.description ? `<p>${esc(o.description)}</p>` : ''}
-    ${o.methods ? `<p>工法：${esc(o.methods.join('、'))}</p>` : ''}${o.materials ? `<p>材料：${esc(o.materials.join('、'))}</p>` : ''}
-    ${claims(o).length > 1 ? `<p><span class="tag warn">有 ${claims(o).length} 種記載：${esc(claims(o).join(' / '))}</span></p>` : ''}${sourceList(o)}`;
-  if (k === 'd') body = `<p class="meta">${esc(o.type)} · ${o.year} · ${esc(o.format)}</p>${o.public ? '' : `<p><span class="tag warn">不公開：${esc(o.privateReason)}</span></p>`}`;
-  if (k === 'm') body = `<p class="meta">${esc(o.type)}</p>`;
-  if (k === 'o') body = `<p class="meta">${esc(o.type)}</p>`;
-  const groups = {};
-  for (const nb of neighbors(id)) (groups[net.N.get(nb).kind] ||= []).push(nb);
-  const rel = Object.keys(KINDS).filter(g => groups[g]).map(g => `<h3>${KINDS[g][0]}（${groups[g].length}）</h3><ul class="plain">${groups[g]
-    .map(x => net.N.get(x)).sort((a, b) => a.label.localeCompare(b.label, 'zh-Hant', { numeric: true }))
-    .map(x => `<li><a href="#" data-node="${x.id}">${esc(x.label)}</a>${x.hid ? '<span class="tag warn">前台不顯示</span>' : ''}</li>`).join('')}</ul>`).join('');
-  const page = k === 'h' || k === 'c' ? `<p style="margin-top:20px"><a href="#/${k}/${id}">開啟完整頁面 →</a>　<span class="hint">或再點一次節點</span></p>` : '';
-  return `<p class="meta">${KINDS[k][0]}${n.hid ? '<span class="tag warn">前台不顯示</span>' : ''}</p><h2>${esc(k === 'h' || k === 'c' ? o.name : n.label)}</h2>${body}${page}${rel}`;
-}
-
-function select(id, grow = true) {
-  if (!cy.getElementById(id).length) { shown.add(id); sync(selected || roots[0]); } // 從面板點到還沒畫出的節點：先放在目前選取的節點旁
-  selected = id;
-  if (grow) { expand(id, 1); sync(id); }
-  const node = cy.getElementById(id);
-  cy.elements().removeClass('sel focus').addClass('faded');
-  node.addClass('sel').closedNeighborhood().removeClass('faded').addClass('focus');
-  if (grow) cy.animate({ fit: { eles: node.closedNeighborhood(), padding: 90 } }, { duration: 350 });
-  document.getElementById('panel').innerHTML = nodePanel(id);
-}
-
-function netPage(n, ids, q) {
-  net = n; roots = ids; shown = new Set(); selected = null;
-  app.innerHTML = `<div class="net"><div class="netmain"><div id="cy"></div>
-    <div class="netbar"><form id="sf"><input type="search" value="${esc(q)}" placeholder="再搜尋…"></form>
-      <div class="legend">${Object.entries(KINDS).map(([k, [name, color]]) => `<label><input type="checkbox" data-kind="${k}" ${offKinds.has(k) ? '' : 'checked'}><span class="dot" style="background:${color}"></span>${name}</label>`).join('')}</div>
-    </div></div><aside class="panel" id="panel"></aside></div>`;
-  bindSearch('sf');
-  const panel = document.getElementById('panel');
-  if (!roots.length) {
-    panel.innerHTML = `<h2>找不到「${esc(q)}」</h2><p class="meta">試試：</p><div class="chips" style="justify-content:flex-start">${EXAMPLES.map(t => `<a href="#/q/${encodeURIComponent(t)}">${t}</a>`).join('')}</div>`;
-    return;
-  }
-  roots.forEach(r => expand(r, roots.length === 1 ? 2 : 1));
-  cy = cytoscape({ container: document.getElementById('cy'), minZoom: .25, maxZoom: 1.8, style: [
-    { selector: 'node', style: { label: 'data(label)', 'font-family': 'Noto Sans TC, sans-serif', 'font-size': 12, color: '#C9D1DC', 'text-valign': 'bottom', 'text-margin-y': 5, 'text-wrap': 'ellipsis', 'text-max-width': '140px' } },
-    ...Object.entries(KINDS).map(([k, [, color, shape, size]]) => ({ selector: `node[kind="${k}"]`, style: { 'background-color': color, shape, width: size, height: size } })),
-    { selector: 'node[kind="h"]', style: { 'font-size': 15, 'font-weight': 700, color: '#F6F4EE' } },
-    { selector: 'edge', style: { width: 1.5, 'line-color': '#34445C', 'curve-style': 'bezier', 'font-size': 10, color: '#C9D1DC', 'text-background-color': '#0F1722', 'text-background-opacity': 1, 'text-background-padding': '2px' } },
-    { selector: 'edge.focus', style: { label: 'data(label)', 'line-color': '#8FB0FF', width: 2.5 } },
-    { selector: 'node.hid', style: { 'border-width': 3, 'border-style': 'dashed', 'border-color': '#FFD166' } },
-    { selector: 'edge.hid', style: { 'line-style': 'dashed', 'line-color': '#B8901F' } },
-    { selector: '.faded', style: { opacity: .2 } },
-    { selector: 'node.sel', style: { 'border-width': 4, 'border-style': 'solid', 'border-color': '#FFFFFF' } },
-    { selector: '.off', style: { display: 'none' } }
-  ] });
-  sync();
-  cy.on('tap', 'node', ev => {
-    const id = ev.target.id(), k = ev.target.data('kind');
-    if (id === selected && (k === 'h' || k === 'c')) location.hash = `#/${k}/${id}`;
-    else select(id);
-  });
-  cy.on('tap', ev => { if (ev.target === cy) { selected = null; cy.elements().removeClass('faded focus sel'); } });
-  panel.addEventListener('click', ev => {
-    const a = ev.target.closest('[data-node]');
-    if (a) { ev.preventDefault(); select(a.dataset.node); }
-  });
-  app.querySelectorAll('[data-kind]').forEach(cb => cb.onchange = () => {
-    cb.checked ? offKinds.delete(cb.dataset.kind) : offKinds.add(cb.dataset.kind);
-    cy.nodes().forEach(x => x.toggleClass('off', offKinds.has(x.data('kind')) && !roots.includes(x.id())));
-  });
-  if (roots.length === 1) select(roots[0], false);
-  else panel.innerHTML = `<p class="meta">搜尋「${esc(q)}」</p><h2>找到 ${roots.length} 個結果</h2><ul class="plain">${roots.map(r => `<li><a href="#" data-node="${r}">${esc(net.N.get(r).label)}</a><span class="tag">${KINDS[net.N.get(r).kind][0]}</span></li>`).join('')}</ul><p class="hint" style="margin-top:16px">點節點展開它的關聯。</p>`;
-}
-
-// ---- 路由與狀態 ----
-function route() {
-  if (map) { map.remove(); map = null; }
-  if (cy) { cy.destroy(); cy = null; }
-  const [page = '', ...rest] = location.hash.slice(2).split('/');
-  const id = decodeURIComponent(rest.join('/'));
-  document.body.classList.toggle('dark', ['', 'q', 'n'].includes(page));
-  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === (['h', 'c', 'q', 'n'].includes(page) ? '' : page)));
-  if (page === 'h') heritagePage(id);
-  else if (page === 'c') craftsmanPage(id);
-  else if (page === 'timeline') timelinePage();
-  else if (page === 'map') mapPage();
-  else if (page === 'q') { const n = buildNet(); netPage(n, findNodes(id, n), id); }
-  else if (page === 'n') { const n = buildNet(); netPage(n, n.N.has(id) ? [id] : [], id); }
-  else landing();
-}
-
-function setBack(on) {
-  back = on;
-  document.body.classList.toggle('back', on);
-  document.getElementById('notice').textContent = on
-    ? `後台視角：顯示全部資料，包含未校對與不公開的內容（黃色標示）。前台共隱藏 ${hiddenCount()} 筆出處或匠師紀錄。`
-    : '前台視角：只顯示已校對、且來源文件可公開的內容。所有資料皆為虛構。';
-  route();
-}
-
-function publicData() {
-  const evs = D.events.filter(evOk).map(e => ({ ...e, sources: e.sources.filter(srcOk) }));
-  const docs = D.documents.filter(d => d.public);
-  const docIds = new Set(docs.map(d => d.id));
-  return {
-    note: '虛構資料，僅供示意。只包含已校對、可公開的內容。',
-    heritage: D.heritage.map(({ owner, ...h }) => h),
-    components: D.components, craftsmen: D.craftsmen,
-    documents: docs.map(({ privateReason, ...d }) => d),
-    pages: D.pages.filter(p => docIds.has(p.doc)),
-    events: evs, participations: D.participations.filter(partOk)
+function tween(T, done) { // 補間動畫：所有節點從目前位置移到 T
+  const cur = net.getPositions(), token = ++anim, t0 = performance.now();
+  const dur = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 900;
+  net.setOptions({ physics: { enabled: false } });
+  const step = now => {
+    if (token !== anim) return;
+    const k = dur ? Math.min(1, (now - t0) / dur) : 1, e = k < .5 ? 4 * k ** 3 : 1 - (-2 * k + 2) ** 3 / 2;
+    for (const id in T) net.moveNode(id, cur[id].x + (T[id][0] - cur[id].x) * e, cur[id].y + (T[id][1] - cur[id].y) * e);
+    k < 1 ? requestAnimationFrame(step) : done && done();
   };
+  requestAnimationFrame(step);
 }
 
-document.getElementById('back').addEventListener('change', ev => setBack(ev.target.checked));
-document.getElementById('dl').addEventListener('click', () => {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([JSON.stringify(publicData(), null, 2)], { type: 'application/json' }));
-  a.download = 'heritage-public-data.json';
-  a.click();
-});
-addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
+function focusLayout(ids, center) {
+  const act = new Set(ids), cur = net.getPositions();
+  home ||= Object.fromEntries(Object.entries(cur).map(([id, p]) => [id, [p.x, p.y]])); // 第一次聚焦前先記住佈局，供「還原」用
+  const es = edges.get().filter(e => act.has(e.from) && act.has(e.to));
+  const deg = id => es.filter(e => e.from === id || e.to === id).length;
+  center = center || [...act].sort((a, b) => deg(b) - deg(a))[0];
+  const cx = ids.reduce((a, i) => a + cur[i].x, 0) / ids.length, cy = ids.reduce((a, i) => a + cur[i].y, 0) / ids.length;
+  const T = arrangers[focusMode](ids, es, center, cx, cy);
+  const outer = Math.max(...ids.map(i => Math.hypot(T[i][0] - cx, T[i][1] - cy)));
+  for (const id of nodes.getIds()) if (!act.has(id)) { // 無關節點沿原方向被推到外圍
+    const dx = cur[id].x - cx, dy = cur[id].y - cy, d = Math.hypot(dx, dy) || 1, to = outer + 260 + d * .4;
+    T[id] = [cx + dx / d * to, cy + dy / d * to];
+  }
+  tween(T, () => net.fit({ nodes: ids, animation: { duration: 700, easingFunction: 'easeInOutQuad' } }));
+}
 
-fetch('data.json').then(r => r.json()).then(data => {
-  D = data;
-  for (const k of ['heritage', 'components', 'craftsmen', 'organizations', 'projects', 'documents', 'pages', 'events']) for (const x of D[k]) by[x.id] = x;
-  setBack(false);
-}).catch(err => { app.innerHTML = `<p class="hint">資料載入失敗：${esc(err.message)}。請用網頁伺服器開啟（例如 python3 -m http.server），不要直接開檔案。</p>`; });
+function restoreLayout() { // 還原到第一次聚焦前的佈局，並取消變灰
+  active = queryActive = null; paint();
+  if (home) { const h = home; home = null; tween(h, () => net.fit({ animation: { duration: 700, easingFunction: 'easeInOutQuad' } })); }
+  if (!$('detail').hidden) show(hasAnswer ? 'answer' : 'home');
+}
+$('restore').onclick = restoreLayout;
+
+$('focus-mode').onchange = e => { focusMode = e.target.value; if (active) focusLayout([...active]); };
+$('layout').onchange = e => { anim++; home = null; setLayout(e.target.value); };
+
+const chip = id => `<span class="chip" data-id="${id}" style="--c:${COLORS[G[id].kind]}">${esc(G[id].label)}</span>`;
+const group = ids => Object.keys(COLORS).map(k => [k, ids.filter(i => G[i].kind === k)]).filter(([, v]) => v.length)
+  .map(([k, v]) => `<h4>${k}（${v.length}）</h4>${v.map(chip).join('')}`).join('');
+
+function show(view) { // 'home' | 'answer' | 'detail'
+  $('hint').hidden = view !== 'home' || hasAnswer;
+  $('answer').hidden = $('entities').hidden = view === 'detail' || !hasAnswer;
+  if (view === 'detail') $('trust').hidden = true; else if ($('trust').innerHTML) $('trust').hidden = !hasAnswer;
+  $('detail').hidden = view !== 'detail';
+}
+
+const statusTag = s => `<span class="tag">${esc(s.status)}</span><span class="tag">${esc(s.method)}${s.confidence ? ' · 信心 ' + s.confidence : ''}</span>`;
+const srcCard = s => `<div class="src">《${esc(s.doc)}》第 ${s.page} 頁${s.claim ? `，記載為 ${esc(s.claim)} 年` : ''}<br>${statusTag(s)}<q>${esc(s.quote)}</q></div>`;
+function eventTrust(n) { // 事件資訊：描述、記載衝突提示、每筆出處的校對狀態與原文
+  const claims = [...new Set(n.sources.map(s => s.claim).filter(Boolean))];
+  return `<pre>${esc(n.detail.split('\n    出處')[0])}</pre>
+    ${claims.length > 1 ? `<div class="conflict">⚠ 不同出處對年代有 ${claims.length} 種記載：${esc(claims.join(' / '))}。知識庫並陳，不自行判定。</div>` : ''}
+    <h4>出處（${n.sources.length}）</h4>${n.sources.map(srcCard).join('')}`;
+}
+
+// 答案裡的 [e2] 轉成可點的引用編號；回傳 HTML 與引用到的事件
+function renderAnswer(text) {
+  const order = [];
+  const html = esc(text).replace(/\[(e\d+)\]/g, (m, id) => {
+    if (!G[id]) return '';
+    if (!order.includes(id)) order.push(id);
+    return `<a class="cite" data-id="${id}" title="${esc(G[id].label)}">${order.indexOf(id) + 1}</a>`;
+  });
+  return { html, order };
+}
+function renderTrust(order, answered) {
+  const t = $('trust'), n = order.reduce((a, id) => a + (G[id].sources || []).length, 0);
+  t.hidden = !answered; t.classList.toggle('warn', !order.length);
+  t.innerHTML = order.length
+    ? `依據 ${order.length} 件事件、${n} 筆已校對出處（點編號查看原文）<ol>${order.map(id => `<li data-id="${id}">${esc(G[id].label)} · 《${esc(G[id].sources[0]?.doc || '')}》第 ${G[id].sources[0]?.page || '?'} 頁${G[id].sources.length > 1 ? ` 等 ${G[id].sources.length} 筆` : ''}</li>`).join('')}</ol>`
+    : '此回答沒有標註出處，請以下方相關實體的原始紀錄為準。';
+}
+
+function selectEntity(id) {
+  const n = G[id];
+  const rel = [...new Set(edges.get().flatMap(e => e.from === id ? [e.to] : e.to === id ? [e.from] : []))];
+  $('detail').innerHTML = `<span id="back">← 返回</span><h3>${esc(n.label)}</h3><span class="chip" style="--c:${COLORS[n.kind]};cursor:default">${n.kind}</span>
+    ${n.sources ? eventTrust(n) : `<pre>${esc(n.detail)}</pre>`}${group(rel)}`;
+  $('back').onclick = clearFocus;
+  show('detail');
+  active = new Set([id, ...rel]); paint(); // 只留選到的實體與其鄰居，其餘變灰
+  net.selectNodes([id]); focusLayout([...active], id);
+}
+function clearFocus() { show(hasAnswer ? 'answer' : 'home'); if (queryActive) { active = queryActive; paint(); focusLayout([...queryActive]); } else restoreLayout(); }
+document.addEventListener('click', e => { const c = e.target.closest('[data-id]'); if (c) selectEntity(c.dataset.id); });
+
+fetch('/api/graph').then(r => r.json()).then(g => {
+  g.nodes.forEach(n => G[n.id] = n);
+  nodes = new vis.DataSet(g.nodes.map(n => ({ id: n.id, label: n.label, title: n.label, kind: n.kind, shape: 'dot' })));
+  edges = new vis.DataSet(g.edges.map((e, i) => ({ ...e, id: i, arrows: { to: { scaleFactor: .5 } }, width: 2 })));
+  window.net = new vis.Network($('mynetwork'), { nodes, edges }, {
+    physics: { solver: 'forceAtlas2Based', stabilization: { iterations: 250 } },
+    interaction: { hover: true, tooltipDelay: 200 }, edges: { smooth: false, font: { size: 10, color: '#666', strokeWidth: 0 } } });
+  paint();
+  net.once('stabilizationIterationsDone', () => $('loading').remove());
+  net.on('click', p => { if (p.nodes.length) selectEntity(p.nodes[0]); else if (!$('detail').hidden) clearFocus(); });
+  $('legend').innerHTML = Object.entries(COLORS).map(([k, c]) => `<label data-kind="${k}"><span style="background:${c}"></span>${k}</label>`).join('');
+  $('legend').onclick = e => {
+    const l = e.target.closest('label'); if (!l) return;
+    only.has(l.dataset.kind) ? only.delete(l.dataset.kind) : only.add(l.dataset.kind); // 沒選 = 全部顯示
+    document.querySelectorAll('#legend label').forEach(x => x.classList.toggle('off', only.size > 0 && !only.has(x.dataset.kind)));
+    paint();
+  };
+});
+
+async function ask() {
+  const query = $('query-input').value.trim();
+  if (!query) return;
+  $('query-button').disabled = true;
+  hasAnswer = true; $('answer').textContent = '檢索與生成中…'; $('trust').hidden = true; $('trust').innerHTML = ''; $('entities').innerHTML = ''; show('answer');
+  try {
+    const r = await (await fetch('/api/query', { method: 'POST', body: JSON.stringify({ query }), signal: AbortSignal.timeout(90000) })).json();
+    const a = renderAnswer(r.answer); $('answer').innerHTML = a.html; renderTrust(a.order, r.entities.length > 0);
+    $('entities').innerHTML = r.entities.length ? '<h4>相關實體（點擊查看）</h4>' + group(r.entities.filter(i => G[i].kind !== '年代')) : '';
+    active = queryActive = r.entities.length ? new Set(r.entities) : null; paint();
+    if (active) focusLayout(r.entities);
+  } catch (e) { $('answer').textContent = '錯誤：' + e; }
+  finally { $('query-button').disabled = false; $('query-input').focus(); }
+}
+$('query-button').onclick = ask;
+// vis-network 在 window 綁了 Backspace/Delete 並 preventDefault，會讓輸入框刪不了字；擋住冒泡
+$('query-input').onkeydown = e => { e.stopPropagation(); if (e.key === 'Enter' && !e.isComposing) ask(); };
 </script>
 </body>
 </html>

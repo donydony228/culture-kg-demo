@@ -1,3 +1,4 @@
 .claude/
 .impeccable/
 .DS_Store
+.env

@@ -7,64 +7,125 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; height: 100vh; display: flex; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: #f0f2f5; overflow: hidden; }
-  #sidebar { flex: 0 0 25%; min-width: 300px; max-width: 420px; display: flex; flex-direction: column; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,.12); z-index: 10; }
-  #query-container { display: flex; gap: 8px; padding: 12px; border-bottom: 1px solid #e3e6ea; }
-  #query-input { flex: 1; min-width: 0; padding: 8px 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
-  #query-button { padding: 8px 14px; font-size: 16px; color: #fff; background: #4caf50; border: 0; border-radius: 4px; cursor: pointer; }
-  #query-button:hover { background: #45a049; }
-  #query-button:disabled { background: #9ccc9f; cursor: wait; }
+  :root { --bg: #F4F2EE; --panel: #FBFAF8; --line: #E3DFD8; --ink: #2f3a4a; --muted: #8B8579; --accent: #46627F; --accent-dark: #364C63; --tint: #EDEAE4; --sage: #5F8575; --sand: #C4A66B; }
+  body { margin: 0; height: 100vh; display: flex; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--ink); overflow: hidden; }
+  #sidebar { flex: 0 0 34%; min-width: 380px; max-width: 580px; display: flex; flex-direction: column; background: var(--panel); box-shadow: 1px 0 0 var(--line); z-index: 10; }
+  #query-container { display: flex; gap: 8px; padding: 12px; border-bottom: 1px solid var(--line); }
+  #query-input { flex: 1; min-width: 0; box-sizing: border-box; height: 36px; padding: 0 10px; font-size: 16px; border: 1px solid #D5D0C6; border-radius: 4px; background: #fff; color: var(--ink); }
+  #query-input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+  #query-button { height: 36px; padding: 0 14px; font-size: 16px; color: #fff; background: var(--accent); border: 0; border-radius: 4px; cursor: pointer; }
+  #query-button:hover { background: var(--accent-dark); }
+  #query-button:disabled { background: #9FB0C0; cursor: wait; }
+  #tabs[hidden], #ebar[hidden], #mode[hidden], #relbar[hidden], #detail[hidden] { display: none; }
+  #ebar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 14px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: inset 4px 0 0 var(--c, var(--accent)); }
+  #ebar #back { flex: 0 0 100%; } #ebar b { font: 600 20px/1.35 "Noto Serif TC", serif; }
+  #mode { display: flex; gap: 6px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  #mode button { flex: 1; height: 32px; font: 500 13px "Noto Sans TC", sans-serif; color: var(--muted); background: var(--tint); border: 0; border-radius: 16px; cursor: pointer; }
+  #mode button.on { color: #fff; background: var(--accent); }
+  #detail { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 14px 20px; background: #fff; }
+  #relbar { padding: 10px 14px 0; font-size: 12px; color: var(--muted); background: var(--panel); } #relbar b { color: var(--ink); font-weight: 500; }
+  #tabs { display: flex; border-bottom: 1px solid var(--line); }
+  #tabs button { flex: 1; padding: 9px 0; font: 12px "Noto Sans TC", sans-serif; color: var(--muted); background: none; border: 0; cursor: pointer; }
+  #tabs button:hover { color: var(--ink); } #tabs button.on { color: var(--ink); font-weight: 500; box-shadow: inset 0 -2px 0 var(--accent); }
+  .card { margin: 0 0 8px; padding: 9px 11px; background: #fff; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+  .card { transition: transform .15s, box-shadow .15s, background .15s; }
+  .card:hover { background: #F6F4EF; transform: translateY(-2px); box-shadow: 0 3px 8px rgba(47,58,74,.1); }
+  @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } } .card b { display: block; font-size: 16px; } .card small { display: block; margin-top: 2px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  #pane h4 { margin: 14px 0 6px; font-size: 12px; color: var(--muted); font-weight: normal; }
+  #pane select { width: 100%; height: 32px; margin-bottom: 14px; padding: 0 8px; font-size: 12px; border: 1px solid #D5D0C6; border-radius: 4px; background: #fff; color: var(--ink); }
+  .tl { position: relative; padding-left: 22px; }
+  .tl::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .tl-item { position: relative; padding: 0 0 16px; cursor: pointer; }
+  .tl-item::before { content: ''; position: absolute; left: -23px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px var(--panel); }
+  .tl-y { font: 600 20px "Noto Serif TC", serif; } .tl-item:hover .tl-y { color: var(--accent); }
+  .tl-t { margin-left: 6px; font-size: 12px; color: var(--muted); } .tl-s { margin-top: 2px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  #model svg { display: block; width: 100%; height: auto; }
+  #model [data-part] { cursor: pointer; } #model [data-part]:hover { opacity: .8; }
   #results-container { flex: 1; overflow-y: auto; padding: 12px; }
   #results-content { white-space: pre-wrap; line-height: 1.6; margin-top: 6px; }
-  #hint { color: #888; font-size: 12px; line-height: 1.6; }
-  #brand { padding: 14px 12px 0; font: 600 22px "Noto Serif TC", serif; color: #2f3a4a; }
-  #brand small { display: block; margin-top: 2px; font: 400 12px "Noto Sans TC", sans-serif; color: #888; }
-  .cite { display: inline-block; min-width: 16px; padding: 0 4px; margin: 0 1px; font-size: 12px; line-height: 16px; text-align: center; color: #fff; background: #2b7ce9; border-radius: 8px; cursor: pointer; vertical-align: super; }
-  .cite:hover { background: #1a5fc0; }
-  #trust { margin-top: 12px; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #35603a; background: #eef7ee; border-radius: 6px; }
-  #trust.warn { color: #7a5a00; background: #fff6dc; }
+  #hint { color: var(--muted); font-size: 12px; line-height: 1.6; }
+  #brand { padding: 14px 12px 12px; border-bottom: 1px solid var(--line); font: 600 22px "Noto Serif TC", serif; color: var(--ink); }
+  #brand small { display: block; margin-top: 2px; font: 400 12px "Noto Sans TC", sans-serif; color: var(--muted); }
+  .cite { display: inline-block; min-width: 16px; padding: 0 4px; margin: 0 1px; font-size: 12px; line-height: 16px; text-align: center; color: #fff; background: var(--accent); border-radius: 8px; cursor: pointer; vertical-align: super; }
+  .cite:hover { background: var(--accent-dark); }
+  #trust { margin-top: 12px; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #3f5f52; background: #E9EEEA; border-radius: 6px; }
+  #trust.warn { color: #6b5a2e; background: #F3EBDD; }
   #trust ol { margin: 6px 0 0; padding-left: 20px; } #trust li { cursor: pointer; } #trust li:hover { text-decoration: underline; }
-  .conflict { margin: 10px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #7a5a00; background: #fff6dc; border-radius: 6px; }
-  .src { margin: 8px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; background: #f6f7f9; border-radius: 6px; }
+  .conflict { margin: 10px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #6b5a2e; background: #F3EBDD; border-radius: 6px; }
+  .src { margin: 8px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; background: var(--tint); border-radius: 6px; }
   .src q { display: block; margin-top: 4px; color: #444; quotes: none; }
-  .tag { display: inline-block; margin-right: 4px; padding: 0 6px; font-size: 12px; color: #35603a; background: #dff0e0; border-radius: 8px; }
+  .tag { display: inline-block; margin-right: 4px; padding: 0 6px; font-size: 12px; color: #3f5f52; background: #DCE6DF; border-radius: 8px; }
+  .wait i { display: inline-block; width: 7px; height: 7px; margin-left: 5px; border-radius: 50%; background: var(--accent); vertical-align: middle; }
   #answer { white-space: pre-wrap; line-height: 1.7; font-size: 16px; }
-  #entities h4, #detail h4 { margin: 16px 0 6px; font-size: 12px; color: #888; font-weight: normal; }
-  .chip { display: inline-block; margin: 0 6px 6px 0; padding: 3px 9px; font-size: 12px; background: #eef2f7; border-radius: 12px; cursor: pointer; }
+  #entities h4, #detail h4 { margin: 16px 0 6px; font-size: 12px; color: var(--muted); font-weight: normal; }
+  .chip { display: inline-block; margin: 0 6px 6px 0; padding: 3px 9px; font-size: 12px; background: var(--tint); border-radius: 12px; cursor: pointer; }
   .chip::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--c); }
-  .chip:hover { background: #dde6f1; }
-  #detail h3 { margin: 8px 0 4px; font-size: 22px; }
-  #back { color: #2b7ce9; cursor: pointer; font-size: 12px; }
+  .chip:hover { background: #E0DCD3; }
+  #back { color: var(--accent); cursor: pointer; font-size: 12px; }
   #legend label { cursor: pointer; user-select: none; margin-right: 6px; }
   #legend label.off { opacity: .4; }
-  pre { white-space: pre-wrap; font-size: 12px; color: #444; background: #f6f6f6; padding: 8px; border-radius: 4px; }
+  pre { white-space: pre-wrap; font-size: 12px; color: #4a4a45; background: var(--tint); padding: 8px; border-radius: 4px; }
   #graph { position: relative; flex: 1; min-width: 0; }
   #mynetwork { width: 100%; height: 100%; }
-  #legend { position: absolute; left: 12px; bottom: 12px; z-index: 5; font-size: 12px; background: rgba(255,255,255,.9); padding: 8px 10px; border-radius: 6px; }
+  #legend { position: absolute; left: 12px; bottom: 12px; z-index: 5; font-size: 12px; background: rgba(251,250,248,.92); padding: 8px 10px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
   #legend span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 4px 0 8px; vertical-align: middle; }
-  #tools { position: absolute; top: 12px; right: 12px; z-index: 5; display: flex; gap: 6px; }
-  #tools select, #tools button { padding: 6px 8px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; }
-  #tools button:hover { background: #eef2f7; }
-  #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #3498db; }
+  #tools { position: absolute; top: 12px; right: 12px; align-items: center; z-index: 5; display: flex; gap: 6px; }
+  #tools select, #tools button { box-sizing: border-box; height: 36px; padding: 0 10px; font-size: 12px; color: var(--ink); border: 1px solid #D5D0C6; border-radius: 4px; background: var(--panel); cursor: pointer; }
+  #tools button:hover { background: var(--tint); }
+  #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--muted); }
+  #reader { position: fixed; top: 4vh; left: 50%; transform: translateX(-50%); z-index: 51; width: min(860px, 94vw); height: 92vh; overflow-y: auto; padding: 20px 40px 56px; background: var(--bg); border-radius: 10px; box-shadow: 0 0 0 1px var(--line), 0 16px 48px rgba(47,58,74,.25); }
+  #rd-bg { position: fixed; inset: 0; z-index: 50; background: rgba(47,58,74,.45); } #rd-bg[hidden] { display: none; }
+  #rd-bar { position: sticky; top: -20px; z-index: 2; margin: -20px -40px 8px; padding: 12px 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  #reader[hidden] { display: none; }
+  #rd-bar { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; } #rd-bar a { color: var(--accent); cursor: pointer; text-decoration: none; }
+  #reader .kind { display: inline-block; padding: 0 8px; font-size: 12px; color: #fff; background: var(--accent); border-radius: 10px; }
+  #reader h1 { margin: 10px 0 6px; font: 600 28px/1.35 "Noto Serif TC", serif; }
+  #reader .lead { margin: 0 0 16px; color: var(--muted); line-height: 1.7; }
+  #reader p.b { line-height: 1.9; font-size: 16px; margin: 0 0 14px; }
+  #reader sup.c { margin: 0 1px; padding: 0 4px; font-size: 11px; color: #fff; background: var(--accent); border-radius: 8px; cursor: pointer; }
+  #reader figure { margin: 0 0 18px; } #reader figure img { display: block; max-width: 100%; max-height: 380px; border-radius: 6px; background: var(--tint); }
+  #reader figcaption { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.6; } #reader figcaption a { color: var(--accent); }
+  #reader h3 { margin: 26px 0 8px; font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: .05em; }
+  #reader .ref { display: flex; gap: 8px; padding: 8px 10px; margin: 6px 0; font-size: 12px; line-height: 1.6; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+  #reader .ref.hl { border-color: var(--accent); background: #EAF0F5; } #reader .ref b { flex: 0 0 auto; color: var(--accent); } #reader .ref a { color: var(--accent); } #reader .ref small { color: var(--muted); }
+  #reader .case { margin: 8px 0; padding: 10px 12px; font-size: 12px; line-height: 1.7; background: var(--tint); border-radius: 6px; }
+  #reader .link { display: inline-block; margin: 0 6px 6px 0; padding: 3px 10px; font-size: 12px; background: var(--tint); border-radius: 12px; color: var(--ink); text-decoration: none; cursor: pointer; } #reader .link:hover { background: #E0DCD3; }
+  #reader .gap { margin: 10px 0; padding: 8px 10px; font-size: 12px; line-height: 1.6; color: #6b5a2e; background: #F3EBDD; border-radius: 6px; }
+  #reader table { width: 100%; border-collapse: collapse; font-size: 12px; } #reader th, #reader td { padding: 8px 6px; vertical-align: top; border-bottom: 1px solid var(--line); text-align: left; }
+  #reader th { font-weight: 500; color: var(--muted); } #reader th small { display: block; font-weight: 400; } #reader td.m { width: 96px; font-weight: 500; }
+  #reader .ev { display: block; margin-bottom: 4px; padding: 3px 6px; font-size: 12px; line-height: 1.4; background: #fff; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
+  #reader .ev::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--c); } #reader .ev:hover, #reader .ev.on { background: #EAF0F5; }
+  #reader .stop { display: flex; gap: 14px; margin-bottom: 22px; } #reader .stop > i { flex: 0 0 28px; height: 28px; font: 500 14px/28px "Noto Sans TC"; text-align: center; color: #fff; background: var(--sage); border-radius: 50%; font-style: normal; }
+  #reader .stop h2 { margin: 2px 0 6px; font-size: 20px; } #reader .stop p { margin: 0 0 8px; line-height: 1.8; font-size: 15px; }
+  #detail figure.gal { margin: 10px 0 4px; } #detail figure.gal img { display: block; width: 100%; max-height: 220px; object-fit: contain; border-radius: 4px; background: var(--tint); }
+  #detail figure.gal figcaption { margin-top: 4px; font-size: 12px; color: var(--ink); } #detail figure.gal small { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); } #detail figure.gal small a { color: var(--accent); }
+  .gal-t { margin-top: 6px; } .gal-t button { width: 24px; height: 24px; margin-right: 4px; font: 12px "Noto Sans TC"; color: var(--muted); background: var(--tint); border: 0; border-radius: 12px; cursor: pointer; } .gal-t button.on { color: #fff; background: var(--accent); }
 </style>
 </head>
 <body>
 <aside id="sidebar">
-  <div id="brand">文化資產知識庫<small>答案皆來自已校對、可公開的知識圖譜，並附出處</small></div>
+  <div id="brand">文化資產知識庫<small>答案皆來自可公開的知識圖譜，並附出處</small></div>
   <div id="query-container">
-    <input id="query-input" placeholder="問知識圖譜一個問題，例如：靈應宮的屋頂歷來怎麼修？" autofocus>
+    <input id="query-input" placeholder="問知識圖譜一個問題，例如：鐵刃銅柄劍為什麼不清潔？" autofocus>
     <button id="query-button">Search</button>
   </div>
+  <div id="ebar" hidden></div>
+  <div id="mode" hidden></div>
+  <section id="detail" hidden></section>
+  <div id="relbar" hidden></div>
+  <div id="tabs"></div>
   <div id="results-container">
+    <div id="pane" hidden></div>
     <div id="hint">輸入問題後，答案會顯示在這裡，相關實體可點擊查看；右側圖譜中無關節點會變灰。也可直接點圖上的節點。</div>
     <div id="answer" hidden></div>
     <div id="trust" hidden></div>
     <div id="entities" hidden></div>
-    <div id="detail" hidden></div>
   </div>
 </aside>
 <main id="graph">
   <div id="loading">Loading graph...</div>
+  <div id="rd-bg" data-rd-close hidden></div>
+  <article id="reader" hidden></article>
   <div id="mynetwork"></div>
   <div id="tools">
   <select id="layout" title="佈局">
@@ -80,21 +141,45 @@
   <div id="legend"></div>
 </main>
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.umd.min.js"></script>
 <script>
-const COLORS = { 個案: '#F6C85F', 修繕事件: '#5CC8B0', 匠師: '#6C8EF5', 構件: '#B58CE0', 年代: '#E8B466', 文件: '#9AA5B1', 單位: '#F28B82' };
+const rise = sel => { // 側欄內容依序淡入上浮（anime.js 載入失敗或使用者偏好減少動態時略過）
+  if (!window.anime || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  anime.animate(sel, { opacity: [0, 1], y: [14, 0], delay: anime.stagger(60), duration: 450, ease: 'outCubic' });
+};
+let pulseAnim;
+const pulse = id => { // 選中的節點放大再縮回；動畫值直接餵給 vis 的 size
+  if (pulseAnim) pulseAnim.cancel();
+  if (!window.anime || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const o = { s: 1 };
+  pulseAnim = anime.animate(o, { s: [1, 1.5, 1], duration: 700, ease: 'outQuad', onUpdate: () => nodes.update({ id, size: SIZE[id] * o.s }) });
+};
+const waitDots =() => { // 問答等待：三點依序跳動；回傳停止函式
+  const a = window.anime && !matchMedia('(prefers-reduced-motion: reduce)').matches && anime.animate('.wait i', { y: [0, -6, 0], opacity: [.35, 1, .35], delay: anime.stagger(140), duration: 700, loop: true, ease: 'inOutSine' });
+  return () => a && a.cancel();
+};
+const COLORS = { 文物: '#2c3172', 部位: '#234f81', 人物: '#1d6c8a', 單位: '#33858d', 事件: '#509e90', 文件: '#76b791', 材質: '#8dc08b', 知識: '#C4A66B' }; // seaborn crest 色系
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-let nodes, edges, G = {}, active = null, queryActive = null, only = new Set(), hasAnswer = false;
+let nodes, edges, G = {}, active = null, queryActive = null, only = new Set(), solo = null, hasAnswer = false;
 
 // 套用目前狀態：有查詢時，無關節點與邊變灰；類別被關掉的節點隱藏
+let SIZE = {};
 function paint() {
   nodes.update(nodes.get().map(n => {
     const dim = active && !active.has(n.id), hit = active && active.has(n.id);
-    return { id: n.id, hidden: only.size > 0 && !only.has(n.kind), size: n.kind === '個案' ? 22 : 16, borderWidth: hit ? 4 : 2,
-      color: dim ? { background: '#E3E6EA', border: '#CDD2D8' } : { background: COLORS[n.kind], border: hit ? '#FFC300' : '#2B7CE9' },
-      font: { size: 14, color: dim ? '#B5BBC2' : '#333' } };
+    // 純色節點、大小依連線數（Gephi 風格）；無關節點變灰
+    const c = dim ? '#E6E3DD' : COLORS[n.kind];
+    // 標籤：小節點平時不顯示、長標題截斷；被選中／命中的節點放寬
+    const cut = (s, k) => s.length > k ? s.slice(0, k - 1) + '…' : s, show = hit || SIZE[n.id] >= 18;
+    return { id: n.id, label: show ? cut(G[n.id].label, n.id === SEL ? 14 : hit ? 10 : 8) : '', hidden: (only.size > 0 && !only.has(n.kind)) || (solo && !solo.has(n.id)), size: SIZE[n.id], borderWidth: 0,
+      color: { background: c, border: '#2f3a4a', highlight: { background: c, border: '#2f3a4a' }, hover: { background: c, border: '#2f3a4a' } },
+      font: { size: show ? 12 + SIZE[n.id] / 8 : 0, color: dim ? '#C9C5BD' : '#2f3a4a', strokeWidth: 3, strokeColor: '#F4F2EE' } };
   }));
-  edges.update(edges.get().map(e => ({ id: e.id, color: { color: active && !(active.has(e.from) && active.has(e.to)) ? '#E3E6EA' : '#848484', highlight: '#FFC300' } })));
+  edges.update(edges.get().map(e => {
+    const on = !active || (active.has(e.from) && active.has(e.to));
+    return { id: e.id, color: { color: on ? '#C9C4BA' : '#EBE8E2', highlight: '#8B8579', hover: '#8B8579' }, font: { size: active && on && (!SEL || e.from === SEL || e.to === SEL) ? 10 : 0, color: '#666', strokeWidth: 0 } };
+  }));
 }
 
 // 佈局：fa2 交給 vis 物理引擎，其餘直接算座標後關掉物理
@@ -127,8 +212,9 @@ const arrangers = { // 各回傳 { id: [x, y] }，座標以 (cx, cy) 為中心
     for (let q = [center]; q.length;) { const f = q.shift(); nb(f).forEach(n => depth[n] === undefined && (depth[n] = depth[f] + 1, q.push(n))); }
     const maxD = Math.max(...Object.values(depth)) + 1, rings = {}, T = { [center]: [cx, cy] };
     ids.forEach(i => (rings[depth[i] ?? maxD] ||= []).push(i));
+    for (const m of Object.values(rings)) m.sort((a, b) => KIND_ORDER.indexOf(G[a].kind) - KIND_ORDER.indexOf(G[b].kind)); // 同類相鄰，減少交叉
     for (const [d, m] of Object.entries(rings)) if (+d > 0) {
-      const r = Math.max(150 * d, m.length * 85 / (2 * Math.PI));
+      const r = Math.max(210 * d, m.length * 120 / (2 * Math.PI));
       m.forEach((id, k) => T[id] = [cx + r * Math.cos(2 * Math.PI * k / m.length + +d), cy + r * Math.sin(2 * Math.PI * k / m.length + +d)]);
     }
     return T;
@@ -138,15 +224,19 @@ const arrangers = { // 各回傳 { id: [x, y] }，座標以 (cx, cy) 為中心
     for (let it = 0; it < 250; it++) {
       const D = Object.fromEntries(ids.map(i => [i, [0, 0]]));
       for (const a of ids) for (const b of ids) if (a < b) {
-        const dx = P[a][0] - P[b][0], dy = P[a][1] - P[b][1], d = Math.hypot(dx, dy) || .1, f = 14000 / (d * d);
+        const dx = P[a][0] - P[b][0], dy = P[a][1] - P[b][1], d = Math.hypot(dx, dy) || .1, f = 60000 / (d * d);
         D[a][0] += dx / d * f; D[a][1] += dy / d * f; D[b][0] -= dx / d * f; D[b][1] -= dy / d * f; }
-      for (const e of es) { const dx = P[e.to][0] - P[e.from][0], dy = P[e.to][1] - P[e.from][1], d = Math.hypot(dx, dy) || .1, f = (d - 130) * .05;
+      for (const e of es) { const dx = P[e.to][0] - P[e.from][0], dy = P[e.to][1] - P[e.from][1], d = Math.hypot(dx, dy) || .1, f = (d - 200) * .04;
         D[e.from][0] += dx / d * f; D[e.from][1] += dy / d * f; D[e.to][0] -= dx / d * f; D[e.to][1] -= dy / d * f; }
-      for (const i of ids) { P[i][0] += Math.max(-20, Math.min(20, D[i][0] - (P[i][0] - cx) * .01)); P[i][1] += Math.max(-20, Math.min(20, D[i][1] - (P[i][1] - cy) * .01)); }
+      for (const i of ids) { P[i][0] += Math.max(-30, Math.min(30, D[i][0] - (P[i][0] - cx) * .01)); P[i][1] += Math.max(-30, Math.min(30, D[i][1] - (P[i][1] - cy) * .01)); }
     }
+    for (let it = 0; it < 150; it++) for (const a of ids) for (const b of ids) if (a < b) { // 最後防重疊
+      const dx = P[b][0] - P[a][0], dy = P[b][1] - P[a][1], d = Math.hypot(dx, dy) || .1;
+      const min = SIZE[a] + SIZE[b] + 100; // 節點半徑＋標籤空間
+      if (d < min) { const k = (min - d) / 2 / d; P[a][0] -= dx * k; P[a][1] -= dy * k; P[b][0] += dx * k; P[b][1] += dy * k; } }
     return P;
   },
-  columns(ids, es, center, cx, cy) { // 依類別分欄：個案 | 事件 | 匠師 ...，欄內依名稱排序
+  columns(ids, es, center, cx, cy) { // 依類別分欄：文物 | 事件 | 人物 ...，欄內依名稱排序
     const ks = KIND_ORDER.filter(k => ids.some(i => G[i].kind === k)), T = {};
     ks.forEach((k, ki) => { const m = ids.filter(i => G[i].kind === k).sort((a, b) => G[a].label.localeCompare(G[b].label, 'zh-Hant', { numeric: true }));
       m.forEach((id, i) => T[id] = [cx + (ki - (ks.length - 1) / 2) * 240, cy + (i - (m.length - 1) / 2) * 62]); });
@@ -167,7 +257,7 @@ const arrangers = { // 各回傳 { id: [x, y] }，座標以 (cx, cy) 為中心
 };
 
 function tween(T, done) { // 補間動畫：所有節點從目前位置移到 T
-  const cur = net.getPositions(), token = ++anim, t0 = performance.now();
+  const cur = net.getPositions(nodes.getIds()), token = ++anim, t0 = performance.now();
   const dur = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 900;
   net.setOptions({ physics: { enabled: false } });
   const step = now => {
@@ -180,7 +270,7 @@ function tween(T, done) { // 補間動畫：所有節點從目前位置移到 T
 }
 
 function focusLayout(ids, center) {
-  const act = new Set(ids), cur = net.getPositions();
+  const act = new Set(ids), cur = net.getPositions(nodes.getIds()); // 指定 id，隱藏的節點才拿得到座標
   home ||= Object.fromEntries(Object.entries(cur).map(([id, p]) => [id, [p.x, p.y]])); // 第一次聚焦前先記住佈局，供「還原」用
   const es = edges.get().filter(e => act.has(e.from) && act.has(e.to));
   const deg = id => es.filter(e => e.from === id || e.to === id).length;
@@ -196,9 +286,9 @@ function focusLayout(ids, center) {
 }
 
 function restoreLayout() { // 還原到第一次聚焦前的佈局，並取消變灰
-  active = queryActive = null; paint();
+  active = queryActive = solo = SEL = SCOPE = null; paint();
   if (home) { const h = home; home = null; tween(h, () => net.fit({ animation: { duration: 700, easingFunction: 'easeInOutQuad' } })); }
-  if (!$('detail').hidden) show(hasAnswer ? 'answer' : 'home');
+  setTab(TAB);
 }
 $('restore').onclick = restoreLayout;
 
@@ -209,15 +299,16 @@ const chip = id => `<span class="chip" data-id="${id}" style="--c:${COLORS[G[id]
 const group = ids => Object.keys(COLORS).map(k => [k, ids.filter(i => G[i].kind === k)]).filter(([, v]) => v.length)
   .map(([k, v]) => `<h4>${k}（${v.length}）</h4>${v.map(chip).join('')}`).join('');
 
-function show(view) { // 'home' | 'answer' | 'detail'
+function show(view) { // 'home' | 'answer' | 'tab' | 'detail'（detail＝實體介紹，整個結果區讓給 #detail）
+  const o = view === 'tab' || view === 'detail'; $('results-container').hidden = view === 'detail';
   $('hint').hidden = view !== 'home' || hasAnswer;
-  $('answer').hidden = $('entities').hidden = view === 'detail' || !hasAnswer;
-  if (view === 'detail') $('trust').hidden = true; else if ($('trust').innerHTML) $('trust').hidden = !hasAnswer;
-  $('detail').hidden = view !== 'detail';
+  $('answer').hidden = $('entities').hidden = o || !hasAnswer;
+  if (o) $('trust').hidden = true; else if ($('trust').innerHTML) $('trust').hidden = !hasAnswer;
+  $('pane').hidden = view !== 'tab';
 }
+const back = () => TAB === 'qa' ? (hasAnswer ? 'answer' : 'home') : 'tab';
 
-const statusTag = s => `<span class="tag">${esc(s.status)}</span><span class="tag">${esc(s.method)}${s.confidence ? ' · 信心 ' + s.confidence : ''}</span>`;
-const srcCard = s => `<div class="src">《${esc(s.doc)}》第 ${s.page} 頁${s.claim ? `，記載為 ${esc(s.claim)} 年` : ''}<br>${statusTag(s)}<q>${esc(s.quote)}</q></div>`;
+const srcCard = s => `<div class="src">《${esc(s.doc)}》第 ${s.page} 頁${s.claim ? `，記載為 ${esc(s.claim)} 年` : ''}<q>${esc(s.quote)}</q></div>`;
 function eventTrust(n) { // 事件資訊：描述、記載衝突提示、每筆出處的校對狀態與原文
   const claims = [...new Set(n.sources.map(s => s.claim).filter(Boolean))];
   return `<pre>${esc(n.detail.split('\n    出處')[0])}</pre>
@@ -228,7 +319,7 @@ function eventTrust(n) { // 事件資訊：描述、記載衝突提示、每筆�
 // 答案裡的 [e2] 轉成可點的引用編號；回傳 HTML 與引用到的事件
 function renderAnswer(text) {
   const order = [];
-  const html = esc(text).replace(/\[(e\d+)\]/g, (m, id) => {
+  const html = esc(text).replace(/\[(e\d+|k-[\w-]+)\]/g, (m, id) => {
     if (!G[id]) return '';
     if (!order.includes(id)) order.push(id);
     return `<a class="cite" data-id="${id}" title="${esc(G[id].label)}">${order.indexOf(id) + 1}</a>`;
@@ -239,33 +330,189 @@ function renderTrust(order, answered) {
   const t = $('trust'), n = order.reduce((a, id) => a + (G[id].sources || []).length, 0);
   t.hidden = !answered; t.classList.toggle('warn', !order.length);
   t.innerHTML = order.length
-    ? `依據 ${order.length} 件事件、${n} 筆已校對出處（點編號查看原文）<ol>${order.map(id => `<li data-id="${id}">${esc(G[id].label)} · 《${esc(G[id].sources[0]?.doc || '')}》第 ${G[id].sources[0]?.page || '?'} 頁${G[id].sources.length > 1 ? ` 等 ${G[id].sources.length} 筆` : ''}</li>`).join('')}</ol>`
+    ? `依據 ${order.length} 項事件／知識條目、${n} 筆出處（點編號查看原文）<ol>${order.map(id => `<li data-id="${id}">${esc(G[id].label)} · ${G[id].sources ? `《${esc(G[id].sources[0]?.doc || '')}》第 ${G[id].sources[0]?.page || '?'} 頁${G[id].sources.length > 1 ? ` 等 ${G[id].sources.length} 筆` : ''}` : '知識條目'}</li>`).join('')}</ol>`
     : '此回答沒有標註出處，請以下方相關實體的原始紀錄為準。';
 }
 
-function selectEntity(id) {
-  const n = G[id];
-  const rel = [...new Set(edges.get().flatMap(e => e.from === id ? [e.to] : e.to === id ? [e.from] : []))];
-  $('detail').innerHTML = `<span id="back">← 返回</span><h3>${esc(n.label)}</h3><span class="chip" style="--c:${COLORS[n.kind]};cursor:default">${n.kind}</span>
-    ${n.sources ? eventTrust(n) : `<pre>${esc(n.detail)}</pre>`}${group(rel)}`;
-  $('back').onclick = clearFocus;
-  show('detail');
-  active = new Set([id, ...rel]); paint(); // 只留選到的實體與其鄰居，其餘變灰
-  net.selectNodes([id]); focusLayout([...active], id);
+// ---- 各類實體的專屬分頁：事件＝時間軸、部位＝掛軸裝裱示意圖、其餘卡片 ----
+let TAB = 'qa', PART = null, HER = '', SEL = null, SCOPE = null; // SCOPE＝目前聚焦的實體集合（選中實體兩度關係內／問答命中），null＝全部
+const PARTS = { top: '天桿（捲桿）', cover: '包首・題簽', back: '覆背・托紙', bottom: '地桿' };
+const partOf = n => ({ 天桿: 'top', 包首: 'cover', 托紙: 'back', 地桿: 'bottom' })[n.attrs[0]] || null;
+const of = (k, scoped = true) => Object.values(G).filter(n => n.kind === k && (!SCOPE || !scoped || SCOPE.has(n.id)));
+function hops2(id) { // 兩度關係內；年代是樞紐節點不納入、知識條目只當葉節點（不經由它擴散到其他文物）
+  const got = new Set([id]); let f = [id];
+  for (let d = 0; d < 2; d++) { f = f.flatMap(i => d && G[i].kind === '知識' ? [] : nb(i)).filter(i => !got.has(i) && G[i].kind !== '年代'); f.forEach(i => got.add(i)); }
+  return got;
 }
-function clearFocus() { show(hasAnswer ? 'answer' : 'home'); if (queryActive) { active = queryActive; paint(); focusLayout([...queryActive]); } else restoreLayout(); }
-document.addEventListener('click', e => { const c = e.target.closest('[data-id]'); if (c) selectEntity(c.dataset.id); });
+const nb = id => [...new Set(edges.get().flatMap(e => e.from === id ? [e.to] : e.to === id ? [e.from] : []))];
+const yrOf = n => n.year[0] === n.year[1] ? n.year[0] : `${n.year[0]}–${n.year[1]}`;
+
+function modelSvg(sel, mini) { // 掛軸裝裱結構示意；mini＝只標出單一部位位置
+  const has = {}; of('部位').forEach(n => { const p = partOf(n); if (p) has[p] = (has[p] || 0) + 1; });
+  const f = p => sel === p ? '#1d6c8a' : (!mini && has[p]) ? '#509e90' : '#DDD9D0', P = (p, d) => `<g data-part="${mini ? '' : p}" fill="${f(p)}">${d}</g>`;
+  const T = (y, t) => `<text x="180" y="${y}" font-size="11" fill="#6b675d">${t}</text>`;
+  return `<svg viewBox="0 0 250 300" role="img" aria-label="掛軸裝裱結構示意圖">
+    ${P('top', '<rect x="22" y="10" width="136" height="9" rx="4.5"/><circle cx="20" cy="14.5" r="5"/><circle cx="160" cy="14.5" r="5"/>')}
+    ${P('cover', '<rect x="30" y="24" width="120" height="38"/><rect x="82" y="29" width="16" height="28" fill="#fff" opacity=".7"/>')}
+    ${P('back', '<rect x="30" y="66" width="120" height="186"/>')}
+    <rect x="48" y="82" width="84" height="154" fill="#F4F1EA" stroke="#CFCABF"/>
+    <path d="M52 220 q18 -52 34 -20 t30 -62 t14 26" stroke="#B9B3A4" fill="none" stroke-width="2"/><path d="M60 130 l8 -22 l8 22Z" fill="#CFCABF"/>
+    ${P('bottom', '<rect x="22" y="256" width="136" height="10" rx="5"/><circle cx="20" cy="261" r="5.5"/><circle cx="160" cy="261" r="5.5"/>')}
+    ${T(18, '天桿')}${T(46, '包首・題簽')}${T(160, '畫心')}${T(124, '覆背・托紙')}${T(265, '地桿')}
+  </svg>`;
+}
+const compCard = n => `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>${nb(n.id).filter(i => G[i].kind === '事件').length} 筆保存修護紀錄</small></div>`;
+const evHer = id => new Set(nb(id).flatMap(i => G[i].kind === '文物' || G[i].kind === '單位' ? [i] : G[i].kind === '部位' ? nb(i).filter(j => G[j].kind === '文物') : []));
+const panes = {
+  文物: () => of('文物').map(n => { const ev = of('事件', false).filter(e => evHer(e.id).has(n.id)).length;
+    return `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>${esc(n.attrs.filter(Boolean).slice(0, 2).join('・'))}<br>${ev} 筆事件・${nb(n.id).filter(i => G[i].kind === '部位').length} 個部位</small></div>`; }).join('') + (of('材質').length ? '<h4>材質</h4>' + of('材質').map(n => `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>${nb(n.id).filter(i => G[i].kind === '文物').length} 件文物・${nb(n.id).filter(i => G[i].kind === '事件').length} 筆事件</small></div>`).join('') : ''),
+  事件: () => {
+    const hs = of('文物'), list = of('事件').filter(e => !HER || evHer(e.id).has(HER)).sort((a, b) => a.year[0] - b.year[0]);
+    return `<select id="her"><option value="">全部文物</option>${hs.map(h => `<option value="${h.id}" ${h.id === HER ? 'selected' : ''}>${esc(h.label)}</option>`).join('')}</select>
+      <div class="tl">${list.map(e => { const ab = [...evHer(e.id)].map(i => G[i].label).join('、') + '・' + nb(e.id).filter(i => G[i].kind === '部位').map(i => G[i].label.split('・').pop()).join('、'),
+        m = (e.detail.match(/方法與技術 ([^；\n]+)/) || [])[1], mt = (e.detail.match(/材料 ([^；\n]+)/) || [])[1];
+        return `<div class="tl-item" data-id="${e.id}" style="--c:${COLORS.事件}"><span class="tl-y">${yrOf(e)}</span><span class="tl-t">${esc(e.attrs[0])}</span>
+          <div class="tl-s">${esc(ab.replace(/・$/, ''))}${m ? '<br>方法與技術：' + esc(m) : ''}${mt ? '<br>材料：' + esc(mt) : ''}</div></div>`; }).join('')}</div>`;
+  },
+  部位: () => `<div id="model">${modelSvg(PART)}</div><h4>${PART ? PARTS[PART] + '（點圖上同一位置取消）' : '點掛軸上的位置，只看該位置的部位；色塊＝知識庫有紀錄（示意圖僅適用書畫裝裱，其餘部位在下方列表）'}</h4>
+    ${of('部位').filter(n => !PART || partOf(n) === PART).map(compCard).join('') || '<div class="tl-s">此位置目前沒有部位紀錄</div>'}`,
+  人物: () => of('人物').map(n => { const m = (n.text || '').match(/（(.+?)）：(.*)/) || [];
+    return `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>${esc(m[1] || n.attrs.filter(Boolean).join('，'))}<br>${esc(m[2] || '')}<br>參與 ${nb(n.id).filter(i => G[i].kind === '事件').length} 筆事件</small></div>`; }).join(''),
+  知識: () => `<div class="card" data-read="tour"><b>▶ 導覽：走一趟「文物新生」</b><small>依展覽動線串起知識條目、案例與出處</small></div>` + [...new Set(of('知識').map(n => n.attrs[0]))].map(t => `<h4>${esc(t)}</h4>` + of('知識').filter(n => n.attrs[0] === t).map(n =>
+    `<div class="card" data-id="${n.id}" data-read="${n.id}"><b>${esc(n.label)}</b><small>${esc(n.summary || '')}</small></div>`).join('')).join(''),
+  單位: () => of('單位').map(n => `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>${esc(n.attrs.join(' '))}・${nb(n.id).filter(i => G[i].kind === '事件').length} 筆事件</small></div>`).join(''),
+  文件: () => of('文件').map(n => `<div class="card" data-id="${n.id}"><b>${esc(n.label)}</b><small>展覽網頁・${statText(n)}</small></div>`).join(''),
+};
+const TABS = [['qa', '問答'], ['文物', '文物'], ['事件', '事件'], ['部位', '部位'], ['人物', '人物'], ['單位', '單位'], ['知識', '知識'], ['文件', '文件']];
+const scopeBar = () => SCOPE && !SEL ? `<div class="tl-s" style="margin-bottom:12px">聚焦「${esc(SEL ? G[SEL].label : '搜尋結果')}」${SEL ? '兩度關係內' : ''}・${SCOPE.size} 個實體　<a data-clear href="#" style="color:var(--accent)">清除</a></div>` : '';
+let MODE = 'intro'; // 選中實體時：intro＝實體自身介紹；rel＝與它相關的實體（分頁列出）
+function setTab(t) {
+  if (SEL && t === 'qa') t = ['事件', '文物', '知識', '部位', '人物', '單位', '文件'].find(k => of(k).some(x => x.id !== SEL)) || '事件';
+  TAB = t;
+  const rel = SEL && MODE === 'rel', intro = SEL && MODE === 'intro';
+  $('ebar').hidden = $('mode').hidden = !SEL; $('detail').hidden = !intro; $('relbar').hidden = !rel; $('tabs').hidden = !!SEL && !rel;
+  if (SEL) $('mode').innerHTML = `<button data-mode="intro" class="${intro ? 'on' : ''}">介紹</button><button data-mode="rel" class="${rel ? 'on' : ''}">相關實體 · ${SCOPE.size - 1}</button>`;
+  if (rel) $('relbar').innerHTML = `與「<b>${esc(G[SEL].label)}</b>」相關的實體（兩度關係內）`;
+  $('tabs').innerHTML = TABS.filter(([k]) => !SEL || k !== 'qa').map(([k, l]) => `<button data-tab="${k}" class="${k === t ? 'on' : ''}">${l}</button>`).join('');
+  if (t !== 'qa' && !intro) { const html = panes[t](); $('pane').innerHTML = scopeBar() + (/class="(card|tl-item)"/.test(html) || html.includes('id="model"') ? html : '<div class="tl-s">兩度關係內沒有這類實體</div>'); rise('#pane .tl-item, #pane .card'); if (t === '部位' && !PART) rise('#pane #model g'); }
+  show(intro ? 'detail' : back());
+}
+const endSel = () => { SEL = null; SCOPE = queryActive ? new Set(queryActive) : null; setTab(TAB); };
+document.addEventListener('click', e => {
+  const m = e.target.closest('[data-mode]'); if (m) { MODE = m.dataset.mode; return setTab(TAB); }
+  const b = e.target.closest('[data-tab]'); if (b) return setTab(b.dataset.tab);
+  if (e.target.closest('[data-clear]')) { e.preventDefault(); return SEL || queryActive ? (SEL ? clearFocus() : restoreLayout()) : null; }
+  const p = e.target.closest('#model [data-part]'); if (p) { PART = PART === p.dataset.part ? null : p.dataset.part; setTab('部位'); }
+});
+document.addEventListener('change', e => { if (e.target.id === 'her') { HER = e.target.value; setTab('事件'); } });
+
+const statText = n => ['件文物', '筆事件', '個單位'].map((u, i) => [n.stats?.[[0, 1, 2][i]] ?? 0, u]).filter(([c]) => c).map(([c, u]) => `${c} ${u}`).join('、') || '尚無事件';
+const docIntro = n => `<p style="line-height:1.8">展覽網頁，${statText(n)}的出處。${n.url ? `<br><a href="${esc(n.url)}" target="_blank" rel="noopener" style="color:var(--accent)">開啟原始網頁 →</a>` : ''}</p>
+  <h4>這份文件記載的事件（點擊查看原文出處）</h4>${nb(n.id).filter(i => G[i].kind === '事件').sort((a, b) => G[a].year[0] - G[b].year[0]).map(chip).join('')}`;
+
+const gallery = n => !n.images?.length ? '' : `<figure class="gal"><img loading="lazy" src="${esc(n.images[0].src)}" alt="${esc(n.images[0].caption)}">
+  <figcaption><span>${esc(n.images[0].caption)}</span></figcaption>
+  ${n.images.length > 1 ? `<div class="gal-t">${n.images.map((m, i) => `<button data-gal="${i}" data-n="${n.id}" class="${i ? '' : 'on'}">${i + 1}</button>`).join('')}</div>` : ''}
+  <small>圖片：<a href="${esc(n.images[0].page)}" target="_blank" rel="noopener">國立故宮博物院「文物新生」展覽網站</a>，© 國立故宮博物院</small></figure>`;
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-gal]'); if (!b) return;
+  const m = G[b.dataset.n].images[+b.dataset.gal], f = b.closest('figure');
+  f.querySelector('img').src = m.src; f.querySelector('figcaption span').textContent = m.caption;
+  f.querySelectorAll('[data-gal]').forEach(x => x.classList.toggle('on', x === b));
+});
+
+function selectEntity(id, only1, fromPane) {
+  const n = G[id];
+  MODE = 'intro';
+  $('ebar').style.setProperty('--c', COLORS[n.kind]);
+  $('ebar').innerHTML = `<span id="back">← 回到全部</span><span class="chip" style="--c:${COLORS[n.kind]};cursor:default;margin:0">${n.kind}</span><b>${esc(n.label)}</b>`;
+  $('detail').innerHTML = `${gallery(n)}
+    ${n.kind === '部位' && partOf(n) ? `<h4>在掛軸中的位置（示意）</h4><div id="model">${modelSvg(partOf(n), true)}</div>` : ''}${n.sources ? eventTrust(n) : n.kind === '文件' ? docIntro(n) : `<pre>${esc(n.detail)}</pre>`}${n.entry ? `<p><a href="#" data-read="${id}" style="color:var(--accent)">閱讀條目全文（圖片、引用、案例）→</a></p>` : ''}`;
+  $('back').onclick = clearFocus;
+  rise('#detail > *');
+  SEL = id; SCOPE = hops2(id);
+  setTab(TAB); // 先看這個實體的介紹；切到「相關實體」才列出兩度內的其他實體（從問答進來會自動選有內容的一類）
+  active = SCOPE; solo = only1 ? active : null; paint(); // 只留選到的實體與其鄰居，其餘變灰
+  net.selectNodes([id]); pulse(id); focusLayout([...active], id); // 圖與各分頁看同一份兩度範圍
+}
+function clearFocus() { endSel(); if (queryActive) { active = queryActive; paint(); focusLayout([...queryActive]); } else restoreLayout(); }
+document.addEventListener('click', e => { const c = e.target.closest('[data-id]'); if (c) { if (e.target.closest('#reader')) closeReader(); selectEntity(c.dataset.id, false, !!e.target.closest('#pane')); } });
+
+// ---- 知識閱讀器：條目全文、引用、案例溯源、導覽、介入光譜（原 kb.html 併入） ----
+let KB = null, RD = null;
+const LV_COLOR = { l1: '#5F8575', l2: '#7E9E8E', l3: '#C4A66B', l4: '#C28E55', l5: '#46627F', l6: '#9C4A3C' };
+const rdLink = id => `<a class="link" data-read="${id}">${esc(KB.entries.find(e => e.id === id).title)}</a>`;
+const rdLinks = ids => (ids || []).filter(i => KB.entries.some(e => e.id === i)).map(rdLink).join('');
+function caseHtml(id) {
+  const n = G[id]; if (!n) return '';
+  const desc = (n.detail.split('\n')[0] || '').replace(/^\[e\d+\]\s*/, '');
+  return `<div class="case"><b>${esc(n.label)}</b><br>${esc(desc)}${(n.sources || []).map(s => `<div class="src">《${esc(s.doc)}》第 ${s.page} 項<q>${esc(s.quote)}</q></div>`).join('')}<br><a class="link" data-id="${id}" style="margin-top:6px">在圖譜中查看此事件 →</a></div>`;
+}
+function rdBody(e) {
+  const order = [];
+  const html = e.body.map(p => `<p class="b">${esc(p).replace(/\[(s\d+)\]/g, (m, id) => {
+    if (!KB.sources[id]) return '';
+    if (!order.includes(id)) order.push(id);
+    return `<sup class="c" data-ref="${id}" title="${esc(KB.sources[id].title)}">${order.indexOf(id) + 1}</sup>`;
+  })}</p>`).join('');
+  return { html, order };
+}
+const refHtml = (id, n) => { const s = KB.sources[id]; return `<div class="ref" id="ref-${id}"><b>[${n}]</b><div>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)} <span class="tag">${esc(s.kind)}</span><br><small>${esc(s.note)}</small></div></div>`; };
+const imgHtml = i => `<figure><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(i.file)}?width=900" alt="${esc(i.caption)}"><figcaption>${esc(i.caption)}。攝影：${esc(i.author)}，${esc(i.license)}，<a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(i.file)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>`;
+function rdSpectrum() {
+  const L = KB.spectrum.levels;
+  const head = `<tr><th>材質</th>${L.map((l, i) => `<th title="${esc(l.desc)}"><span style="color:${LV_COLOR[l.id]}">●</span> ${i + 1}<small>${esc(l.name)}</small></th>`).join('')}</tr>`;
+  const rows = KB.spectrum.rows.map(r => `<tr><td class="m">${esc(r.material)}</td>${L.map(l => `<td>${r.events.filter(x => x.level === l.id && G[x.e]).map(x =>
+    `<span class="ev" style="--c:${LV_COLOR[l.id]}" data-case="${x.e}">${esc(x.why)}</span>`).join('')}</td>`).join('')}</tr>`).join('');
+  return `<table>${head}${rows}</table><div id="spcase"></div><h3>光譜說明</h3>${L.map((l, i) => `<p class="b" style="margin:0 0 6px;font-size:14px"><span style="color:${LV_COLOR[l.id]}">●</span> <b>${i + 1} ${esc(l.name)}</b>：${esc(l.desc)}</p>`).join('')}`;
+}
+function openReader(id) {
+  const e = KB.entries.find(x => x.id === id), t = KB.tour, cases = e && (e.cases || []).filter(c => G[c]);
+  let h;
+  if (e) {
+    const b = rdBody(e);
+    h = `<span class="kind">${esc(e.type)}</span><h1>${esc(e.title)}</h1><p class="lead">${esc(e.summary)}</p><span class="tag">引用 ${b.order.length} 筆來源</span>
+      ${e.img ? '<br><br>' + imgHtml(e.img) : ''}${b.html}${e.spectrum ? '<h3>光譜：本庫各案例的位置</h3>' + rdSpectrum() : ''}
+      ${cases.length ? `<h3>本庫案例（${cases.length}）— 附展覽網頁出處</h3>` + cases.map(caseHtml).join('') : ''}
+      <p><a class="link" data-focus="${id}">在圖譜中查看此條目與相關實體 →</a></p>
+      <h3>參考來源</h3>${b.order.map((s, i) => refHtml(s, i + 1)).join('')}${e.links ? '<h3>延伸閱讀</h3>' + rdLinks(e.links) : ''}`;
+  } else {
+    id = 'tour';
+    h = `<span class="kind">導覽</span><h1>${esc(t.title)}</h1><p class="lead">依國立故宮博物院「文物新生」特展的動線，把保存修護的知識條目、文物案例與出處串起來。</p>
+      ${t.stops.map((s, i) => `<div class="stop"><i>${i + 1}</i><div><h2>${esc(s.name)}</h2><p>${esc(s.text)}</p>${rdLinks(s.entries)}
+        ${(s.objects || []).filter(o => G[o]).map(o => `<a class="link" data-id="${o}">文物：${esc(G[o].label)}</a>`).join('')}
+        ${s.gap ? `<div class="gap">資料缺口：${esc(s.gap)}</div>` : ''}${s.spectrum ? '<br><br>' + rdSpectrum() : ''}</div></div>`).join('')}`;
+  }
+  RD = id; $('reader').hidden = $('rd-bg').hidden = false;
+  $('reader').innerHTML = `<div id="rd-bar"><a data-read="tour">▶ 導覽</a><a data-rd-close>關閉 ✕</a></div>` + h;
+  $('reader').scrollTop = 0;
+}
+const closeReader = () => { $('reader').hidden = $('rd-bg').hidden = true; RD = null; };
+document.addEventListener('click', ev => {
+  const r = ev.target.closest('[data-read]'); if (r) { ev.preventDefault(); return openReader(r.dataset.read); }
+  if (ev.target.closest('[data-rd-close]')) return closeReader();
+  const f = ev.target.closest('[data-focus]'); if (f) { closeReader(); return selectEntity(f.dataset.focus); }
+  const c = ev.target.closest('#reader sup.c');
+  if (c) { document.querySelectorAll('#reader .ref').forEach(x => x.classList.remove('hl')); const x = $('ref-' + c.dataset.ref); x.classList.add('hl'); x.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  const v = ev.target.closest('#reader .ev');
+  if (v) { document.querySelectorAll('#reader .ev').forEach(x => x.classList.toggle('on', x === v)); const box = $('spcase'); box.innerHTML = caseHtml(v.dataset.case); box.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+});
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && RD) closeReader(); });
+fetch('knowledge.json').then(r => r.json()).then(k => KB = k);
 
 fetch('/api/graph').then(r => r.json()).then(g => {
   g.nodes.forEach(n => G[n.id] = n);
+  const deg = {}; g.edges.forEach(e => { deg[e.from] = (deg[e.from] || 0) + 1; deg[e.to] = (deg[e.to] || 0) + 1; });
+  const dv = Object.values(deg), lo = Math.min(...dv), hi = Math.max(...dv); // 大小 = 連線數，開根號壓縮差距
+  g.nodes.forEach(n => SIZE[n.id] = 8 + 40 * Math.sqrt(((deg[n.id] || lo) - lo) / (hi - lo || 1)));
   nodes = new vis.DataSet(g.nodes.map(n => ({ id: n.id, label: n.label, title: n.label, kind: n.kind, shape: 'dot' })));
-  edges = new vis.DataSet(g.edges.map((e, i) => ({ ...e, id: i, arrows: { to: { scaleFactor: .5 } }, width: 2 })));
+  edges = new vis.DataSet(g.edges.map((e, i) => ({ ...e, id: i, width: 1.5 })));
   window.net = new vis.Network($('mynetwork'), { nodes, edges }, {
     physics: { solver: 'forceAtlas2Based', stabilization: { iterations: 250 } },
     interaction: { hover: true, tooltipDelay: 200 }, edges: { smooth: false, font: { size: 10, color: '#666', strokeWidth: 0 } } });
-  paint();
-  net.once('stabilizationIterationsDone', () => $('loading').remove());
-  net.on('click', p => { if (p.nodes.length) selectEntity(p.nodes[0]); else if (!$('detail').hidden) clearFocus(); });
+  paint(); setTab('qa');
+  net.once('stabilizationIterationsDone', () => { $('loading').remove(); const h = decodeURIComponent(location.hash.slice(1)); if (G[h]) selectEntity(h, true); }); 
+  net.on('click', p => { if (p.nodes.length) selectEntity(p.nodes[0]); else if (SEL) clearFocus(); });
   $('legend').innerHTML = Object.entries(COLORS).map(([k, c]) => `<label data-kind="${k}"><span style="background:${c}"></span>${k}</label>`).join('');
   $('legend').onclick = e => {
     const l = e.target.closest('label'); if (!l) return;
@@ -278,16 +525,19 @@ fetch('/api/graph').then(r => r.json()).then(g => {
 async function ask() {
   const query = $('query-input').value.trim();
   if (!query) return;
-  $('query-button').disabled = true;
-  hasAnswer = true; $('answer').textContent = '檢索與生成中…'; $('trust').hidden = true; $('trust').innerHTML = ''; $('entities').innerHTML = ''; show('answer');
+  $('query-button').disabled = true; SEL = null; setTab('qa');
+  hasAnswer = true; $('answer').innerHTML = '<span class="wait">檢索與生成中<i></i><i></i><i></i></span>'; $('trust').hidden = true; $('trust').innerHTML = ''; $('entities').innerHTML = ''; show('answer');
+  const stopWait = waitDots();
   try {
     const r = await (await fetch('/api/query', { method: 'POST', body: JSON.stringify({ query }), signal: AbortSignal.timeout(90000) })).json();
+    stopWait();
     const a = renderAnswer(r.answer); $('answer').innerHTML = a.html; renderTrust(a.order, r.entities.length > 0);
     $('entities').innerHTML = r.entities.length ? '<h4>相關實體（點擊查看）</h4>' + group(r.entities.filter(i => G[i].kind !== '年代')) : '';
-    active = queryActive = r.entities.length ? new Set(r.entities) : null; paint();
+    rise('#answer, #entities .chip');
+    active = queryActive = r.entities.length ? new Set(r.entities) : null; SCOPE = queryActive; paint();
     if (active) focusLayout(r.entities);
   } catch (e) { $('answer').textContent = '錯誤：' + e; }
-  finally { $('query-button').disabled = false; $('query-input').focus(); }
+  finally { stopWait(); $('query-button').disabled = false; $('query-input').focus(); }
 }
 $('query-button').onclick = ask;
 // vis-network 在 window 綁了 Backspace/Delete 並 preventDefault，會讓輸入框刪不了字；擋住冒泡

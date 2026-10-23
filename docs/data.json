@@ -1,158 +1,3071 @@
 {
-  "_note": "全部為虛構資料，僅示意知識圖譜形狀。此檔為唯一資料來源：前台直接讀取，seed.cypher 由 to_cypher.py 產生。",
-  "heritage": [
-    {"id": "h1", "name": "虛構・靈應宮", "category": "古蹟", "grade": "縣定古蹟", "city": "彰化縣", "district": "彰化市", "address": "彰化縣彰化市虛構路1號", "lat": 24.05, "lng": 120.50,
-     "summary": "相傳由泉州移民集資興建，主祀媽祖。日治時期曾因地震損壞，歷經多次重修；2008 年起進行解體修復，第二期修復計畫目前審查中。",
-     "owner": "財團法人虛構靈應宮"},
-    {"id": "h2", "name": "虛構・福澤廟", "category": "歷史建築", "grade": "", "city": "臺南市", "district": "中西區", "address": "臺南市中西區虛構街2號", "lat": 23.00, "lng": 120.20,
-     "summary": "昭和年間重修，大木作出自陳某某之手；2015 年修復斗栱並清洗彩繪。",
-     "owner": "虛構福澤廟管理委員會"},
-    {"id": "h3", "name": "虛構・慶安祠", "category": "古蹟", "grade": "市定古蹟", "city": "新北市", "district": "樹林區", "address": "新北市樹林區虛構路3號", "lat": 25.00, "lng": 121.40,
-     "summary": "乙未年（1895）遭焚毀，次年重建，神龕木雕由李某某雕刻。",
-     "owner": "私人（虛構）"},
-    {"id": "h4", "name": "虛構・天和宮", "category": "古蹟", "grade": "縣定古蹟", "city": "彰化縣", "district": "彰化市", "address": "彰化縣彰化市虛構街4號", "lat": 24.07, "lng": 120.53,
-     "summary": "昭和三年（1928）重建，大木作由陳某某主持，前殿龍柱為王某某所雕。",
-     "owner": "財團法人虛構天和宮"},
-    {"id": "h5", "name": "虛構・順德祠", "category": "歷史建築", "grade": "", "city": "彰化縣", "district": "花壇鄉", "address": "彰化縣花壇鄉虛構村5號", "lat": 24.03, "lng": 120.56,
-     "summary": "民國六十一年重修，門神彩繪為黃某某作品，保存相當完整。",
-     "owner": "虛構順德祠管理委員會"},
-    {"id": "h6", "name": "虛構・永福寺", "category": "古蹟", "grade": "縣定古蹟", "city": "彰化縣", "district": "鹿港鎮", "address": "彰化縣鹿港鎮虛構巷6號", "lat": 24.06, "lng": 120.43,
-     "summary": "昭和十一年（1936）重修，屋脊剪黏出自林某某，木雕由李某某承作。",
-     "owner": "財團法人虛構永福寺"},
-    {"id": "h7", "name": "虛構・開元殿", "category": "歷史建築", "grade": "", "city": "臺南市", "district": "中西區", "address": "臺南市中西區虛構路7號", "lat": 22.99, "lng": 120.21,
-     "summary": "民國四十一年重修，剪黏由林某某完成。",
-     "owner": "虛構開元殿管理委員會"},
-    {"id": "h8", "name": "虛構・廣澤宮", "category": "古蹟", "grade": "市定古蹟", "city": "新北市", "district": "板橋區", "address": "新北市板橋區虛構街8號", "lat": 25.01, "lng": 121.46,
-     "summary": "民國三十九年重修，龍柱石雕出自王某某。",
-     "owner": "財團法人虛構廣澤宮"}
-  ],
-  "components": [
-    {"id": "m1", "name": "正殿屋頂", "type": "屋頂", "heritage": "h1"},
-    {"id": "m2", "name": "正殿剪黏", "type": "剪黏", "heritage": "h1"},
-    {"id": "m4", "name": "正殿樑架", "type": "樑", "heritage": "h1"},
-    {"id": "m5", "name": "三川殿彩繪", "type": "彩繪", "heritage": "h1"},
-    {"id": "m3", "name": "斗栱", "type": "斗栱", "heritage": "h2"},
-    {"id": "m6", "name": "前殿龍柱", "type": "石雕", "heritage": "h4"},
-    {"id": "m7", "name": "屋脊剪黏", "type": "剪黏", "heritage": "h6"},
-    {"id": "m8", "name": "門神彩繪", "type": "彩繪", "heritage": "h5"}
-  ],
-  "craftsmen": [
-    {"id": "c1", "name": "陳某某", "role": "大木匠師", "school": "泉州派", "active": "1900s–1930s", "summary": "日治時期活躍於中南部的大木匠師，主持多座廟宇的重建與重修。"},
-    {"id": "c2", "name": "林某某", "role": "剪黏匠師", "school": "潮汕派", "active": "1920s–1950s", "summary": "以屋脊剪黏見長，作品分布於彰化與臺南。"},
-    {"id": "c3", "name": "黃某某", "role": "彩繪匠師", "school": "", "active": "1960s–2010s", "summary": "戰後重要的廟宇彩繪匠師，門神與樑枋彩繪作品甚多。"},
-    {"id": "c4", "name": "吳某某", "role": "泥作匠師", "school": "", "active": "1970s–1990s", "summary": "參與多次屋頂翻修工程的泥作匠師。"},
-    {"id": "c5", "name": "王某某", "role": "石雕匠師", "school": "", "active": "1920s–1950s", "summary": "擅長龍柱與石獅雕刻，作品見於彰化與新北。"},
-    {"id": "c6", "name": "李某某", "role": "木雕匠師", "school": "", "active": "1890s–1930s", "summary": "清末至日治時期的木雕匠師，擅長神龕與門窗雕刻。"}
-  ],
-  "organizations": [
-    {"id": "o1", "name": "某某文化資產研究所", "type": "承攬廠商"},
-    {"id": "o2", "name": "彰化縣文化局", "type": "主管機關"},
-    {"id": "o3", "name": "某某建築師事務所", "type": "承攬廠商"},
-    {"id": "o4", "name": "某某營造廠", "type": "承攬廠商"},
-    {"id": "o5", "name": "某大學建築系", "type": "研究單位"}
-  ],
-  "projects": [
-    {"id": "p5", "caseNo": "FAKE-1985-03", "name": "靈應宮屋頂翻修工程", "year": 1985, "budget": 3000000, "executor": "o4"},
-    {"id": "p1", "caseNo": "FAKE-2008-01", "name": "靈應宮修復及再利用計畫", "year": 2008, "budget": 18000000, "executor": "o1", "commissioner": "o2"},
-    {"id": "p4", "caseNo": "FAKE-2023-02", "name": "靈應宮調查研究計畫", "year": 2023, "budget": 2000000, "executor": "o5", "commissioner": "o2"},
-    {"id": "p3", "caseNo": "FAKE-2026-05", "name": "靈應宮第二期修復計畫", "year": 2026, "budget": 25000000, "executor": "o3", "commissioner": "o2", "status": "審查中"},
-    {"id": "p2", "caseNo": "FAKE-2015-07", "name": "福澤廟調查研究", "year": 2015, "budget": 1500000, "executor": "o1"}
-  ],
-  "documents": [
-    {"id": "d1", "title": "靈應宮修復及再利用計畫書", "type": "修復計畫", "year": 2010, "format": "PDF（掃描）", "project": "p1", "heritage": ["h1"], "public": true},
-    {"id": "d4", "title": "靈應宮調查研究報告", "type": "調查研究", "year": 2023, "format": "PDF", "project": "p4", "heritage": ["h1"], "public": true},
-    {"id": "d5", "title": "靈應宮第二期修復計畫書（送審版）", "type": "修復計畫", "year": 2026, "format": "PDF", "project": "p3", "heritage": ["h1"], "public": false, "privateReason": "審查中，尚未公開"},
-    {"id": "d2", "title": "福澤廟調查研究報告", "type": "調查研究", "year": 2016, "format": "PDF", "project": "p2", "heritage": ["h2"], "public": true},
-    {"id": "d3", "title": "慶安祠工作報告", "type": "工作報告", "year": 2016, "format": "Word", "heritage": ["h3"], "public": true},
-    {"id": "d6", "title": "天和宮重建紀要", "type": "調查研究", "year": 2018, "format": "PDF", "heritage": ["h4"], "public": true},
-    {"id": "d7", "title": "天和宮匠師後人訪談紀錄", "type": "訪談紀錄", "year": 2019, "format": "Word", "heritage": ["h4"], "public": false, "privateReason": "受訪者未同意公開"},
-    {"id": "d8", "title": "彰化地區寺廟彩繪與剪黏調查", "type": "調查研究", "year": 2012, "format": "PDF（掃描）", "heritage": ["h5", "h6"], "public": true},
-    {"id": "d9", "title": "臺南地區剪黏工藝調查", "type": "調查研究", "year": 2014, "format": "PDF", "heritage": ["h7"], "public": true},
-    {"id": "d10", "title": "廣澤宮修復紀錄", "type": "工作報告", "year": 2001, "format": "PDF（掃描）", "heritage": ["h8"], "public": true}
-  ],
-  "pages": [
-    {"id": "g6",  "doc": "d1", "page": 12, "ocr": 0.91, "text": "…本宮肇建於清乾隆三十四年，由泉州移民集資…"},
-    {"id": "g8",  "doc": "d1", "page": 20, "ocr": 0.85, "text": "…明治三十七年大地震，正殿屋頂坍塌…"},
-    {"id": "g1",  "doc": "d1", "page": 45, "ocr": 0.93, "text": "…大正十二年由陳某某主持重修正殿，換修樑架…"},
-    {"id": "g2",  "doc": "d1", "page": 78, "ocr": 0.88, "text": "…剪黏部分由林某某師傅修補，歷時三月…"},
-    {"id": "g10", "doc": "d1", "page": 60, "ocr": 0.95, "text": "…本次屋頂解體修復，桷木全數更換為福杉…"},
-    {"id": "g7",  "doc": "d4", "page": 3,  "ocr": 0.97, "text": "…據廟內石碑，本宮建於乾隆四十年…"},
-    {"id": "g9",  "doc": "d4", "page": 8,  "ocr": 0.71, "text": "…民國五十四年重修，三川殿彩繪由黃某菜負責…"},
-    {"id": "g11", "doc": "d4", "page": 15, "ocr": 0.82, "text": "…民國七十四年由某某營造廠翻修屋頂，泥作吳某某，以水泥補強…"},
-    {"id": "g12", "doc": "d4", "page": 1,  "ocr": 0.99, "text": "…本計畫於民國112年執行靈應宮全面調查…"},
-    {"id": "g13", "doc": "d5", "page": 10, "ocr": 0.99, "text": "…擬針對正殿屋頂進行解體修復並改善防水層…"},
-    {"id": "g3",  "doc": "d2", "page": 12, "ocr": 0.96, "text": "…昭和六年重修，大木作為陳某某…"},
-    {"id": "g4",  "doc": "d2", "page": 30, "ocr": 0.90, "text": "…民國104年修復斗栱，彩繪由黃某某…"},
-    {"id": "g5",  "doc": "d3", "page": 5,  "ocr": 0.99, "text": "…乙未年遭焚毀，次年重建…"},
-    {"id": "g22", "doc": "d3", "page": 7,  "ocr": 0.98, "text": "…重建時神龕木雕由李某某雕刻…"},
-    {"id": "g14", "doc": "d6", "page": 4,  "ocr": 0.94, "text": "…昭和三年重建本宮，大木作由陳某某主持…"},
-    {"id": "g15", "doc": "d6", "page": 9,  "ocr": 0.92, "text": "…前殿龍柱為王某某所雕…"},
-    {"id": "g16", "doc": "d7", "page": 2,  "ocr": 0.99, "text": "…據王某某後人口述，龍柱石材取自泉州…"},
-    {"id": "g17", "doc": "d8", "page": 33, "ocr": 0.86, "text": "…順德祠門神彩繪為黃某某民國六十一年作品…"},
-    {"id": "g18", "doc": "d8", "page": 51, "ocr": 0.84, "text": "…永福寺昭和十一年重修，屋脊剪黏出自林某某…"},
-    {"id": "g19", "doc": "d8", "page": 52, "ocr": 0.83, "text": "…同年木雕由李某某承作…"},
-    {"id": "g20", "doc": "d9", "page": 18, "ocr": 0.95, "text": "…開元殿民國四十一年重修，剪黏林某某…"},
-    {"id": "g21", "doc": "d10", "page": 6, "ocr": 0.80, "text": "…民國三十九年重修，龍柱石雕王某某…"}
-  ],
-  "events": [
-    {"id": "e1", "type": "創建", "yearFrom": 1769, "yearTo": 1769, "original": "清乾隆三十四年", "about": ["h1"],
-     "sources": [
-       {"page": "g6", "claim": "1769", "method": "LLM", "confidence": 0.90, "status": "已校"},
-       {"page": "g7", "claim": "1775", "method": "LLM", "confidence": 0.88, "status": "已校"}]},
-    {"id": "e7", "type": "災損", "yearFrom": 1904, "yearTo": 1904, "original": "明治三十七年", "about": ["m1"], "description": "地震致正殿屋頂坍塌",
-     "sources": [{"page": "g8", "method": "LLM", "confidence": 0.83, "status": "未校"}]},
-    {"id": "e2", "type": "重修", "yearFrom": 1923, "yearTo": 1923, "original": "大正十二年", "about": ["m1", "m2", "m4"], "methods": ["樑架抽換", "屋頂重鋪", "剪黏修補"], "materials": ["福杉", "紅瓦"],
-     "sources": [
-       {"page": "g1", "method": "LLM", "confidence": 0.92, "status": "已校"},
-       {"page": "g2", "method": "LLM", "confidence": 0.80, "status": "未校"}]},
-    {"id": "e8", "type": "重修", "yearFrom": 1965, "yearTo": 1965, "original": "民國五十四年", "about": ["m5"], "methods": ["彩繪重繪"], "materials": ["化學漆"],
-     "sources": [{"page": "g9", "method": "LLM", "confidence": 0.77, "status": "已校"}]},
-    {"id": "e11", "type": "修復", "yearFrom": 1985, "yearTo": 1985, "original": "民國七十四年", "about": ["m1"], "methods": ["屋頂翻修", "水泥補強"], "materials": ["水泥", "琉璃瓦"], "project": "p5",
-     "sources": [{"page": "g11", "method": "LLM", "confidence": 0.70, "status": "未校"}]},
-    {"id": "e3", "type": "修復", "yearFrom": 2008, "yearTo": 2010, "original": "民國97–99年", "about": ["m1", "m2"], "methods": ["屋頂解體修復", "桷木更換", "剪黏修補"], "materials": ["福杉", "傳統紅瓦"], "budget": 18000000, "project": "p1",
-     "sources": [{"page": "g10", "method": "人工", "status": "已校"}]},
-    {"id": "e12", "type": "調查", "yearFrom": 2023, "yearTo": 2023, "original": "民國112年", "about": ["h1"], "project": "p4",
-     "sources": [{"page": "g12", "method": "人工", "status": "已校"}]},
-    {"id": "e10", "type": "修復", "yearFrom": 2026, "yearTo": 2027, "original": "民國115–116年", "status": "規劃中", "about": ["m1"], "methods": ["屋頂解體修復", "防水層改善"], "budget": 25000000, "project": "p3",
-     "sources": [{"page": "g13", "method": "人工", "status": "已校"}]},
-    {"id": "e4", "type": "重建", "yearFrom": 1895, "yearTo": 1896, "original": "乙未年", "about": ["h3"],
-     "sources": [{"page": "g5", "method": "人工", "status": "已校"}]},
-    {"id": "e5", "type": "修復", "yearFrom": 2015, "yearTo": 2015, "original": "民國104年", "about": ["m3"], "methods": ["斗栱補強", "彩繪清洗"], "project": "p2",
-     "sources": [{"page": "g4", "method": "LLM", "confidence": 0.90, "status": "未校"}]},
-    {"id": "e6", "type": "重修", "yearFrom": 1931, "yearTo": 1931, "original": "昭和六年", "about": ["h2"], "methods": ["大木重組"],
-     "sources": [{"page": "g3", "method": "人工", "status": "已校"}]},
-    {"id": "e13", "type": "重建", "yearFrom": 1928, "yearTo": 1928, "original": "昭和三年", "about": ["h4"],
-     "sources": [{"page": "g14", "method": "LLM", "confidence": 0.90, "status": "已校"}]},
-    {"id": "e14", "type": "興建", "yearFrom": 1928, "yearTo": 1928, "original": "昭和三年", "about": ["m6"], "materials": ["泉州白石"],
-     "sources": [
-       {"page": "g15", "method": "LLM", "confidence": 0.87, "status": "已校"},
-       {"page": "g16", "method": "人工", "status": "已校"}]},
-    {"id": "e15", "type": "重修", "yearFrom": 1972, "yearTo": 1972, "original": "民國六十一年", "about": ["m8"], "methods": ["門神重繪"],
-     "sources": [{"page": "g17", "method": "LLM", "confidence": 0.85, "status": "已校"}]},
-    {"id": "e16", "type": "重修", "yearFrom": 1936, "yearTo": 1936, "original": "昭和十一年", "about": ["m7", "h6"], "methods": ["屋脊剪黏", "木雕更新"],
-     "sources": [
-       {"page": "g18", "method": "LLM", "confidence": 0.84, "status": "已校"},
-       {"page": "g19", "method": "LLM", "confidence": 0.81, "status": "已校"}]},
-    {"id": "e17", "type": "重修", "yearFrom": 1952, "yearTo": 1952, "original": "民國四十一年", "about": ["h7"],
-     "sources": [{"page": "g20", "method": "LLM", "confidence": 0.93, "status": "已校"}]},
-    {"id": "e18", "type": "重修", "yearFrom": 1950, "yearTo": 1950, "original": "民國三十九年", "about": ["h8"],
-     "sources": [{"page": "g21", "method": "LLM", "confidence": 0.79, "status": "已校"}]}
-  ],
-  "participations": [
-    {"craftsman": "c1", "event": "e2",  "role": "主持",   "source": {"page": "g1",  "quote": "由陳某某主持重修正殿", "method": "LLM", "confidence": 0.91, "status": "已校"}},
-    {"craftsman": "c2", "event": "e2",  "role": "剪黏",   "source": {"page": "g2",  "quote": "剪黏部分由林某某師傅修補", "method": "LLM", "confidence": 0.74, "status": "未校"}},
-    {"craftsman": "c3", "event": "e8",  "role": "彩繪",   "source": {"page": "g9",  "quote": "三川殿彩繪由黃某菜負責", "method": "LLM", "confidence": 0.62, "status": "已修正"},
-     "correction": {"field": "匠師姓名", "originalValue": "黃某菜", "correctedValue": "黃某某", "reviewer": "校對員A", "reviewedAt": "2026-10-01"}},
-    {"craftsman": "c4", "event": "e11", "role": "泥作",   "source": {"page": "g11", "quote": "泥作吳某某", "method": "LLM", "confidence": 0.55, "status": "未校"}},
-    {"craftsman": "c1", "event": "e6",  "role": "大木作", "source": {"page": "g3",  "quote": "大木作為陳某某", "method": "人工", "status": "已校"}},
-    {"craftsman": "c3", "event": "e5",  "role": "彩繪",   "source": {"page": "g4",  "quote": "彩繪由黃某某", "method": "LLM", "confidence": 0.88, "status": "未校"}},
-    {"craftsman": "c1", "event": "e13", "role": "大木作", "source": {"page": "g14", "quote": "大木作由陳某某主持", "method": "LLM", "confidence": 0.90, "status": "已校"}},
-    {"craftsman": "c5", "event": "e14", "role": "石雕",   "source": {"page": "g15", "quote": "前殿龍柱為王某某所雕", "method": "LLM", "confidence": 0.87, "status": "已校"}},
-    {"craftsman": "c3", "event": "e15", "role": "彩繪",   "source": {"page": "g17", "quote": "門神彩繪為黃某某民國六十一年作品", "method": "LLM", "confidence": 0.86, "status": "已校"}},
-    {"craftsman": "c2", "event": "e16", "role": "剪黏",   "source": {"page": "g18", "quote": "屋脊剪黏出自林某某", "method": "LLM", "confidence": 0.84, "status": "已校"}},
-    {"craftsman": "c6", "event": "e16", "role": "木雕",   "source": {"page": "g19", "quote": "同年木雕由李某某承作", "method": "LLM", "confidence": 0.81, "status": "已校"}},
-    {"craftsman": "c2", "event": "e17", "role": "剪黏",   "source": {"page": "g20", "quote": "剪黏林某某", "method": "LLM", "confidence": 0.93, "status": "已校"}},
-    {"craftsman": "c5", "event": "e18", "role": "石雕",   "source": {"page": "g21", "quote": "龍柱石雕王某某", "method": "LLM", "confidence": 0.79, "status": "已校"}},
-    {"craftsman": "c6", "event": "e4",  "role": "木雕",   "source": {"page": "g22", "quote": "神龕木雕由李某某雕刻", "method": "人工", "status": "已校"}}
-  ]
+ "_note": "資料整理自國立故宮博物院「文物新生」特展網頁（theme.npm.edu.tw/exh115/CulturalRelicsRenewed）。未載明處置年份的保存修護事件記為展出年 2026。此檔為唯一資料來源：前台直接讀取，seed.cypher 由 to_cypher.py 產生。",
+ "heritage": [
+  {
+   "id": "r1",
+   "name": "唐 象尊",
+   "category": "青銅器",
+   "era": "唐",
+   "materials": [
+    "銅"
+   ],
+   "accNo": "",
+   "summary": "原以棉布包覆收存，纖維易勾掛器表；改以量身訂製的無酸保護盒收存。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-1/1-1-s.png",
+     "caption": "唐 象尊",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r2",
+   "name": "戰國至漢 鐵刃銅柄劍",
+   "category": "兵器",
+   "era": "戰國至漢",
+   "materials": [
+    "鐵",
+    "銅"
+   ],
+   "accNo": "購銅000040",
+   "summary": "X光顯示內部鐵胎大量流失，僅存少量金屬核心；採密封低濕保存，不做清潔與加固。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-2/1-2-s.png",
+     "caption": "戰國至漢 鐵刃銅柄劍",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r3",
+   "name": "新石器時代晚期 西陰村蠶繭",
+   "category": "考古遺物",
+   "era": "新石器時代晚期（距今約五千六百年）",
+   "materials": [
+    "絲"
+   ],
+   "accNo": "中雜000024",
+   "summary": "1926 年李濟主持的考古隊在山西夏縣西陰村發掘，科學檢驗確認為蠶繭殼；體積細小脆弱，重新設計包裝。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-3/1-3-s.png",
+     "caption": "西陰村蠶繭",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r4",
+   "name": "清 黃幡",
+   "category": "織品",
+   "era": "清",
+   "materials": [
+    "絲",
+    "毛皮"
+   ],
+   "accNo": "故雜000604",
+   "summary": "天然纖維與染料對光敏感；不修補，改以展示環境控制（無紫外線燈源、約 50 lux）預防保存。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-4/1-4-s.png",
+     "caption": "清 黃幡",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r5",
+   "name": "清 翠玉杯、玉杯、玉卮",
+   "category": "玉器",
+   "era": "清",
+   "materials": [
+    "玉"
+   ],
+   "accNo": "故玉000491、故玉001242、故玉002550",
+   "summary": "三件玉器以穩固支撐、減少搬運震動與碰撞的方式保存。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-5/1-5-s.png",
+     "caption": "清 翠玉杯、玉杯、玉卮",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r6",
+   "name": "文物鐵箱",
+   "category": "典藏設備",
+   "era": "遷臺後長期沿用",
+   "materials": [
+    "鑄鐵"
+   ],
+   "accNo": "",
+   "summary": "箱內舊包裝以稻草、麥稈等天然緩衝材，老化後產生粉塵；以典藏級材料重新包裝並推動改箱為櫃。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/1-6/1-6-s.png",
+     "caption": "文物鐵箱",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html"
+    }
+   ]
+  },
+  {
+   "id": "r7",
+   "name": "南宋 紹興十六年 紹興豆",
+   "category": "青銅器",
+   "era": "南宋紹興十六年（1146）",
+   "materials": [
+    "銅",
+    "錫",
+    "鉛"
+   ],
+   "accNo": "中銅000101",
+   "summary": "銘文記載為賜予秦檜家廟的祭器；X光與顯微觀察顯示器身分上下兩段鑄造後接合，乳丁另鑄並以鉚釘固定。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-1/2-1-s.png",
+     "caption": "南宋 紹興豆",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r8",
+   "name": "春秋 竊曲紋鐘（明清改製）",
+   "category": "青銅器",
+   "era": "春秋；明清改製",
+   "materials": [
+    "銅"
+   ],
+   "accNo": "",
+   "summary": "春秋原器經明清工匠裁切、拼接改製，以X光與XRF辨識改製區域。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-2/2-2-5/2-2-5-s.png",
+     "caption": "竊曲紋鐘（春秋，明清改製）",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r9",
+   "name": "明清 熊足洗",
+   "category": "青銅器",
+   "era": "明清改製",
+   "materials": [
+    "銅"
+   ],
+   "accNo": "",
+   "summary": "明清改製器，以X光與XRF辨識拼接、焊縫與表面作舊處理。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-2/2-2-4/2-2-4-s.png",
+     "caption": "熊足洗",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r10",
+   "name": "清 紅木鑲寶石如意",
+   "category": "器物",
+   "era": "清",
+   "materials": [
+    "木",
+    "閃玉",
+    "輝玉",
+    "碧璽",
+    "尖晶石",
+    "托帕石",
+    "羽毛",
+    "金屬"
+   ],
+   "accNo": "故雜001584",
+   "summary": "拉曼光譜確認柄身寶石為托帕石而非料石（玻璃）；寶石色彩主要來自底座上的硃砂與藍、黃顏料。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-4/2-4-s.png",
+     "caption": "清 紅木鑲寶石如意",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r11",
+   "name": "清 五彩龍鳳紋桃實酒壺",
+   "category": "陶瓷",
+   "era": "清",
+   "materials": [
+    "陶瓷"
+   ],
+   "accNo": "故瓷012062",
+   "summary": "俗稱倒流壺，無壺口壺蓋，自器底注酒；X光透視顯示壺內有中空導管控制酒液進出。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-6/2-6-s.png",
+     "caption": "清 五彩龍鳳紋桃實酒壺",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r12",
+   "name": "齊家文化 嵌綠松石玉璧",
+   "category": "玉器",
+   "era": "齊家文化（約西元前 2300–1500）",
+   "materials": [
+    "玉",
+    "綠松石"
+   ],
+   "accNo": "",
+   "summary": "以顯微拉曼光譜、XRF、XRD確認礦物種類，納入玉料資料庫。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-3/2-3-4/2-3-4-s.png",
+     "caption": "齊家文化嵌綠松石玉璧",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r13",
+   "name": "石峁文化中期 牙璋",
+   "category": "玉器",
+   "era": "石峁文化中期（約西元前 2100–1800）",
+   "materials": [
+    "玉"
+   ],
+   "accNo": "",
+   "summary": "以礦物科學鑑識確認玉料，探討史前玉器的貿易、工藝交流與傳播。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-3/2-3-6/2-3-6-s.png",
+     "caption": "石峁文化中期牙璋",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r14",
+   "name": "清 浩官（廣州外銷畫）",
+   "category": "書畫",
+   "era": "19 世紀",
+   "materials": [
+    "顏料"
+   ],
+   "accNo": "",
+   "summary": "廣州外銷畫，以 MA-XRF、FT-IR 與紫外、紅外影像研究顏料、設色、隱藏影像與修復痕跡。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/2-5/2-5-1/2-5-1-s.png",
+     "caption": "〈浩官〉",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html"
+    }
+   ]
+  },
+  {
+   "id": "r15",
+   "name": "清 煙袋荷包",
+   "category": "織品",
+   "era": "清",
+   "materials": [
+    "織品",
+    "珠寶"
+   ],
+   "accNo": "故雜001917",
+   "summary": "原紀錄為緙絲，修復前觀察確認為白紗地納紗繡，推測原為火鐮包；表層與內襯破損，以昆蟲針與疏薄網固定。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-1/3-1-s.png",
+     "caption": "清 煙袋荷包",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-1/intro-3-1-3.png",
+     "caption": "修復前：表層破損",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-1/intro-3-1-8.png",
+     "caption": "修復後",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r16",
+   "name": "清 趙懋本修、盧秉純纂《襄陵縣志》",
+   "category": "圖書文獻",
+   "era": "清雍正十年（1732）刊本",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "故志001420—001423",
+   "summary": "藉解體修復的機會研究書衣紙張，探討其是否為砑花紙。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-2/3-2-s.png",
+     "caption": "襄陵縣志",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r17",
+   "name": "清乾隆《西清續鑑》鏡匣及配件",
+   "category": "器物",
+   "era": "清乾隆（鏡匣製於乾隆四十九年）",
+   "materials": [
+    "木",
+    "紙",
+    "錦",
+    "黃綾",
+    "銅"
+   ],
+   "accNo": "",
+   "summary": "匣件曾散佚民間，故宮 2010 年購藏十件，使分散的配件重新聚合並修護穩定。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-3/3-3-4/3-3-4-s.png",
+     "caption": "《西清續鑑》鏡匣",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-3/3-3-2/3-3-2-s.png",
+     "caption": "雕刻木蓋附楊大章〈梧桐院落〉",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r18",
+   "name": "清光緒 《廣昌縣志》及〈淶源縣輿地圖〉",
+   "category": "圖書文獻",
+   "era": "清光緒元年（1875）刊本",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "故志012978、012982",
+   "summary": "嚴重蟲蛀、地圖外側缺失嚴重；以鏡像原理比對殘片，暫時加固、分離圖面與圖封、背面補缺後對位黏合。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-4/3-4-s.png",
+     "caption": "廣昌縣志",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-4/intro-3-4-1.png",
+     "caption": "將散落殘片標記位置後展開地圖",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-4/intro-3-4-2.png",
+     "caption": "展開後的缺損分布",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r19",
+   "name": "清 皮帽纓",
+   "category": "織品",
+   "era": "清",
+   "materials": [
+    "毛皮",
+    "織品",
+    "金屬"
+   ],
+   "accNo": "故雜006010",
+   "summary": "皮板僅約 0.5 毫米，脆裂且早期修補上下黏反；以非熱塑性黏合劑與玻璃纖維支撐層加固。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-5/3-5-s.png",
+     "caption": "清 皮帽纓",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-5/intro-3-5-1.png",
+     "caption": "修護前帽纓上下側倒置",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r20",
+   "name": "清乾隆 嵌東珠寶石盔（清皇帝大閱盔）",
+   "category": "器物",
+   "era": "清乾隆朝",
+   "materials": [
+    "珠寶",
+    "漆",
+    "織品",
+    "金屬",
+    "毛皮"
+   ],
+   "accNo": "故雜006008",
+   "summary": "包邊劣化、金線鬆脫、青緞變色；修復包邊與金線，並保留修復痕跡的辨識性。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-6/3-6-s.png",
+     "caption": "清皇帝大閱盔",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-6/intro-3-6-6.png",
+     "caption": "修復後以紅底襯作展示與結構支撐",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r21",
+   "name": "明 仇英《桐陰畫靜圖》",
+   "category": "書畫",
+   "era": "明",
+   "materials": [
+    "絹",
+    "漿糊"
+   ],
+   "accNo": "故畫000481",
+   "summary": "覆背層漿糊老化、局部空鼓；全面揭裱，以原格式與原裱料重裝，並發現地桿內藏金屬配重。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-7/3-7-s.png",
+     "caption": "明 仇英 桐陰畫靜圖",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-7/intro-3-7-1.png",
+     "caption": "地桿內藏的金屬配重",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r22",
+   "name": "清 張照《臨蘇軾赤壁賦》",
+   "category": "書畫",
+   "era": "清",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "故書000460",
+   "summary": "手卷摺痕、空鼓、鑲接處浮開；以原格式與原裱料重裝，並發現罕見的兩段式紙捲桿。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-8/3-8-s.png",
+     "caption": "清 張照 臨蘇軾赤壁賦",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-8/intro-3-8-2.png",
+     "caption": "兩段式紙捲桿結構",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    },
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/3-8/intro-3-8-3.png",
+     "caption": "包首錦裱與天桿修復中",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html"
+    }
+   ]
+  },
+  {
+   "id": "r23",
+   "name": "西周 弦紋方甗",
+   "category": "青銅器",
+   "era": "西周",
+   "materials": [
+    "銅",
+    "錫"
+   ],
+   "accNo": "故銅001944",
+   "summary": "上半部舊修區域錯位、器身斷脫；保留舊修的錫料與銅鉚釘，除鏽、加固、黏合、填補與全色。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-1/4-1-s.png",
+     "caption": "西周 弦紋方甗",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r24",
+   "name": "西周 圓渦四瓣目紋鼎",
+   "category": "青銅器",
+   "era": "西周",
+   "materials": [
+    "銅",
+    "木",
+    "玉"
+   ],
+   "accNo": "故銅002154",
+   "summary": "兩處足部斷裂無法站立、蓋上玉紐脫膠；以環氧樹脂補缺黏合，鰾魚皮膠黏合木質與玉紐。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-2/4-2-s.png",
+     "caption": "西周 圓渦四瓣目紋鼎",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r25",
+   "name": "民國 劉峨士《安順讀書山華嚴洞圖》",
+   "category": "書畫",
+   "era": "民國",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "贈畫000996",
+   "summary": "戰時省略撞邊結構、卷尾有未裝裱的散跋手稿；以文獻考證梳理題跋次第並研擬外接撞邊方案。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-3/4-3-s.png",
+     "caption": "劉峨士 安順讀書山華嚴洞圖",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r26",
+   "name": "清 何紹基《隸書以俟知奧》",
+   "category": "書畫",
+   "era": "清",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "贈書000262",
+   "summary": "原雙天桿使捲收不實而變形；保留原裝裱材料重新揭裱，裝桿改為月牙桿。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-4/4-4-s.png",
+     "caption": "何紹基 隸書以俟知奧",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r27",
+   "name": "清 銀鍍金喜荷蓮簪",
+   "category": "首飾",
+   "era": "清",
+   "materials": [
+    "金屬",
+    "羽毛",
+    "珍珠",
+    "寶石"
+   ],
+   "accNo": "故雜004873",
+   "summary": "金屬構件變形斷裂、點翠髒汙翹起；去離子水清潔、Klucel E 加固點翠、顯微電焊接合。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-5/4-5-s.png",
+     "caption": "銀鍍金喜荷蓮簪",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r28",
+   "name": "清 壽喜天下太平貼繡布套",
+   "category": "織品",
+   "era": "清",
+   "materials": [
+    "織品"
+   ],
+   "accNo": "故雜000300N000000001",
+   "summary": "貼繡（堆綾）鏡套，底部承重處破損；清潔並染製黃色底布作支撐層。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-6/4-6-s.png",
+     "caption": "壽喜天下太平貼繡布套",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r29",
+   "name": "清乾隆 金嵌珊瑚阿彌陀佛三尊像",
+   "category": "佛教造像",
+   "era": "清乾隆",
+   "materials": [
+    "金銅",
+    "珊瑚",
+    "白玉",
+    "青金石",
+    "綠松石"
+   ],
+   "accNo": "故雜001835–001837",
+   "summary": "大勢至菩薩缺損嚴重；比對故雜001840 的散落殘件，確認屬此組並接回原位。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-7/4-7-s.png",
+     "caption": "金嵌珊瑚阿彌陀佛三尊像",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r30",
+   "name": "宋 宋人寒林待渡",
+   "category": "書畫",
+   "era": "宋",
+   "materials": [
+    "絹"
+   ],
+   "accNo": "故畫000214",
+   "summary": "畫心局部浮開；揭除老化背紙重新托裱，保留舊托絹、補筆與兩件題簽。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-8/4-8-s.png",
+     "caption": "宋人寒林待渡",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r31",
+   "name": "宋 「雪夜鐘」琴",
+   "category": "樂器",
+   "era": "宋",
+   "materials": [
+    "木",
+    "漆灰"
+   ],
+   "accNo": "購雜001165",
+   "summary": "琴面多次修復且無紀錄，灰地層成分不明；修護前以橫切面顯微分析並評估修復策略。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-9/4-9-s.png",
+     "caption": "宋 雪夜鐘琴",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r32",
+   "name": "民國 張大千《菇》",
+   "category": "書畫",
+   "era": "民國",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "購畫001198",
+   "summary": "原框背層三夾板釋出酸性物質，畫心黃化脆化；清洗、揭除舊裱褙紙並改為掛軸。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-10/4-10-s.png",
+     "caption": "張大千 菇",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r33",
+   "name": "明 崔子忠《桐陰博古圖》",
+   "category": "書畫",
+   "era": "明",
+   "materials": [
+    "紙",
+    "石綠"
+   ],
+   "accNo": "故畫000660",
+   "summary": "民國 59 年揭裱保留的原托紙吸附石綠釋出的銅離子，纖維素持續降解；民國 113 年再次揭裱移除。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-11/4-11-s.png",
+     "caption": "崔子忠 桐陰博古圖",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r34",
+   "name": "《新刊五經》木匣",
+   "category": "圖書文獻",
+   "era": "",
+   "materials": [
+    "木"
+   ],
+   "accNo": "故殿002653–002682",
+   "summary": "保存木匣本身、維持收存功能並保護匣內古籍之間取得平衡。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-12/4-12-1/4-12-1-s.png",
+     "caption": "《新刊五經》木匣",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r35",
+   "name": "《五百家注音辯昌黎先生文集》木匣",
+   "category": "圖書文獻",
+   "era": "",
+   "materials": [
+    "木"
+   ],
+   "accNo": "故觀007565–007579",
+   "summary": "適度修復木匣，並評估新加入材料對紙質文物的影響。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-12/4-12-2/4-12-2-s.png",
+     "caption": "《五百家注音辯昌黎先生文集》木匣",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  },
+  {
+   "id": "r36",
+   "name": "民國 朱其石、白蕉 觀雲 七言絕句扇",
+   "category": "書畫",
+   "era": "民國",
+   "materials": [
+    "紙"
+   ],
+   "accNo": "購扇000224",
+   "summary": "沿邊缺損、扇面斷裂無法開閤；結合斷裂處、補絹包邊並全色。",
+   "owner": "國立故宮博物院",
+   "images": [
+    {
+     "src": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/common/images/collection/4-13/4-13-s.png",
+     "caption": "朱其石、白蕉 觀雲扇",
+     "page": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html"
+    }
+   ]
+  }
+ ],
+ "components": [
+  {
+   "id": "m1",
+   "name": "乳丁",
+   "type": "其他",
+   "heritage": "r7"
+  },
+  {
+   "id": "m2",
+   "name": "地桿（內藏金屬配重）",
+   "type": "地桿",
+   "heritage": "r21"
+  },
+  {
+   "id": "m3",
+   "name": "覆背層",
+   "type": "托紙",
+   "heritage": "r21"
+  },
+  {
+   "id": "m4",
+   "name": "二段式紙捲桿",
+   "type": "天桿",
+   "heritage": "r22"
+  },
+  {
+   "id": "m5",
+   "name": "月牙桿",
+   "type": "天桿",
+   "heritage": "r26"
+  },
+  {
+   "id": "m6",
+   "name": "原托紙",
+   "type": "托紙",
+   "heritage": "r33"
+  },
+  {
+   "id": "m7",
+   "name": "舊托絹",
+   "type": "托紙",
+   "heritage": "r30"
+  },
+  {
+   "id": "m8",
+   "name": "包首題簽",
+   "type": "包首",
+   "heritage": "r30"
+  },
+  {
+   "id": "m9",
+   "name": "玉紐",
+   "type": "其他",
+   "heritage": "r24"
+  },
+  {
+   "id": "m10",
+   "name": "雕刻木蓋",
+   "type": "其他",
+   "heritage": "r17"
+  },
+  {
+   "id": "m11",
+   "name": "〈淶源縣輿地圖〉",
+   "type": "其他",
+   "heritage": "r18"
+  },
+  {
+   "id": "m12",
+   "name": "點翠",
+   "type": "其他",
+   "heritage": "r27"
+  },
+  {
+   "id": "m13",
+   "name": "灰胎地層",
+   "type": "其他",
+   "heritage": "r31"
+  },
+  {
+   "id": "m14",
+   "name": "舊裱褙紙",
+   "type": "托紙",
+   "heritage": "r32"
+  },
+  {
+   "id": "m15",
+   "name": "包邊與金線",
+   "type": "其他",
+   "heritage": "r20"
+  },
+  {
+   "id": "m16",
+   "name": "內襯",
+   "type": "其他",
+   "heritage": "r15"
+  },
+  {
+   "id": "m17",
+   "name": "大勢至菩薩殘件",
+   "type": "其他",
+   "heritage": "r29"
+  }
+ ],
+ "craftsmen": [
+  {
+   "id": "c1",
+   "name": "李濟",
+   "role": "考古學者",
+   "school": "",
+   "active": "",
+   "summary": "1926 年主持山西夏縣西陰村發掘的考古隊主持人。"
+  },
+  {
+   "id": "c2",
+   "name": "仇英",
+   "role": "畫家",
+   "school": "明",
+   "active": "",
+   "summary": "明代畫家（約 1494—1552），《桐陰畫靜圖》的作者。"
+  },
+  {
+   "id": "c3",
+   "name": "張照",
+   "role": "書法家",
+   "school": "清",
+   "active": "",
+   "summary": "清代書法家（1691—1745），《臨蘇軾赤壁賦》的書寫者。"
+  },
+  {
+   "id": "c4",
+   "name": "楊大章",
+   "role": "畫家",
+   "school": "清",
+   "active": "",
+   "summary": "清乾隆雕刻木蓋所附〈梧桐院落〉的作者。"
+  },
+  {
+   "id": "c5",
+   "name": "林呱",
+   "role": "外銷畫家",
+   "school": "清",
+   "active": "",
+   "summary": "廣州外銷畫的畫家或其作坊，〈浩官〉、〈廣州行商〉署為其所繪。"
+  },
+  {
+   "id": "c6",
+   "name": "何紹基",
+   "role": "書法家",
+   "school": "清",
+   "active": "",
+   "summary": "清代書法家（1799—1873），《隸書以俟知奧》的書寫者。"
+  },
+  {
+   "id": "c7",
+   "name": "張大千",
+   "role": "畫家",
+   "school": "民國",
+   "active": "",
+   "summary": "民國畫家（1899—1983），《菇》的作者。"
+  }
+ ],
+ "organizations": [
+  {
+   "id": "o1",
+   "name": "國立故宮博物院",
+   "type": "典藏機構"
+  },
+  {
+   "id": "o2",
+   "name": "裱畫室",
+   "type": "院內單位"
+  },
+  {
+   "id": "o3",
+   "name": "圖書文獻處",
+   "type": "院內單位"
+  },
+  {
+   "id": "o4",
+   "name": "科技室",
+   "type": "院內單位"
+  },
+  {
+   "id": "o5",
+   "name": "保存維護處",
+   "type": "院內單位"
+  },
+  {
+   "id": "o6",
+   "name": "器物修護室",
+   "type": "院內單位"
+  },
+  {
+   "id": "o7",
+   "name": "北京大學賽克勒考古與藝術博物館",
+   "type": "研究單位"
+  },
+  {
+   "id": "o8",
+   "name": "美國蓋蒂保護研究所",
+   "type": "研究單位"
+  },
+  {
+   "id": "o9",
+   "name": "中華民國博物館學會",
+   "type": "學會"
+  },
+  {
+   "id": "o10",
+   "name": "交通大學",
+   "type": "研究單位"
+  },
+  {
+   "id": "o11",
+   "name": "上海博物館",
+   "type": "典藏機構"
+  }
+ ],
+ "projects": [
+  {
+   "id": "p1",
+   "caseNo": "",
+   "name": "瓷器庫房整飭計畫",
+   "executor": "o1"
+  },
+  {
+   "id": "p2",
+   "caseNo": "",
+   "name": "文物高精密科學檢測技術研發應用暨實驗室建置計畫",
+   "executor": "o1",
+   "year": 2013
+  },
+  {
+   "id": "p3",
+   "caseNo": "",
+   "name": "新故宮計畫（南院二館文物修護中心）",
+   "executor": "o1",
+   "year": 2022
+  },
+  {
+   "id": "p4",
+   "caseNo": "",
+   "name": "「文物檢測與修復在故宮」特展",
+   "executor": "o1",
+   "year": 2023
+  },
+  {
+   "id": "p5",
+   "caseNo": "",
+   "name": "「文物新生」特展",
+   "executor": "o1",
+   "year": 2026
+  }
+ ],
+ "documents": [
+  {
+   "id": "d1",
+   "title": "文物新生・保存優先",
+   "type": "展覽網頁",
+   "year": 2026,
+   "format": "網頁",
+   "url": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-2.html",
+   "heritage": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6"
+   ],
+   "public": true
+  },
+  {
+   "id": "d2",
+   "title": "文物新生・解讀文物：科學分析與材質研究",
+   "type": "展覽網頁",
+   "year": 2026,
+   "format": "網頁",
+   "url": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-3.html",
+   "heritage": [
+    "r10",
+    "r11",
+    "r12",
+    "r13",
+    "r14",
+    "r7",
+    "r8",
+    "r9"
+   ],
+   "public": true
+  },
+  {
+   "id": "d3",
+   "title": "文物新生・隱跡重現",
+   "type": "展覽網頁",
+   "year": 2026,
+   "format": "網頁",
+   "url": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-4.html",
+   "heritage": [
+    "r15",
+    "r16",
+    "r17",
+    "r18",
+    "r19",
+    "r20",
+    "r21",
+    "r22"
+   ],
+   "public": true
+  },
+  {
+   "id": "d4",
+   "title": "文物新生・續命再生",
+   "type": "展覽網頁",
+   "year": 2026,
+   "format": "網頁",
+   "url": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-5.html",
+   "heritage": [
+    "r23",
+    "r24",
+    "r25",
+    "r26",
+    "r27",
+    "r28",
+    "r29",
+    "r30",
+    "r31",
+    "r32",
+    "r33",
+    "r34",
+    "r35",
+    "r36"
+   ],
+   "public": true
+  },
+  {
+   "id": "d5",
+   "title": "文物新生・大事記",
+   "type": "展覽網頁",
+   "year": 2026,
+   "format": "網頁",
+   "url": "https://theme.npm.edu.tw/exh115/CulturalRelicsRenewed/ch/page-6.html",
+   "heritage": [],
+   "public": true
+  }
+ ],
+ "pages": [
+  {
+   "id": "g1",
+   "doc": "d1",
+   "page": 1,
+   "ocr": 1.0,
+   "text": "…原以棉布包覆易勾掛器表，改製無酸保護盒穩定支撐。…"
+  },
+  {
+   "id": "g2",
+   "doc": "d1",
+   "page": 2,
+   "ocr": 1.0,
+   "text": "…X光檢視顯示鐵胎大量流失，為氯化物造成的水泡鏽蝕。…"
+  },
+  {
+   "id": "g3",
+   "doc": "d1",
+   "page": 2,
+   "ocr": 1.0,
+   "text": "…以透明聚酯袋密封，放入矽膠與濕度指示卡，濕度維持 20% 以下。…"
+  },
+  {
+   "id": "g4",
+   "doc": "d1",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…1926 年李濟主持考古隊，於山西夏縣西陰村發掘。…"
+  },
+  {
+   "id": "g5",
+   "doc": "d1",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…狀況相對穩定，改以無酸卡紙板、泡棉與壓克力製作內盒。…"
+  },
+  {
+   "id": "g6",
+   "doc": "d1",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…紫外線與長時間藍紫光會使染料褪色、纖維變脆，改控制光源與照度。…"
+  },
+  {
+   "id": "g7",
+   "doc": "d1",
+   "page": 5,
+   "ocr": 1.0,
+   "text": "…以穩固支撐與穩定環境取代頻繁介入。…"
+  },
+  {
+   "id": "g8",
+   "doc": "d1",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…瓷器庫房整飭計畫以典藏級材料重新包裝，並推動改箱為櫃。…"
+  },
+  {
+   "id": "g9",
+   "doc": "d2",
+   "page": 1,
+   "ocr": 1.0,
+   "text": "…X光與顯微觀察顯示分段鑄造接合，XRF顯示三部位合金比例不同。…"
+  },
+  {
+   "id": "g10",
+   "doc": "d2",
+   "page": 2,
+   "ocr": 1.0,
+   "text": "…明清工匠常裁切拼接青銅器並作舊，X光與XRF可辨識改製區域。…"
+  },
+  {
+   "id": "g11",
+   "doc": "d2",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…拉曼光譜確認柄身寶石為托帕石，色彩來自底座顏料。…"
+  },
+  {
+   "id": "g12",
+   "doc": "d2",
+   "page": 5,
+   "ocr": 1.0,
+   "text": "…X光透視揭示倒流壺的內部導管構造。…"
+  },
+  {
+   "id": "g13",
+   "doc": "d2",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…拉曼、XRF與XRD鑑識玉料礦物，建立玉料資料庫。…"
+  },
+  {
+   "id": "g14",
+   "doc": "d2",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…〈浩官〉為19世紀林呱或其作坊所繪。…"
+  },
+  {
+   "id": "g15",
+   "doc": "d2",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…以MA-XRF、FT-IR與紫外紅外影像研究外銷畫的顏料與隱藏影像。…"
+  },
+  {
+   "id": "g16",
+   "doc": "d3",
+   "page": 1,
+   "ocr": 1.0,
+   "text": "…顯微觀察後確認為納紗繡而非緙絲。…"
+  },
+  {
+   "id": "g17",
+   "doc": "d3",
+   "page": 1,
+   "ocr": 1.0,
+   "text": "…以昆蟲針與疏薄網固定破損的表層與內襯。…"
+  },
+  {
+   "id": "g18",
+   "doc": "d3",
+   "page": 2,
+   "ocr": 1.0,
+   "text": "…藉修復解體之機，研究書衣是否為砑花紙。…"
+  },
+  {
+   "id": "g19",
+   "doc": "d3",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…鏡匣製於乾隆四十九年，對照寫本為乾隆五十八年。…"
+  },
+  {
+   "id": "g20",
+   "doc": "d3",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…2010 年購藏十件，使鏡匣配件重新聚合。…"
+  },
+  {
+   "id": "g21",
+   "doc": "d3",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…嚴重蟲蛀的地圖，以鏡像原理拼對殘片後補缺復位。…"
+  },
+  {
+   "id": "g22",
+   "doc": "d3",
+   "page": 5,
+   "ocr": 1.0,
+   "text": "…加固試驗後選用非熱塑性黏合劑，避免熱傷毛根。…"
+  },
+  {
+   "id": "g23",
+   "doc": "d3",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…修復包邊與金線，保留修復痕跡的辨識性。…"
+  },
+  {
+   "id": "g24",
+   "doc": "d3",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…明代仇英《桐陰畫靜圖》，絹本設色。…"
+  },
+  {
+   "id": "g25",
+   "doc": "d3",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…全面揭裱，以原格式與原裱料重裝。…"
+  },
+  {
+   "id": "g26",
+   "doc": "d3",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…揭裱時發現地桿內藏金屬配重。…"
+  },
+  {
+   "id": "g27",
+   "doc": "d3",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…清代張照臨蘇軾赤壁賦，手卷。…"
+  },
+  {
+   "id": "g28",
+   "doc": "d3",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…以原格式與原裱料重裝，修復包首錦裱與天桿。…"
+  },
+  {
+   "id": "g29",
+   "doc": "d3",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…揭示兩段式紙捲桿結構。…"
+  },
+  {
+   "id": "g30",
+   "doc": "d4",
+   "page": 1,
+   "ocr": 1.0,
+   "text": "…保留舊修材料，除鏽、加固、填補、全色。…"
+  },
+  {
+   "id": "g31",
+   "doc": "d4",
+   "page": 2,
+   "ocr": 1.0,
+   "text": "…環氧樹脂補缺足部，鰾魚皮膠黏合木質與玉紐。…"
+  },
+  {
+   "id": "g32",
+   "doc": "d4",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…文獻考證梳理題跋次第，研擬外接撞邊。…"
+  },
+  {
+   "id": "g33",
+   "doc": "d4",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…清代何紹基隸書橫披《以俟知奧》。…"
+  },
+  {
+   "id": "g34",
+   "doc": "d4",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…重新揭裱並改裝月牙桿。…"
+  },
+  {
+   "id": "g35",
+   "doc": "d4",
+   "page": 5,
+   "ocr": 1.0,
+   "text": "…以顯微電焊接合斷裂金屬，Klucel E 加固點翠。…"
+  },
+  {
+   "id": "g36",
+   "doc": "d4",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…染製黃色底布作為支撐層。…"
+  },
+  {
+   "id": "g37",
+   "doc": "d4",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…比對散落殘件後接回原位，避免臆測性修復。…"
+  },
+  {
+   "id": "g38",
+   "doc": "d4",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…重新托裱，但保留前人的托絹、補筆與題簽。…"
+  },
+  {
+   "id": "g39",
+   "doc": "d4",
+   "page": 9,
+   "ocr": 1.0,
+   "text": "…橫切面顯微分析灰胎層，評估古琴修護策略。…"
+  },
+  {
+   "id": "g40",
+   "doc": "d4",
+   "page": 10,
+   "ocr": 1.0,
+   "text": "…民國張大千《菇》，紙本水墨。…"
+  },
+  {
+   "id": "g41",
+   "doc": "d4",
+   "page": 10,
+   "ocr": 1.0,
+   "text": "…三夾板酸性物質造成黃化，清洗並改裝掛軸。…"
+  },
+  {
+   "id": "g42",
+   "doc": "d4",
+   "page": 11,
+   "ocr": 1.0,
+   "text": "…民國59年揭裱，保留原托紙。…"
+  },
+  {
+   "id": "g43",
+   "doc": "d4",
+   "page": 11,
+   "ocr": 1.0,
+   "text": "…民國113年再揭裱，移除吸附銅離子的原托紙。…"
+  },
+  {
+   "id": "g44",
+   "doc": "d4",
+   "page": 12,
+   "ocr": 1.0,
+   "text": "…木匣修護需評估修護材料對匣內竹紙古籍的影響。…"
+  },
+  {
+   "id": "g45",
+   "doc": "d4",
+   "page": 13,
+   "ocr": 1.0,
+   "text": "…適度修復木匣並評估新材料對紙質文物的影響。…"
+  },
+  {
+   "id": "g46",
+   "doc": "d4",
+   "page": 14,
+   "ocr": 1.0,
+   "text": "…補絹包邊並全色，使扇面可開閤。…"
+  },
+  {
+   "id": "g47",
+   "doc": "d5",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…1955 年成立裱畫室。…"
+  },
+  {
+   "id": "g48",
+   "doc": "d5",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…1968 年增設圖書文獻處及裱書室。…"
+  },
+  {
+   "id": "g49",
+   "doc": "d5",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…1969 年邀日本修復師協助揭裱 21 件宋元書畫。…"
+  },
+  {
+   "id": "g50",
+   "doc": "d5",
+   "page": 9,
+   "ocr": 1.0,
+   "text": "…1970 年成立科技室。…"
+  },
+  {
+   "id": "g51",
+   "doc": "d5",
+   "page": 11,
+   "ocr": 1.0,
+   "text": "…1991 年建置燻蒸庫。…"
+  },
+  {
+   "id": "g52",
+   "doc": "d5",
+   "page": 12,
+   "ocr": 1.0,
+   "text": "…1994 年起派員赴美澳研習預防性保存。…"
+  },
+  {
+   "id": "g53",
+   "doc": "d5",
+   "page": 13,
+   "ocr": 1.0,
+   "text": "…1997 年赴北京大學研習考古青銅器保存修復。…"
+  },
+  {
+   "id": "g54",
+   "doc": "d5",
+   "page": 17,
+   "ocr": 1.0,
+   "text": "…2008 年成立保存維護處。…"
+  },
+  {
+   "id": "g55",
+   "doc": "d5",
+   "page": 18,
+   "ocr": 1.0,
+   "text": "…2010 年導入環境感測並建置 X 光三維 CT 系統。…"
+  },
+  {
+   "id": "g56",
+   "doc": "d5",
+   "page": 20,
+   "ocr": 1.0,
+   "text": "…2013 年起推動高精密科學檢測實驗室建置。…"
+  },
+  {
+   "id": "g57",
+   "doc": "d5",
+   "page": 25,
+   "ocr": 1.0,
+   "text": "…2023 年推出文物檢測與修復特展。…"
+  },
+  {
+   "id": "g58",
+   "doc": "d1",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…由李濟博士主持考古隊，於山西夏縣西陰村發掘。…"
+  },
+  {
+   "id": "g59",
+   "doc": "d3",
+   "page": 7,
+   "ocr": 1.0,
+   "text": "…仇英（約1494—1552）《桐陰畫靜圖》。…"
+  },
+  {
+   "id": "g60",
+   "doc": "d3",
+   "page": 8,
+   "ocr": 1.0,
+   "text": "…張照（1691—1745）臨蘇軾赤壁賦。…"
+  },
+  {
+   "id": "g61",
+   "doc": "d3",
+   "page": 3,
+   "ocr": 1.0,
+   "text": "…雕刻木蓋附楊大章〈梧桐院落〉。…"
+  },
+  {
+   "id": "g62",
+   "doc": "d2",
+   "page": 6,
+   "ocr": 1.0,
+   "text": "…〈浩官〉為林呱或其作坊所繪。…"
+  },
+  {
+   "id": "g63",
+   "doc": "d4",
+   "page": 4,
+   "ocr": 1.0,
+   "text": "…何紹基隸書《以俟知奧》。…"
+  },
+  {
+   "id": "g64",
+   "doc": "d4",
+   "page": 10,
+   "ocr": 1.0,
+   "text": "…張大千《菇》。…"
+  }
+ ],
+ "events": [
+  {
+   "id": "e1",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r1"
+   ],
+   "description": "不直接修補本體，量身訂製無酸保護盒，提供支撐與定位、減少搬運晃動。",
+   "sources": [
+    {
+     "page": "g1",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "無酸包裝"
+   ],
+   "materials": [
+    "無酸材料"
+   ]
+  },
+  {
+   "id": "e2",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r2"
+   ],
+   "description": "X光顯示內部鐵胎大量流失、結構多孔脆弱；水泡現象由氯化物導致鐵質鏽蝕。",
+   "sources": [
+    {
+     "page": "g2",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "X光檢視",
+    "顯微觀察"
+   ]
+  },
+  {
+   "id": "e3",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r2"
+   ],
+   "description": "不清潔、不加固，密封並使相對濕度維持在 20% 以下，定期以濕度指示卡監測。",
+   "sources": [
+    {
+     "page": "g3",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "密封低濕保存"
+   ],
+   "materials": [
+    "ESCAL透明聚酯袋",
+    "矽膠乾燥劑"
+   ]
+  },
+  {
+   "id": "e4",
+   "type": "出土",
+   "yearFrom": 1926,
+   "yearTo": 1926,
+   "original": "1926 年",
+   "about": [
+    "r3"
+   ],
+   "description": "由李濟主持的考古隊在山西夏縣西陰村發掘。",
+   "sources": [
+    {
+     "page": "g4",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r3"
+   ],
+   "description": "狀況相對穩定，不過度修補，重新設計內盒以防搬動與摩擦。",
+   "sources": [
+    {
+     "page": "g5",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "無酸包裝"
+   ],
+   "materials": [
+    "無酸卡紙板",
+    "Plastazote泡棉",
+    "低反射壓克力"
+   ]
+  },
+  {
+   "id": "e6",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r4"
+   ],
+   "description": "未修補清潔；使用無紫外線燈源，照度約 50 lux，並控制照射時間。",
+   "sources": [
+    {
+     "page": "g6",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "展示光照控制"
+   ],
+   "materials": [
+    "無紫外線燈源"
+   ]
+  },
+  {
+   "id": "e7",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r5"
+   ],
+   "description": "不頻繁修補，重點在支撐穩固、減少搬運震動與碰撞。",
+   "sources": [
+    {
+     "page": "g7",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "穩固支撐"
+   ]
+  },
+  {
+   "id": "e8",
+   "type": "預防保存",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r6",
+    "o1"
+   ],
+   "description": "舊包裝的稻草、木絲老化產粉塵；以典藏級材料重新包裝並推動改箱為櫃。",
+   "sources": [
+    {
+     "page": "g8",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "典藏級包裝",
+    "Oddy Test"
+   ],
+   "materials": [
+    "無酸瓦楞紙板",
+    "Plastazote LD24",
+    "Tyvek"
+   ],
+   "project": "p1"
+  },
+  {
+   "id": "e9",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r7",
+    "m1",
+    "o11"
+   ],
+   "description": "器身上下兩段鑄造後接合，乳丁另鑄並以鉚釘固定；與上海博物館藏北宋宣和豆的一體成型工法不同，豆盤、環帶紋腹部與乳丁的合金比例也各異。",
+   "sources": [
+    {
+     "page": "g9",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "顯微觀察",
+    "X光檢視",
+    "XRF"
+   ]
+  },
+  {
+   "id": "e10",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r8",
+    "r9"
+   ],
+   "description": "辨識明清改製、拼接、焊縫，以及作鏽、塗漆、施蠟的仿古與封護痕跡。",
+   "sources": [
+    {
+     "page": "g10",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "X光檢視",
+    "XRF"
+   ]
+  },
+  {
+   "id": "e11",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r10"
+   ],
+   "description": "確認先前被認為是料石的柄身寶石實為托帕石；寶石色彩主要來自底座上的硃砂與藍、黃顏料。",
+   "sources": [
+    {
+     "page": "g11",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "拉曼光譜"
+   ],
+   "materials": [
+    "托帕石",
+    "硃砂"
+   ]
+  },
+  {
+   "id": "e12",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r11"
+   ],
+   "description": "X光透視顯示壺內有中空導管，利用導管高度與液面位置控制酒液進出。",
+   "sources": [
+    {
+     "page": "g12",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "X光檢視"
+   ]
+  },
+  {
+   "id": "e13",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r12",
+    "r13"
+   ],
+   "description": "確認礦物種類並建立玉料資料庫，探討史前至夏時期華西玉器的貿易、工藝交流與傳播。",
+   "sources": [
+    {
+     "page": "g13",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "顯微拉曼光譜",
+    "XRF",
+    "XRD"
+   ]
+  },
+  {
+   "id": "e14",
+   "type": "製作",
+   "yearFrom": 1800,
+   "yearTo": 1899,
+   "original": "19 世紀",
+   "about": [
+    "r14"
+   ],
+   "description": "林呱或其作坊所繪。",
+   "sources": [
+    {
+     "page": "g14",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "顏料"
+   ]
+  },
+  {
+   "id": "e15",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r14"
+   ],
+   "description": "研究顏料、設色、隱藏影像與修復痕跡；作品兼用中西繪畫材料。",
+   "sources": [
+    {
+     "page": "g15",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "MA-XRF",
+    "FT-IR",
+    "紫外與紅外影像"
+   ],
+   "materials": [
+    "顏料"
+   ]
+  },
+  {
+   "id": "e16",
+   "type": "研究發現",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r15",
+    "m16"
+   ],
+   "description": "原紀錄為緙絲，觀察確認為白紗地納紗繡，推測原為火鐮包。",
+   "sources": [
+    {
+     "page": "g16",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "顯微觀察",
+    "文獻比對"
+   ]
+  },
+  {
+   "id": "e17",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r15",
+    "m16"
+   ],
+   "description": "表層破損、內襯纖維粉碎斷裂；以昆蟲針固定形狀、疏薄網固定內襯。",
+   "sources": [
+    {
+     "page": "g17",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "昆蟲針固定",
+    "疏薄網固定"
+   ]
+  },
+  {
+   "id": "e18",
+   "type": "研究發現",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r16"
+   ],
+   "description": "借解體修復的機會，比對書衣紙張特徵，檢視其是否為砑花紙。",
+   "sources": [
+    {
+     "page": "g18",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "紙張特徵比對",
+    "工藝文獻"
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e19",
+   "type": "製作",
+   "yearFrom": 1784,
+   "yearTo": 1784,
+   "original": "乾隆四十九年",
+   "about": [
+    "r17"
+   ],
+   "description": "鏡匣製於乾隆四十九年。",
+   "sources": [
+    {
+     "page": "g19",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "木",
+    "錦"
+   ]
+  },
+  {
+   "id": "e20",
+   "type": "入藏",
+   "yearFrom": 2010,
+   "yearTo": 2010,
+   "original": "2010 年",
+   "about": [
+    "r17",
+    "m10",
+    "o1"
+   ],
+   "description": "故宮購藏十件，使散落民間的配件重新聚合；以院藏線繪圖比對規格與紋飾，並修護穩定結構。",
+   "sources": [
+    {
+     "page": "g20",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "跨領域研究",
+    "線繪圖比對"
+   ]
+  },
+  {
+   "id": "e21",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r18",
+    "m11"
+   ],
+   "description": "標記殘片位置並展開，以摺痕對稱的鏡像原理比對，暫時加固後分離圖面與圖封，於背面補缺再對位黏合。",
+   "sources": [
+    {
+     "page": "g21",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "鏡像原理比對",
+    "殘片位置圖",
+    "暫時加固",
+    "背面補缺"
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e22",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r19"
+   ],
+   "description": "皮板約 0.5 毫米脆裂；早期修補毛皮上下黏反；以非熱塑性黏合劑與玻璃纖維支撐層加固，避免高溫傷害毛根，皮板與毛髮分區處理。",
+   "sources": [
+    {
+     "page": "g22",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "顯微觀察",
+    "加固試驗",
+    "非熱塑性黏合加固"
+   ],
+   "materials": [
+    "非熱塑性黏合劑",
+    "玻璃纖維"
+   ]
+  },
+  {
+   "id": "e23",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r20",
+    "m15"
+   ],
+   "description": "修復包邊與金線，以紅底襯作結構支撐與展示基底，並保留修復痕跡的辨識性。",
+   "sources": [
+    {
+     "page": "g23",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "織品經緯密度觀察",
+    "金線包繞觀察",
+    "保留修復痕跡"
+   ],
+   "materials": [
+    "紅色底襯"
+   ]
+  },
+  {
+   "id": "e24",
+   "type": "製作",
+   "yearFrom": 1494,
+   "yearTo": 1552,
+   "original": "明（仇英約 1494—1552）",
+   "about": [
+    "r21"
+   ],
+   "description": "絹本設色掛軸。",
+   "sources": [
+    {
+     "page": "g24",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "絹"
+   ]
+  },
+  {
+   "id": "e25",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r21",
+    "m3"
+   ],
+   "description": "覆背層漿糊老化、局部空鼓；全面揭裱後以原格式與原裱料重新裝裱。",
+   "sources": [
+    {
+     "page": "g25",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱",
+    "原格式原裱料重裝"
+   ],
+   "materials": [
+    "原裱料"
+   ]
+  },
+  {
+   "id": "e26",
+   "type": "研究發現",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r21",
+    "m2"
+   ],
+   "description": "修復中發現地桿內藏金屬條塊作配重，在中式裝裱中罕見，展覽認為早於已知的日本同類實例。",
+   "sources": [
+    {
+     "page": "g26",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱"
+   ],
+   "materials": [
+    "金屬條塊"
+   ]
+  },
+  {
+   "id": "e27",
+   "type": "製作",
+   "yearFrom": 1691,
+   "yearTo": 1745,
+   "original": "清（張照 1691—1745）",
+   "about": [
+    "r22"
+   ],
+   "description": "二色大鑲包邊手卷。",
+   "sources": [
+    {
+     "page": "g27",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e28",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r22",
+    "m4"
+   ],
+   "description": "修復包首錦裱與天桿，摺痕、空鼓與鑲接處浮開得以改善。",
+   "sources": [
+    {
+     "page": "g28",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "原格式原裱料重裝"
+   ],
+   "materials": [
+    "原裱料"
+   ]
+  },
+  {
+   "id": "e29",
+   "type": "研究發現",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r22",
+    "m4"
+   ],
+   "description": "發現罕見的兩段式紙捲桿，為清代手卷裝裱提供實物證據；並以宋米芾與魏泰唱和詩卷的木捲桿對照。",
+   "sources": [
+    {
+     "page": "g29",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "實物對照"
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e30",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r23"
+   ],
+   "description": "保留舊修的錫料與銅鉚釘，進行除鏽、結構加固、黏合斷裂處、局部填補與全色，塗佈保護層。",
+   "sources": [
+    {
+     "page": "g30",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "保留舊修材料",
+    "除鏽",
+    "結構加固",
+    "全色"
+   ],
+   "materials": [
+    "錫",
+    "銅鉚釘"
+   ]
+  },
+  {
+   "id": "e31",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r24",
+    "m9"
+   ],
+   "description": "去離子水與乙醇清潔，丙酮移除舊膠，環氧樹脂補缺黏合，鰾魚皮膠黏合木質與玉紐。",
+   "sources": [
+    {
+     "page": "g31",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "溶劑清潔",
+    "環氧樹脂補缺",
+    "全色"
+   ],
+   "materials": [
+    "去離子水",
+    "乙醇",
+    "丙酮",
+    "環氧樹脂",
+    "鰾魚皮膠"
+   ]
+  },
+  {
+   "id": "e32",
+   "type": "研究發現",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r25"
+   ],
+   "description": "梳理題跋與散件次第紀年，研擬外接撞邊結構的綜合方案。",
+   "sources": [
+    {
+     "page": "g32",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "文獻考證"
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e33",
+   "type": "製作",
+   "yearFrom": 1799,
+   "yearTo": 1873,
+   "original": "清（何紹基 1799—1873）",
+   "about": [
+    "r26"
+   ],
+   "description": "橫披，紙本水墨。",
+   "sources": [
+    {
+     "page": "g33",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e34",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r26",
+    "m5"
+   ],
+   "description": "原雙天桿使捲收不實；保留原裝裱材料重新揭裱，裝桿改為月牙桿，新裱料延長以包覆。",
+   "sources": [
+    {
+     "page": "g34",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱",
+    "月牙桿"
+   ],
+   "materials": [
+    "原裝裱材料"
+   ]
+  },
+  {
+   "id": "e35",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r27",
+    "m12"
+   ],
+   "description": "加固鬆動點翠；斷裂金屬以顯微電焊接合，減少黏著劑的厚度與視覺干擾。",
+   "sources": [
+    {
+     "page": "g35",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "溶劑清潔",
+    "Klucel E 加固",
+    "顯微電焊"
+   ],
+   "materials": [
+    "去離子水",
+    "Klucel E"
+   ]
+  },
+  {
+   "id": "e36",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r28"
+   ],
+   "description": "對比區域清潔；染製黃色底布作支撐層，強化底部承重處。",
+   "sources": [
+    {
+     "page": "g36",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "清潔",
+    "支撐層"
+   ],
+   "materials": [
+    "黃色底布"
+   ]
+  },
+  {
+   "id": "e37",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r29",
+    "m17"
+   ],
+   "description": "依倫理規範避免臆測性修復；比對故雜001840 的散落殘件，確認屬此組並接回，修補阿彌陀佛身體後全色。",
+   "sources": [
+    {
+     "page": "g37",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "殘件比對",
+    "全色"
+   ]
+  },
+  {
+   "id": "e38",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r30",
+    "m7",
+    "m8"
+   ],
+   "description": "揭除老化背紙重新托裱；保留舊托絹、補筆與兩件題簽，強化基底材支撐。",
+   "sources": [
+    {
+     "page": "g38",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱",
+    "托裱",
+    "保留舊修"
+   ],
+   "materials": [
+    "托絹"
+   ]
+  },
+  {
+   "id": "e39",
+   "type": "檢測",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r31",
+    "m13",
+    "o6"
+   ],
+   "description": "灰地層成分不明，可能含鹿角灰、八寶灰與黃土灰或瓦灰；修護前先評估兼顧真實性與功能性的策略。",
+   "sources": [
+    {
+     "page": "g39",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "可見光顯微橫切面分析"
+   ],
+   "materials": [
+    "鹿角灰",
+    "八寶灰",
+    "黃土灰"
+   ]
+  },
+  {
+   "id": "e40",
+   "type": "製作",
+   "yearFrom": 1899,
+   "yearTo": 1983,
+   "original": "民國（張大千 1899—1983）",
+   "about": [
+    "r32"
+   ],
+   "description": "紙本水墨掛軸。",
+   "sources": [
+    {
+     "page": "g40",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "materials": [
+    "紙"
+   ]
+  },
+  {
+   "id": "e41",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r32",
+    "m14"
+   ],
+   "description": "原框背層三夾板釋出酸性物質，畫心黃化脆化；清洗並揭除舊裱褙紙，改為掛軸型式。",
+   "sources": [
+    {
+     "page": "g41",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "清洗",
+    "揭除舊裱褙紙",
+    "改裝掛軸"
+   ]
+  },
+  {
+   "id": "e42",
+   "type": "修復",
+   "yearFrom": 1970,
+   "yearTo": 1970,
+   "original": "民國 59 年",
+   "about": [
+    "r33",
+    "m6"
+   ],
+   "description": "民國 59 年揭裱時保留原托紙。",
+   "sources": [
+    {
+     "page": "g42",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱"
+   ],
+   "materials": [
+    "原托紙"
+   ]
+  },
+  {
+   "id": "e43",
+   "type": "修復",
+   "yearFrom": 2024,
+   "yearTo": 2024,
+   "original": "民國 113 年",
+   "about": [
+    "r33",
+    "m6"
+   ],
+   "description": "原托紙吸附石綠釋出的銅離子，纖維素持續降解；再次揭裱時移除，依可逆性原則汰換老化材料。",
+   "sources": [
+    {
+     "page": "g43",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱",
+    "可逆性原則"
+   ],
+   "materials": [
+    "新托紙"
+   ]
+  },
+  {
+   "id": "e44",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r34"
+   ],
+   "description": "保存木匣、維持收存功能與保護匣內古籍之間取得平衡；院內研究中式木匣修護材料對竹紙的影響。",
+   "sources": [
+    {
+     "page": "g44",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "修護材料影響評估"
+   ],
+   "materials": [
+    "木"
+   ]
+  },
+  {
+   "id": "e45",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r35"
+   ],
+   "description": "適度修復木匣，並評估新加入材料對紙質文物的影響。",
+   "sources": [
+    {
+     "page": "g45",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "修護材料影響評估"
+   ],
+   "materials": [
+    "木"
+   ]
+  },
+  {
+   "id": "e46",
+   "type": "修復",
+   "yearFrom": 2026,
+   "yearTo": 2026,
+   "original": "（處置年份展覽未載明）",
+   "about": [
+    "r36"
+   ],
+   "description": "結合斷裂處，以補絹依缺損形狀補新並包邊，補新處全色調整。",
+   "sources": [
+    {
+     "page": "g46",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "補絹",
+    "全色"
+   ],
+   "materials": [
+    "補絹"
+   ]
+  },
+  {
+   "id": "e47",
+   "type": "機構沿革",
+   "yearFrom": 1955,
+   "yearTo": 1955,
+   "original": "1955 年",
+   "about": [
+    "o2"
+   ],
+   "description": "成立裱畫室，奠定院內書畫修復專業基礎。",
+   "sources": [
+    {
+     "page": "g47",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ]
+  },
+  {
+   "id": "e48",
+   "type": "機構沿革",
+   "yearFrom": 1968,
+   "yearTo": 1968,
+   "original": "1968 年",
+   "about": [
+    "o3"
+   ],
+   "description": "增設圖書文獻處及裱書室，建立圖書文獻修復專業體系。",
+   "sources": [
+    {
+     "page": "g48",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ]
+  },
+  {
+   "id": "e49",
+   "type": "機構沿革",
+   "yearFrom": 1969,
+   "yearTo": 1969,
+   "original": "1969 年",
+   "about": [
+    "o2"
+   ],
+   "description": "邀請日本修復師來院協助 21 件宋元書畫揭裱。",
+   "sources": [
+    {
+     "page": "g49",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "揭裱"
+   ]
+  },
+  {
+   "id": "e50",
+   "type": "機構沿革",
+   "yearFrom": 1970,
+   "yearTo": 1970,
+   "original": "1970 年",
+   "about": [
+    "o4"
+   ],
+   "description": "成立科技室，集結保存、化學、生物、核能、工藝等跨領域專業。",
+   "sources": [
+    {
+     "page": "g50",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "科學檢測"
+   ]
+  },
+  {
+   "id": "e51",
+   "type": "機構沿革",
+   "yearFrom": 1991,
+   "yearTo": 1991,
+   "original": "1991 年",
+   "about": [
+    "o1"
+   ],
+   "description": "建置燻蒸庫，強化藏品蟲菌害防治。",
+   "sources": [
+    {
+     "page": "g51",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "燻蒸"
+   ]
+  },
+  {
+   "id": "e52",
+   "type": "機構沿革",
+   "yearFrom": 1994,
+   "yearTo": 1994,
+   "original": "1994 年起",
+   "about": [
+    "o1",
+    "o8"
+   ],
+   "description": "派員赴美國、澳洲研習，引進預防性保存與藏品風險管理觀念。",
+   "sources": [
+    {
+     "page": "g52",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "預防性保存"
+   ]
+  },
+  {
+   "id": "e53",
+   "type": "機構沿革",
+   "yearFrom": 1997,
+   "yearTo": 1997,
+   "original": "1997 年",
+   "about": [
+    "o1",
+    "o7"
+   ],
+   "description": "派員赴北京大學研習考古青銅器保存修復；同年採購冷凍櫃發展物理性除蟲。",
+   "sources": [
+    {
+     "page": "g53",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "青銅保存修復"
+   ]
+  },
+  {
+   "id": "e54",
+   "type": "機構沿革",
+   "yearFrom": 2008,
+   "yearTo": 2008,
+   "original": "2008 年",
+   "about": [
+    "o5"
+   ],
+   "description": "成立保存維護處，整合登記、安全管理、保存科學與修復業務（2010 年更名登錄保存處）。",
+   "sources": [
+    {
+     "page": "g54",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ]
+  },
+  {
+   "id": "e55",
+   "type": "機構沿革",
+   "yearFrom": 2010,
+   "yearTo": 2010,
+   "original": "2010 年",
+   "about": [
+    "o1"
+   ],
+   "description": "導入感測器與無線網路監測陳列室溫濕度；建置文物 X 光三維電腦斷層掃描影像系統。",
+   "sources": [
+    {
+     "page": "g55",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "環境感測監測",
+    "X光三維電腦斷層掃描"
+   ]
+  },
+  {
+   "id": "e56",
+   "type": "機構沿革",
+   "yearFrom": 2013,
+   "yearTo": 2013,
+   "original": "2013 年起",
+   "about": [
+    "o1"
+   ],
+   "description": "推動四年期文物高精密科學檢測技術研發應用暨實驗室建置計畫。",
+   "sources": [
+    {
+     "page": "g56",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "科學檢測"
+   ],
+   "project": "p2"
+  },
+  {
+   "id": "e57",
+   "type": "機構沿革",
+   "yearFrom": 2023,
+   "yearTo": 2023,
+   "original": "2023 年",
+   "about": [
+    "o1"
+   ],
+   "description": "推出「文物檢測與修復在故宮」特展，首次以保存科學與修復技術為主題。",
+   "sources": [
+    {
+     "page": "g57",
+     "method": "人工整理",
+     "confidence": 1.0,
+     "status": "已校"
+    }
+   ],
+   "methods": [
+    "科學檢測"
+   ],
+   "project": "p4"
+  }
+ ],
+ "participations": [
+  {
+   "craftsman": "c1",
+   "event": "e4",
+   "role": "主持",
+   "source": {
+    "page": "g58",
+    "quote": "由李濟博士主持考古隊，於山西夏縣西陰村發掘。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c2",
+   "event": "e24",
+   "role": "創作",
+   "source": {
+    "page": "g59",
+    "quote": "仇英（約1494—1552）《桐陰畫靜圖》。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c3",
+   "event": "e27",
+   "role": "書寫",
+   "source": {
+    "page": "g60",
+    "quote": "張照（1691—1745）臨蘇軾赤壁賦。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c4",
+   "event": "e19",
+   "role": "附圖作者",
+   "source": {
+    "page": "g61",
+    "quote": "雕刻木蓋附楊大章〈梧桐院落〉。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c5",
+   "event": "e14",
+   "role": "繪製",
+   "source": {
+    "page": "g62",
+    "quote": "〈浩官〉為林呱或其作坊所繪。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c6",
+   "event": "e33",
+   "role": "書寫",
+   "source": {
+    "page": "g63",
+    "quote": "何紹基隸書《以俟知奧》。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  },
+  {
+   "craftsman": "c7",
+   "event": "e40",
+   "role": "創作",
+   "source": {
+    "page": "g64",
+    "quote": "張大千《菇》。",
+    "method": "人工整理",
+    "confidence": 1.0,
+    "status": "已校"
+   }
+  }
+ ]
 }
